@@ -1,0 +1,30 @@
+﻿<Window x:Class="SJNScaffolding.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SJNScaffolding"
+        mc:Ignorable="d"
+        Title="邵式ABP代码生成工具" Height="850" Width="1200" Background="LightSkyBlue">
+    <Grid Margin="0,0,-6.4,-6">
+        <Button Content="确认" HorizontalAlignment="Left" Margin="1090,47,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="关闭" HorizontalAlignment="Left" Margin="1090,93,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" RenderTransformOrigin="0.32,-4.854"/>
+        <Label Content="项目名称：" HorizontalAlignment="Left" Margin="72,44,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="161,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" Name="ProjectName"/>
+        <Label Content="表名：" HorizontalAlignment="Left" Margin="72,86,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="161,86,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" Name="TableName"/>
+        <Label Content="表字段" HorizontalAlignment="Left" Margin="146,129,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="621" Margin="80,155,0,0" TextWrapping="Wrap" Name="Columns" VerticalAlignment="Top" Width="169" AcceptsReturn="True"/>
+        <Label Content="表字段类型" HorizontalAlignment="Left" Margin="343,129,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="621" Margin="290,155,0,0" TextWrapping="Wrap" Name="ColumnsType" VerticalAlignment="Top" Width="169" AcceptsReturn="True"/>
+        <Label Content="表字段中文名" HorizontalAlignment="Left" Margin="560,129,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="621" Margin="479,155,0,0" TextWrapping="Wrap" Name="ColumnsName" VerticalAlignment="Top" Width="239" AcceptsReturn="True"/>
+        <Label Content="字段渲染形式" HorizontalAlignment="Left" Margin="938,129,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="621" Margin="741,155,0,0" TextWrapping="Wrap" Name="ColumnsHtml" VerticalAlignment="Top" Width="438" AcceptsReturn="True"/>
+        <CheckBox Content="是否有上传" HorizontalAlignment="Left" Margin="494,47,0,0" VerticalAlignment="Top" Name="IfUpload"/>
+        <CheckBox Content="是否有省市区级联" HorizontalAlignment="Left" Margin="494,93,0,0" VerticalAlignment="Top" Name="IfCityPicker"/>
+        <Label MaxWidth="550" Margin="654,22,125,702" >
+            <TextBlock TextWrapping="Wrap" Text="每列中的数量要一致，有跨行使用CrossColumn，如果是下拉框直接添加Combobox" Width="411" />
+        </Label>
+    </Grid>
+</Window>

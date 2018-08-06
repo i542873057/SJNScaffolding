@@ -1,0 +1,14 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="wrap">
+    <form id="editForm">
+        <input id="Id" name="Id" type="hidden" /><!--主键字段-->
+        <table class="kv-table">
+            {{ContentHtml}}
+        </table>
+    </form>
+</div>
+{{UploadFileJSPath}}
+<script src="~/Areas/Plat/Views/{{TableName}}/CreateOrUpdateModal.js"></script>

@@ -1,0 +1,27 @@
+﻿//=============================================================
+// 创建人:               邵佳楠   
+// 创建时间:            {{CurrentDateTime}}
+// 邮箱：             1542873057@qq.com 
+//==============================================================
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Abp.Domain.Repositories;
+using {{ProjectName}}.Domain.Plat.{{TableName}}s.Dto;
+using {{ProjectName}}.Usual;
+
+namespace {{ProjectName}}.Domain.Plat.{{TableName}}s
+{
+    public class {{TableName}}AppService : UsualCrudAppService<{{TableName}}, {{TableName}}ListDto, {{TableName}}SearchDto, {{TableName}}InputDto, long>, I{{TableName}}AppService
+    {
+        private readonly IRepository<{{TableName}}, long> _i{{TableName}}Repository;
+
+        public {{TableName}}AppService(IRepository<{{TableName}}, long> i{{TableName}}Repository) : base(i{{TableName}}Repository)
+        {
+            _i{{TableName}}Repository = i{{TableName}}Repository;
+        }
+
+    }
+}

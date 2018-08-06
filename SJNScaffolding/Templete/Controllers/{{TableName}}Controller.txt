@@ -1,0 +1,68 @@
+﻿//=============================================================
+// 创建人:               邵佳楠   
+// 创建时间:            {{CurrentDateTime}}
+// 邮箱：             1542873057@qq.com 
+//==============================================================
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using {{ProjectName}}.Domain.Plat.{{TableName}}s;
+using {{ProjectName}}.Domain.Plat.{{TableName}}s.Dto;
+using {{ProjectName}}.Web.Controllers;
+
+namespace {{ProjectName}}.Web.Areas.Plat.Controllers
+{
+    public class {{TableName}}Controller : {{ProjectName}}ControllerBase
+    {
+        // GET: Plat/{{TableName}}
+
+
+        private readonly I{{TableName}}AppService _i{{TableName}}AppService;
+
+        public {{TableName}}Controller(I{{TableName}}AppService i{{TableName}}AppService)
+        {
+            _i{{TableName}}AppService = i{{TableName}}AppService;
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 新增编辑页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CreateOrUpdateModal()
+        {
+            return View();
+        }
+
+        #region 数据
+        /// <summary>
+        /// 根据ID获取编辑数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ActionResult> GetInfoForEdit(int id)
+        {
+            var input = await _i{{TableName}}AppService.GetInfoForEdit(id);
+
+            return Json(input);
+        }
+
+        /// <summary>
+        /// 根据条件查询对应列表数据
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public ActionResult GetGridByCondition({{TableName}}SearchDto input)
+        {
+            var gridData = _i{{TableName}}AppService.GetGridByCondition(input);
+            return Json(gridData);
+        }
+        #endregion
+    }
+}

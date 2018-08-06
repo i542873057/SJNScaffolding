@@ -1,0 +1,13 @@
+﻿//=============================================================
+// 创建人:               邵佳楠   
+// 创建时间:            {{CurrentDateTime}}
+// 邮箱：             1542873057@qq.com 
+//==============================================================
+using System;
+using Abp.Domain.Entities.Auditing;
+namespace {{ProjectName}}.Domain.Plat.{{TableName}}s
+{
+    public class {{TableName}} : FullAuditedEntity<long>
+    {
+    }
+}

@@ -1,0 +1,19 @@
+﻿//=============================================================
+// 创建人:               邵佳楠   
+// 创建时间:            {{CurrentDateTime}}
+// 邮箱：             1542873057@qq.com 
+//==============================================================
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using {{ProjectName}}.CoreModel.Dto;
+
+namespace {{ProjectName}}.Domain.Plat.{{TableName}}s.Dto
+{
+    public class {{TableName}}SearchDto : PageDto
+    {
+	     {{Content}}
+    }
+}

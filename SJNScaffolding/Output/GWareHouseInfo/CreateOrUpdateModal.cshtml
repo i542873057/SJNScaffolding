@@ -1,0 +1,144 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="wrap">
+    <form id="editForm">
+        <input id="Id" name="Id" type="hidden" /><!--主键字段-->
+        <table class="kv-table">
+            <tr>
+﻿<th class="kv-label">仓库名称（必填项）</th>
+<td class="kv-content">
+<input id="StoreName" name="StoreName" type="text"  />
+</td>
+﻿<th class="kv-label">联系人（必填项）</th>
+<td class="kv-content">
+<input id="LinkMan" name="LinkMan" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">联系方式（必填项）</th>
+<td class="kv-content">
+<input id="ContactNum" name="ContactNum" type="text"  />
+</td>
+﻿<th class="kv-label">地址：省（必填项）</th>
+<td class="kv-content">
+<input id="Province" name="Province" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">地址：市（必填项）</th>
+<td class="kv-content">
+<input id="City" name="City" type="text"  />
+</td>
+﻿<th class="kv-label">地址：详细地址（必填项）</th>
+<td class="kv-content">
+<input id="RegAddress" name="RegAddress" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">总库容，单位立方，保留1位小数</th>
+<td class="kv-content">
+<input id="StoreSize" name="StoreSize" type="text"  />
+</td>
+﻿<th class="kv-label">仓库库体：长，单位米，小数精确到2位</th>
+<td class="kv-content">
+<input id="StoreLength" name="StoreLength" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">仓库库体：宽，单位米，小数精确到2位</th>
+<td class="kv-content">
+<input id="StoreWide" name="StoreWide" type="text"  />
+</td>
+﻿<th class="kv-label">仓库库体：高，单位米，小数精确到2位</th>
+<td class="kv-content">
+<input id="StoreHigth" name="StoreHigth" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">出货方式（多选，逗号分隔：人工其他）</th>
+<td class="kv-content">
+<input id="ShipmentMode" name="ShipmentMode" type="text"  />
+</td>
+﻿<th class="kv-label">月台数量</th>
+<td class="kv-content">
+<input id="Platform" name="Platform" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">月台尺寸（长，单位米，小数精确到2位）</th>
+<td class="kv-content">
+<input id="PlatformLen" name="PlatformLen" type="text"  />
+</td>
+﻿<th class="kv-label">月台尺寸（宽，单位米，小数精确到2位）</th>
+<td class="kv-content">
+<input id="PlatformWide" name="PlatformWide" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">月台尺寸（高，单位米，小数精确到2位）</th>
+<td class="kv-content">
+<input id="PlatformHight" name="PlatformHight" type="text"  />
+</td>
+﻿<th class="kv-label">投产日期</th>
+<td class="kv-content">
+<input id="UseDate" name="UseDate" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">仓库类型（单选，1-室外堆场；2库）项）</th>
+<td class="kv-content">
+<input id="WareHouseType" name="WareHouseType" type="text"  />
+</td>
+﻿<th class="kv-label">建筑结构（单选，钢结构、混凝土、其他）</th>
+<td class="kv-content">
+<input id="BuildingStruct" name="BuildingStruct" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">柱网跨度</th>
+<td class="kv-content">
+<input id="ColNetSpan" name="ColNetSpan" type="text"  />
+</td>
+﻿<th class="kv-label">建筑层高，单位米，保留1位小数</th>
+<td class="kv-content">
+<input id="FloorHeight" name="FloorHeight" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">结构承重</th>
+<td class="kv-content">
+<input id="StructLoad" name="StructLoad" type="text"  />
+</td>
+﻿<th class="kv-label">库内设备（多选，、货架、托盘、分拣线）</th>
+<td class="kv-content">
+<input id="Devices" name="Devices" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">土地产权证（图片）</th>
+<td class="kv-content">
+<input id="OwnerShip" name="OwnerShip" type="text"  />
+</td>
+﻿<th class="kv-label">防火等级（单选：B1、B2、A1）</th>
+<td class="kv-content">
+<input id="FireRate" name="FireRate" type="text"  />
+</td>
+</tr>
+<tr>
+﻿<th class="kv-label">仓库照片（图片）</th>
+<td class="kv-content">
+<input id="WareHouseImages" name="WareHouseImages" type="text"  />
+</td>
+﻿<th class="kv-label">备注</th>
+<td class="kv-content">
+<input id="Remark" name="Remark" type="text"  />
+</td>
+</tr>
+
+        </table>
+    </form>
+</div>
+
+<script src="~/Areas/Plat/Views/GWareHouseInfo/CreateOrUpdateModal.js"></script>

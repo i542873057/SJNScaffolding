@@ -1,0 +1,4 @@
+﻿<th class="kv-label">{{ColumnsName}}</th>
+<td class="kv-content">
+<input id="{{Columns}}" name="{{Columns}}" type="text" {{ColumnsHtml}} />
+</td>
