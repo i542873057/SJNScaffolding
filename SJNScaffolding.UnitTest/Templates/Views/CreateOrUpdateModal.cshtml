@@ -1,0 +1,44 @@
+﻿@using SJNScaffolding.Extend
+@model SJNScaffolding.Models.TemplateModels.CreateOrUpdateViewModel
+@RazorHelper.RawHtml("@{Layout=null;}")
+<div class="layui-layer-content">
+    <form id="editForm">
+        <table class="kv-table">
+            <input id="Id" name="Id" type="hidden" />
+            @for (int i=0;i<Model.TypeColumnNames.Count;i++)
+            {
+                var item = Model.TypeColumnNames[i];
+                if (item.IsColspan3 == false)
+                {
+
+                    <tr>
+                        <td class="kv-label">@item.ColumnsNameRemark</td>
+                        <td class="kv-content">
+                            <input id="@item.ColumnName" name="@item.ColumnName" class="@item.ClassName" />
+                        </td>
+                        @{
+                            if (i < Model.TypeColumnNames.Count)
+                            {
+
+                                item = Model.TypeColumnNames[i + 1];
+                            }
+                        }
+                        <td class="kv-label">@item.ColumnsNameRemark</td>
+                        <td class="kv-content">
+                            <input id="@item.ColumnName" name="@item.ColumnName" class="@item.ClassName" />
+                        </td>
+                    </tr>
+                }
+                else
+                {
+
+                }
+            }
+            <tr>
+                <td class="kv-label">备注</td>
+                <td class="kv-content" colspan="3">
+                    <input id="Remark" name="Remark" class="easyui-textbox" data-options="width:560" />
+            </tr>
+        </table>
+    </form>
+</div>

@@ -1,9 +1,9 @@
-﻿
+﻿@model SJNScaffolding.Models.TemplateModels.ViewFileModel
 var gridUI = gridUI || {};
 (function() {
-    var processService = abp.services.app.gWareHouseInfo;
-    var gridUrl = '/Plat/GWareHouseInfo/GetGridByCondition';
-    var editModalUrl = '/Plat/GWareHouseInfo/CreateOrUpdateModal';
+    var processService = abp.services.app.@Model.TableNameCamel;
+    var gridUrl = '/Plat/@(Model.TableName)/GetGridByCondition';
+    var editModalUrl = '/Plat/@(Model.TableName)/CreateOrUpdateModal';
     var dgGrid, dgGridId = "#dgGrid";
 
     $.extend(gridUI,
@@ -17,14 +17,16 @@ var gridUI = gridUI || {};
                         { text: "编辑", iconCls: "icon-edit", handler: gridUI.btnEdit },
                         { text: "删除 ", iconCls: "icon-remove", handler: gridUI.btnDelete }
                     ],
-                    columns: [
-                        [
-                            { field: 'StoreName', title: '仓库名称', width: 120 },
-                            {field: 'LinkMan',title: '联系人',width: 120},
-                            {field: 'ContactNum',title: '联系方式',width: 80},
-                            { field: 'CreationTime', title: '增加时间', width: 80 }
-                        ]
-                    ]
+                    columns: [[
+                            @{
+                                int i=0;
+                            }
+                            @foreach (var item in Model.TypeColumnNames)
+                            {
+@("                         { field: '"+item.ColumnName+"', title: '"+item.ColumnsNameRemark+"', width: 80 }"+(i==Model.TypeColumnNames.Count?"":","))
+                            i++;
+                            }
+                        ]]
                 });
             },
             editInfo: function(title, icon, id) {
@@ -62,7 +64,7 @@ var gridUI = gridUI || {};
                         }
                     ],
                     onLoad: function() {
-                        editUI.setForm(id);
+                        editUI.setForm(id,pDialog);
                     }
                 });
             },
@@ -85,4 +87,3 @@ var gridUI = gridUI || {};
     });
 
 })();
-

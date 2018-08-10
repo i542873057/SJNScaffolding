@@ -1,0 +1,16 @@
+﻿//=============================================================
+// 创建人:            @Model.UserName
+// 创建时间:          @Model.CreateTime
+// 邮箱：             @Model.EmailAddress
+//==============================================================
+@model SJNScaffolding.Models.TemplateModels.ViewFileModel
+using @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto;
+using @(Model.ProjectName).Usual;
+
+namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s
+{
+    public interface I@(Model.TableName)AppService : IUsualCrudAppService<@(Model.TableName)ListDto, @(Model.TableName)SearchDto, @(Model.TableName)InputDto, @Model.IdType>
+    {
+
+    }
+}

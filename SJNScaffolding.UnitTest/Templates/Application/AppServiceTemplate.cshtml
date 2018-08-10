@@ -1,0 +1,33 @@
+﻿//=============================================================
+// 创建人:            @Model.UserName
+// 创建时间:          @Model.CreateTime
+// 邮箱：             @Model.EmailAddress
+//==============================================================
+@model SJNScaffolding.Models.TemplateModels.ViewFileModel
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Abp.Domain.Repositories;
+using @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto;
+using @(Model.ProjectName).Usual;
+
+namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s
+{
+    public class @(Model.TableName)AppService : UsualCrudAppService<@(Model.TableName+",")@(Model.TableName)ListDto, @(Model.TableName)SearchDto, @(Model.TableName)InputDto, @Model.IdType>, I@(Model.TableName)AppService
+    {
+        private readonly IRepository<@(Model.TableName+",")@(Model.IdType)>_i@(Model.TableNameCamel)Repository;
+
+        public @(Model.TableName)AppService(IRepository<@(Model.TableName+",")long>i@(Model.TableName)Repository) : base(i@(Model.TableName)Repository)
+        {
+            _i@(Model.TableNameCamel)Repository = i@(Model.TableNameCamel)Repository;
+            base.GetPermissionName = "Plat.@(Model.TableName)";
+			base.GetAllPermissionName = "Plat.@(Model.TableName).GetGrid";
+            base.CreatePermissionName = "Plat.@(Model.TableName).Add";
+            base.UpdatePermissionName = "Plat.@(Model.TableName).Edit";
+            base.DeletePermissionName = "Plat.@(Model.TableName).Delete";
+        }
+
+    }
+}

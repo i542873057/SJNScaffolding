@@ -34,8 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -54,6 +60,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extend\RazorHelper.cs" />
+    <Compile Include="Models\TypeCollection\EasyuiType.cs" />
+    <Compile Include="Models\TypeCollection\IdType.cs" />
+    <Compile Include="Models\TypeCollection\TypeColumnName.cs" />
+    <Compile Include="Models\TemplateModels\CopyRightUserInfo.cs" />
     <Resource Include="Templete\Views\Index.txt" />
     <Resource Include="Templete\Views\CreateOrUpdateModal.txt" />
     <Resource Include="Templete\JS\CreateOrUpdateModal.txt" />
@@ -66,7 +77,6 @@
     <Resource Include="Templete\Controllers\{{TableName}}Controller.txt" />
     <Resource Include="Core\FormTemplete\FormBase.txt" />
     <Resource Include="Core\FormTemplete\FormSpecial.txt" />
-    <Content Include="Templete\Domain\{{TableName}}.txt" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -84,6 +94,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\TemplateModels\CreateOrUpdateViewModel.cs" />
+    <Compile Include="Models\TemplateModels\DtoFileModel.cs" />
+    <Compile Include="Models\TemplateModels\IndexViewModel.cs" />
+    <Compile Include="Models\TemplateModels\ServiceFileModel.cs" />
+    <Compile Include="Models\TemplateModels\ServiceInterfaceFileModel.cs" />
+    <Compile Include="Models\TemplateModels\ViewFileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -101,6 +117,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -111,6 +128,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Output\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Templete\Domain\{{TableName}}.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

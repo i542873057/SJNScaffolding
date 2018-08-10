@@ -54,5 +54,7 @@ namespace SJNScaffolding.Core
         /// 表名首字母小写
         /// </summary>
         public string TableNameCamel => TableName.Substring(0, 1).ToLower() + TableName.Substring(1);
+
+        public string FileCopyRight { get; set; }
     }
 }

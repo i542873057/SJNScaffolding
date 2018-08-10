@@ -1,5 +1,9 @@
-﻿var editUI = {
+﻿@model SJNScaffolding.Models.TemplateModels.CreateOrUpdateViewModel
+var editUI = {
     initCombobox: function () {
+        @foreach(var item in Model.ComboboxPart){
+                item
+        }
         var comboboxControl = [];
 
         $.each(comboboxControl, function (i, v) {
@@ -18,7 +22,7 @@
         //   uploadType: 'img'
         //});
     },
-    setForm: function (id) {
+    setForm: function (id,pDialog) {
         editUI.initCombobox();
         editUI.initUpload();
         com.setForm(id, function (jsonData) {
@@ -31,6 +35,6 @@
             //    elem: '#WareHouseImages',
             //   rows: jsonData['WareHouseImagesOutput']
             //});
-        });
+        },true,'/');
     }
 }

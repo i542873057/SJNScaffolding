@@ -1,0 +1,22 @@
+﻿@using System
+@model SJNScaffolding.Models.TemplateModels.ViewFileModel
+//=============================================================
+// 创建人:            @Model.UserName
+// 创建时间:          @Model.CreateTime
+// 邮箱：             @Model.EmailAddress
+//==============================================================
+using System;
+using Abp.Domain.Entities.Auditing;
+namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s
+{
+    public class @Model.TableName : FullAuditedEntity<@(Model.IdType)>
+    {
+        @foreach (var item in Model.TypeColumnNames)
+        {
+@("     ///" )<summary>
+@("     ///" + item.ColumnsNameRemark) 
+@("     ///" )</summary>
+@("     public " + item.TypeName + " " + item.ColumnName + "{get;set;} \r\n")
+        }
+    }
+}
