@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using SJNScaffolding.Models.CollectiveType;
 
 namespace SJNScaffolding.Models.TemplateModels
@@ -36,7 +37,7 @@ namespace SJNScaffolding.Models.TemplateModels
             get
             {
                 string className = "";
-                if (_tableName?.Length > 2&&(_tableName.EndsWith("es")|| _tableName.EndsWith("s")))
+                if (_tableName?.Length > 2 && (_tableName.EndsWith("es") || _tableName.EndsWith("s")))
                 {
 
                     className = _tableName.EndsWith("es") ?
@@ -50,7 +51,7 @@ namespace SJNScaffolding.Models.TemplateModels
         /// <summary>
         /// id的类型
         /// </summary>
-        public string IdType { get; set; }= CollectiveType.IdType.INT;
+        public string IdType { get; set; } = CollectiveType.IdType.INT;
 
         public string FileName { get; set; }
 
@@ -69,5 +70,57 @@ namespace SJNScaffolding.Models.TemplateModels
         /// </summary>
         public bool HasPermission { get; } = true;
 
+        public string ComboboxPart
+        {
+            get
+            {
+                List<dynamic> comboboxPart = new List<dynamic>();
+                TypeColumnNames?.ForEach(r =>
+                {
+                    if (r.ClassName == EasyuiForm.combo || r.ClassName == EasyuiForm.combobox)
+                    {
+                        comboboxPart.Add(new
+                        {
+                            ClassName = r.ClassName.Replace("easyui-",""),
+                            r.ColumnName
+                        });
+                    }
+                });
+                var comboxControl = JsonConvert.SerializeObject(comboboxPart);
+                return comboxControl;
+            }
+        }
+        public string WebUploadPart
+        {
+            get
+            {
+                
+                var webuploadControl = JsonConvert.SerializeObject(this.WebUploadList);
+                return webuploadControl;
+            }
+
+        }
+
+        public List<WebUploadColunm> WebUploadList
+        {
+            get
+            {
+                List<WebUploadColunm> webuploadPart = new List<WebUploadColunm>();
+                TypeColumnNames?.ForEach(r =>
+                {
+                    if (r.WebuploadColunm.IsWebUpload)
+                    {
+                        webuploadPart.Add(r.WebuploadColunm);
+                    }
+                });
+                return webuploadPart;
+            }
+        }
+
+        
+        /// <summary>
+        /// 查询条件
+        /// </summary>
+        public List<TypeColumnName> SearchColumnNames { get; set; }
     }
 }

@@ -23,18 +23,23 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s
 {
     public class @(Model.TableName)AppService : UsualCrudAppService<@(Model.TableName+",")@(Model.TableName)ListDto, @(Model.TableName)SearchDto, @(Model.TableName)InputDto, @Model.IdType>, I@(Model.TableName)AppService
     {
-           private readonly IRepository<@(Model.TableName+",")@(Model.IdType)>_i@(Model.TableNameCamel)Repository;
+        private readonly IRepository<@(Model.TableName+",")@(Model.IdType)>_i@(Model.TableNameCamel)Repository;
 
-            public @(Model.TableName)AppService(IRepository<@(Model.TableName+",")long>i@(Model.TableNameCamel)Repository) : base(i@(Model.TableNameCamel)Repository)
-            {
-                _i@(Model.TableNameCamel)Repository = i@(Model.TableNameCamel)Repository;
-                @if(Model.HasPermission){
-                    @RazorHelper.RawHtml("              base.GetPermissionName =\"Plat."+Model.TableName+"\";\r\n");
-                    @RazorHelper.RawHtml("              base.GetAllPermissionName = \"Plat." + Model.TableName + ".GetGrid\";\r\n");
-                    @RazorHelper.RawHtml("              base.CreatePermissionName = \"Plat."+Model.TableName+".Add\";\r\n");
-                    @RazorHelper.RawHtml("              base.UpdatePermissionName = \"Plat."+Model.TableName+".Edit\";\r\n");
-                    @RazorHelper.RawHtml("              base.DeletePermissionName = \"Plat."+Model.TableName+".Delete\";\r\n");
-                }
-          }
+        public @(Model.TableName)AppService(IRepository<@(Model.TableName+",")long>i@(Model.TableNameCamel)Repository) : base(i@(Model.TableNameCamel)Repository)
+        {
+            _i@(Model.TableNameCamel)Repository = i@(Model.TableNameCamel)Repository;
+            @if(Model.HasPermission){
+                @RazorHelper.RawHtml("          base.GetPermissionName =\"Plat."+Model.TableName+"\";\r\n");
+                @RazorHelper.RawHtml("          base.GetAllPermissionName = \"Plat." + Model.TableName + ".GetGrid\";\r\n");
+                @RazorHelper.RawHtml("          base.CreatePermissionName = \"Plat."+Model.TableName+".Add\";\r\n");
+                @RazorHelper.RawHtml("          base.UpdatePermissionName = \"Plat."+Model.TableName+".Edit\";\r\n");
+                @RazorHelper.RawHtml("          base.DeletePermissionName = \"Plat."+Model.TableName+".Delete\";\r\n");
+            }
+        }
+
+        protected override IQueryable<@(Model.TableName)> CreateFilteredQuery(@(Model.TableName)SearchDto input)
+        {
+            return base.CreateFilteredQuery(input);
+        }
     }
 }

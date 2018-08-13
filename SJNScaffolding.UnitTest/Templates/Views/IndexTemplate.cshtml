@@ -1,10 +1,10 @@
 ﻿@("@using Abp.Web.Mvc.Extensions")
-@model SJNScaffolding.Models.TemplateModels.IndexViewModel
+@model SJNScaffolding.Models.TemplateModels.ViewFileModel
 @using SJNScaffolding.Extend
 @RazorHelper.RawHtml("@{ViewBag.Title =\"\";}")
 @("@section styles{")
 @{
-    if (Model.WebuploadCount > 0)
+    if (Model.WebUploadList.Count>0)
     {
         <link href="~/bower_components/webuploader/dist/webuploader.css"/>
     }
@@ -13,11 +13,11 @@
 @("@section scripts{")
         @RazorHelper.RawHtml("@Html.IncludeScript('~/Areas/Plat/Views/" + Model.TableName + "/Index.js')")
 @{
-    if (Model.WebuploadCount > 0)
+    if (Model.WebUploadList.Count > 0)
     {
         <script src="~/bower_components/webuploader/dist/webuploader.min.js"></script>
     }
-    if (Model.IsContainUpload)
+    if (Model.WebUploadList.Any())
     {
         <script src="~/bower_components/webuploader/dist/webuploader.extend.js"></script>
     }

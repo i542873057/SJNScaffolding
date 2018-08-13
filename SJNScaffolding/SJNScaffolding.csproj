@@ -13,6 +13,8 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
@@ -61,10 +66,21 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extend\RazorHelper.cs" />
+    <Compile Include="Helper\AddNewBussinessHelper.cs" />
+    <Compile Include="Helper\HelperBase.cs" />
     <Compile Include="Models\CollectiveType\EasyuiForm.cs" />
     <Compile Include="Models\CollectiveType\IdType.cs" />
     <Compile Include="Models\CollectiveType\TypeColumnName.cs" />
+    <Compile Include="Models\CollectiveType\UploadType.cs" />
+    <Compile Include="Models\HelperModels\AddNewBussinessModel.cs" />
     <Compile Include="Models\TemplateModels\CopyRightUserInfo.cs" />
+    <Compile Include="RazorEngine.xaml.cs">
+      <DependentUpon>RazorEngine.xaml</DependentUpon>
+    </Compile>
+    <Page Include="RazorEngine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Resource Include="Templete\Views\Index.txt" />
     <Resource Include="Templete\Views\CreateOrUpdateModal.txt" />
     <Resource Include="Templete\JS\CreateOrUpdateModal.txt" />
@@ -94,9 +110,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\TemplateModels\CreateOrUpdateViewModel.cs" />
     <Compile Include="Models\TemplateModels\DtoFileModel.cs" />
-    <Compile Include="Models\TemplateModels\IndexViewModel.cs" />
     <Compile Include="Models\TemplateModels\ServiceFileModel.cs" />
     <Compile Include="Models\TemplateModels\ServiceInterfaceFileModel.cs" />
     <Compile Include="Models\TemplateModels\ViewFileModel.cs" />
@@ -127,7 +141,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Output\" />
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Templete\Domain\{{TableName}}.txt" />
