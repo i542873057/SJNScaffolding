@@ -1,17 +1,14 @@
-﻿@using SJNScaffolding.Extend
-@using SJNScaffolding.Models.CollectiveType
-@model SJNScaffolding.Models.TemplateModels.ViewFileModel
 var gridUI = gridUI || {};
 (function() {
-    var _@(Model.TableNameCamel)Service = abp.services.app.@(Model.TableNameCamel);
-    var gridUrl = '/Plat/@(Model.TableName)/GetGridByCondition';
-    var editModalUrl = '/Plat/@(Model.TableName)/CreateOrUpdateModal';
+    var _webInfoService = abp.services.app.webInfo;
+    var gridUrl = '/Plat/WebInfo/GetGridByCondition';
+    var editModalUrl = '/Plat/WebInfo/CreateOrUpdateModal';
     var dgGrid, dgGridId = "#dgGrid";
 
     $.extend(gridUI,
         {
             loadGrid: function() {
-                var baseEnCode = 'Plat.@(Model.TableName).';
+                var baseEnCode = 'Plat.WebInfo.';
 
                 var toolbar = [
                             { text: "刷新", iconCls: "icon-reload", handler: function () { com.btnRefresh(dgGridId); } },
@@ -20,45 +17,46 @@ var gridUI = gridUI || {};
                             { text: "删除", EnCode: baseEnCode + 'Delete', iconCls: "icon-remove", handler: gridUI.btnDelete }
                         ];
                     toolbar = com.authorizeButton(toolbar);
-                   @RazorHelper.RawHtml("/*")
-_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "权限",EnCode = "Plat.@(Model.TableName)", TypeCode = menu, LinkUrl = "/Plat/@(Model.TableName)/Index", SortCode = 1 });
-_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "列表权限",EnCode = "Plat.@(Model.TableName).GetGrid", TypeCode = permission,  SortCode = 1 });
-_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "新增权限",EnCode = "Plat.@(Model.TableName).Add", TypeCode = permission,  SortCode = 2 });
-_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "编辑权限",EnCode = "Plat.@(Model.TableName).Edit", TypeCode = permission,  SortCode = 3 });
-_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限",EnCode = "Plat.@(Model.TableName).Delete", TypeCode = permission, SortCode = 4});
-                 @RazorHelper.RawHtml("*/")
+                   /*
+_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "权限",EnCode = "Plat.WebInfo", TypeCode = menu, LinkUrl = "/Plat/WebInfo/Index", SortCode = 1 });
+_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "列表权限",EnCode = "Plat.WebInfo.GetGrid", TypeCode = permission,  SortCode = 1 });
+_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "新增权限",EnCode = "Plat.WebInfo.Add", TypeCode = permission,  SortCode = 2 });
+_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "编辑权限",EnCode = "Plat.WebInfo.Edit", TypeCode = permission,  SortCode = 3 });
+_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限",EnCode = "Plat.WebInfo.Delete", TypeCode = permission, SortCode = 4});
+                 */
 
                 dgGrid = $(dgGridId).datagrid({
                     url: gridUrl,
                     toolbar: toolbar,
                     columns: [[
-                            @{int i=0;}
-                            @foreach (var item in Model.TypeColumnNames)
-                            {
-                    bool isFormatter = false;
-                    string formatterString="";
-                    switch (item.ClassName)
-                    {
-                        case EasyuiForm.datebox:
-                        isFormatter=true;
-                            formatterString = @",formatter:com.formatDate";
-                        break;
-                        case EasyuiForm.combo:
-                        case EasyuiForm.combobox:
-                        isFormatter=true;
-                            formatterString=@", formatter: function (value) {
-                                if (top.clients.dataItems &&top.clients.dataItems['"+item.ColumnName+@"']) {
-                                    return top.clients.dataItems['"+item.ColumnName+@"'][value];
+
+                         { field: 'Title', title: '标题', width: 80, formatter: function (value) {
+                                if (top.clients.dataItems &&top.clients.dataItems['Title']) {
+                                    return top.clients.dataItems['Title'][value];
                                 } else {
                                     return '';
                                 }
-                            }";
-                        break;
-                        default:break;
-                    }
-@RazorHelper.RawHtml("                         { field: '"+item.ColumnName+"', title: '"+item.ColumnsNameRemark+"', width: 80"+ (isFormatter == true ? formatterString+ " \r\n                         " : "") + "}" + (i==(Model.TypeColumnNames.Count-1)?"": ",") +"\r\n")
-                            i++;
+                            } 
+                         },
+                         { field: 'Content', title: '内容', width: 80},
+                         { field: 'WebAddr', title: '网站地址', width: 80, formatter: function (value) {
+                                if (top.clients.dataItems &&top.clients.dataItems['WebAddr']) {
+                                    return top.clients.dataItems['WebAddr'][value];
+                                } else {
+                                    return '';
                                 }
+                            } 
+                         },
+                         { field: 'Abbreviation', title: '发布单位缩写', width: 80},
+                         { field: 'Publisher', title: '发布单位', width: 80, formatter: function (value) {
+                                if (top.clients.dataItems &&top.clients.dataItems['Publisher']) {
+                                    return top.clients.dataItems['Publisher'][value];
+                                } else {
+                                    return '';
+                                }
+                            } 
+                         },
+                         { field: 'PublishTime', title: '发布时间', width: 80}
                         ]]
                 });
             },
@@ -80,7 +78,7 @@ _context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限"
                                         }
                                         var formData = f.formSerialize();
                                         com.setBusy(pDialog, true);
-                                        _@(Model.TableNameCamel)Service.createOrUpdate(formData, { showMsg: true })
+                                        _webInfoService.createOrUpdate(formData, { showMsg: true })
                                     .done(function() {
                                             com.btnRefresh();
                                             pDialog.dialog('close');
@@ -103,12 +101,12 @@ _context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限"
                         });
                         },
             btnDelete: function() {
-                        com.deleted(_@(Model.TableNameCamel)Service, dgGridId);
+                        com.deleted(_webInfoService, dgGridId);
                         },
             btnAdd: function() {
                         gridUI.editInfo('新增', 'icon-add');
-                    }
-            });
+                        }
+        });
 
     $(function() {
         gridUI.loadGrid();

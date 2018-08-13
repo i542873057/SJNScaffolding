@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using SJNScaffolding.Models.TypeCollection;
+using SJNScaffolding.Models.CollectiveType;
 
 namespace SJNScaffolding.Models.TemplateModels
 {
     public class ViewFileModel : CopyRightUserInfo
     {
+        /// <summary>
+        /// 业务名-如用户管理
+        /// </summary>
         public string BusinessName { get; set; }
+        /// <summary>
+        /// 模板路径
+        /// </summary>
 
         public string ViewFolder { get; set; }
 
@@ -44,7 +50,7 @@ namespace SJNScaffolding.Models.TemplateModels
         /// <summary>
         /// id的类型
         /// </summary>
-        public string IdType { get; set; }= TypeCollection.IdType.INT;
+        public string IdType { get; set; }= CollectiveType.IdType.INT;
 
         public string FileName { get; set; }
 
@@ -57,7 +63,11 @@ namespace SJNScaffolding.Models.TemplateModels
         /// 类中的属性
         /// </summary>
         public List<TypeColumnName> TypeColumnNames { get; set; }
-        
+
+        /// <summary>
+        /// 是否需要配置权限
+        /// </summary>
+        public bool HasPermission { get; } = true;
 
     }
 }

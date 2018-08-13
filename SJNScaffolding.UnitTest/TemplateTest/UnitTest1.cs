@@ -7,10 +7,10 @@ using RazorEngine;
 using RazorEngine.Templating;
 using SJNScaffolding.Core;
 using SJNScaffolding.Core.Helper;
+using SJNScaffolding.Models.CollectiveType;
 using SJNScaffolding.Models.TemplateModels;
-using SJNScaffolding.Models.TypeCollection;
 
-namespace SJNScaffolding.UnitTest
+namespace SJNScaffolding.UnitTest.TemplateTest
 {
     [TestClass]
     public class UnitTest1
@@ -69,20 +69,7 @@ namespace SJNScaffolding.UnitTest
             var path = @"..\..\" + "Templates\\Domain\\EntityTemplate.cshtml";
             var template = File.ReadAllText(path);
 
-            var d = this.GetCommonData();
-
-            var typeNameList = new List<TypeColumnName>();
-            int i = 0;
-            d.columnsList.ForEach(r =>
-            {
-                typeNameList.Add(new TypeColumnName()
-                {
-                    ColumnName = r,
-                    TypeName = d.columnsTypeList[i],
-                    ColumnsNameRemark = d.columnsNameList[i]
-                });
-                i++;
-            });
+            var typeNameList = GetColunmsList();
 
             string content = Engine.Razor.RunCompile(template, "EntityTemplate", typeof(ViewFileModel), new ViewFileModel
             {
@@ -92,7 +79,7 @@ namespace SJNScaffolding.UnitTest
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
-                IdType =IdType.LONG,
+                IdType = IdType.LONG,
             });
 
 
@@ -108,18 +95,7 @@ namespace SJNScaffolding.UnitTest
 
             var d = this.GetCommonData();
 
-            var typeNameList = new List<TypeColumnName>();
-            int i = 0;
-            d.columnsList.ForEach(r =>
-            {
-                typeNameList.Add(new TypeColumnName()
-                {
-                    ColumnName = r,
-                    TypeName = d.columnsTypeList[i],
-                    ColumnsNameRemark = d.columnsNameList[i]
-                });
-                i++;
-            });
+            var typeNameList = GetColunmsList();
 
             string content = Engine.Razor.RunCompile(template, "ControllerTemplate", typeof(ViewFileModel), new ViewFileModel
             {
@@ -134,6 +110,63 @@ namespace SJNScaffolding.UnitTest
         }
 
         [TestMethod]
+        public void testIAppservice()
+        {
+            //var path = @"..\..\" + "Templates\\Application\\IAppServiceTemplate.cshtml";
+            var path = @"..\..\" + "Templates\\Application\\AppServiceTemplate.cshtml";
+            var template = File.ReadAllText(path);
+
+            var d = this.GetCommonData();
+
+            var typeNameList = GetColunmsList();
+
+            string content = Engine.Razor.RunCompile(template, "ControllerTemplate", typeof(ViewFileModel), new ViewFileModel
+            {
+                CreateTime = DateTime.Now,
+                EmailAddress = "710277267@qq.com",
+                UserName = "IGeekFan",
+                TableName = "WebInfos",
+                ProjectName = "SJNScaffolding",
+                TypeColumnNames = typeNameList,
+                IdType = IdType.LONG,
+                BusinessName = "信息管理"
+            });
+        }
+
+        [TestMethod]
+        public void testAll()
+        {
+            string[] ss = new[] { "InputDtoTemplate", "ListDtoTemplate", "SearchDtoTemplate" };
+            foreach (var s in ss)
+            {
+                testDto(s);
+            }
+        }
+
+        public void testDto(string InputDtoTemplate = "InputDtoTemplate")
+        {
+            var path = @"..\..\" + "Templates\\Application\\Dto\\" + InputDtoTemplate + ".cshtml";
+            var template = File.ReadAllText(path);
+
+            var d = this.GetCommonData();
+
+            var typeNameList = GetColunmsList();
+
+            string content = Engine.Razor.RunCompile(template, InputDtoTemplate, typeof(ViewFileModel), new ViewFileModel()
+            {
+                CreateTime = DateTime.Now,
+                EmailAddress = "710277267@qq.com",
+                UserName = "IGeekFan",
+                TableName = "WebInfos",
+                ProjectName = "SJNScaffolding",
+                TypeColumnNames = typeNameList,
+                IdType = IdType.LONG,
+            });
+        }
+
+
+
+        [TestMethod]
         public void testIndexTemplate()
         {
             var path = @"..\..\" + "Templates\\Views\\IndexTemplate.cshtml";
@@ -141,26 +174,40 @@ namespace SJNScaffolding.UnitTest
 
             var d = this.GetCommonData();
 
-            var typeNameList = new List<TypeColumnName>();
-            int i = 0;
-            d.columnsList.ForEach(r =>
-            {
-                typeNameList.Add(new TypeColumnName()
-                {
-                    ColumnName = r,
-                    TypeName = d.columnsTypeList[i],
-                    ColumnsNameRemark = d.columnsNameList[i]
-                });
-                i++;
-            });
+            var typeNameList = GetColunmsList();
 
             string content = Engine.Razor.RunCompile(template, "IndexTemplate", typeof(IndexViewModel), new IndexViewModel()
             {
                 TableName = "WebInfos",
                 IsContainUpload = true,
-                WebuploadCount =4
+                WebuploadCount = 4
             });
         }
+
+
+
+        [TestMethod]
+        public void testIndexjsTemplate()
+        {
+            var path = @"..\..\" + "Templates\\JS\\IndexTemplate.cshtml";
+            var template = File.ReadAllText(path);
+
+            var d = this.GetCommonData();
+
+            var typeNameList = GetColunmsList();
+
+            string content = Engine.Razor.RunCompile(template, "IndexTemplate", typeof(ViewFileModel), new ViewFileModel()
+            {
+                CreateTime = DateTime.Now,
+                EmailAddress = "710277267@qq.com",
+                UserName = "IGeekFan",
+                TableName = "WebInfos",
+                ProjectName = "SJNScaffolding",
+                TypeColumnNames = typeNameList,
+                IdType = IdType.LONG,
+            });
+        }
+
 
 
 
@@ -190,7 +237,17 @@ namespace SJNScaffolding.UnitTest
 
 
             //字段填充到HTML中的内容
-            List<string> columnsHtmlList = new List<string>();
+            List<string> columnsHtmlList = new List<string>()
+            {
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            };
+
+
             //字段类型
             List<string> columnsTypeList = new List<string>(){"nvarchar(MAX)",
                 "nvarchar(MAX)",
@@ -212,12 +269,36 @@ namespace SJNScaffolding.UnitTest
 
             return new ColunmsData
             {
-                columnsList=columnsList,
-                columnsNameList =    columnsNameList,
-                columnsTypeList=columnsTypeList
+                columnsList = columnsList,
+                columnsNameList = columnsNameList,
+                columnsTypeList = columnsTypeList
             };
         }
 
+        private List<TypeColumnName> GetColunmsList()
+        {
+
+            var d = this.GetCommonData();
+
+            var typeNameList = new List<TypeColumnName>();
+            int i = 0;
+            d.columnsList.ForEach(r =>
+            {
+                typeNameList.Add(new TypeColumnName()
+                {
+                    ColumnName = r,
+                    TypeName = d.columnsTypeList[i],
+                    ColumnsNameRemark = d.columnsNameList[i],
+                    IsRequired = i % 2 == 0 ? true : false,
+                    IsVarchar = true,
+                    StringLength = 50 + i,
+                    ClassName = i % 2 == 0 ? EasyuiForm.combobox : EasyuiForm.textbox
+
+                });
+                i++;
+            });
+            return typeNameList;
+        }
     }
 
     public class ColunmsData

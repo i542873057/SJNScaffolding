@@ -14,7 +14,7 @@ namespace SJNScaffolding.UnitTest
         public void TestMethod1()
         {
 
-            var template = "@Raw('<a></a>')";
+            var template = "";
 
            
 

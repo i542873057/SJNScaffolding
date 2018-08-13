@@ -81,7 +81,7 @@ namespace SJNScaffolding
                 for (var i = 0; i < columnsList.Count; i++)
                 {
                     //添加注释
-                    string mark = "/// <summary>" + Environment.NewLine + "/// " + columnsNameList[i] + Environment.NewLine + "/// </summary>" + Environment.NewLine;
+                    string mark = "/// <summary>" + Environment.NewLine + Environment.CommandLine+"/// " + columnsNameList[i] + Environment.NewLine + Environment.CommandLine + "/// </summary>" + Environment.NewLine;
                     templeteProperty.Content += mark + "public " + columnsTypeList[i] + " " + columnsList[i] + " { get; set; }" + Environment.NewLine;
                 }
                 //为CreateOrUpdateModal文件填充字段

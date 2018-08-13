@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SJNScaffolding.Models.TypeCollection;
+using SJNScaffolding.Models.CollectiveType;
 
 namespace SJNScaffolding.Models.TemplateModels
 {

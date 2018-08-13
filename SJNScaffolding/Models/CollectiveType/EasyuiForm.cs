@@ -1,4 +1,4 @@
-﻿namespace SJNScaffolding.Models.TypeCollection
+﻿namespace SJNScaffolding.Models.CollectiveType
 {
     public static class EasyuiForm
     {
@@ -12,5 +12,9 @@
         public const string datebox = "easyui-datebox";
         public const string datetimebox = "easyui-datetimebox";
         public const string calendar = "easyui-calendar";
+        /// <summary>
+        /// webuploader上传控件
+        /// </summary>
+        public const string WebUpload = "WebUpload";
     }
 }

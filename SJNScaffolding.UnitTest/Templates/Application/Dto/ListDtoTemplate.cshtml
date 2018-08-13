@@ -1,8 +1,13 @@
-﻿//=============================================================
-// 创建人:            @Model.UserName
-// 创建时间:          @Model.CreateTime
-// 邮箱：             @Model.EmailAddress
-//==============================================================
+﻿/*
+* 创建人:            @Model.UserName
+* 创建时间:          @Model.CreateTime
+* 邮箱：             @Model.EmailAddress
+* 文件功能描述：      @Model.FileRemark
+*
+* 修改人：
+* 时间：
+* 修改说明：
+*/
 @model SJNScaffolding.Models.TemplateModels.ViewFileModel
 using System;
 using System.Collections.Generic;
@@ -12,10 +17,10 @@ using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 
-namespace @(Model.ProjectName).Domain.Plat.@(Model.@(Model.TableName))s.Dto
+namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto
 {
-    [AutoMap(typeof(@(Model.@(Model.TableName))))]
-    public class @(Model.@(Model.TableName))ListDto : EntityDto<<@Model.IdType>>
+    [AutoMapFrom(typeof(@(Model.TableName)))]
+    public class @(Model.TableName)ListDto : EntityDto<@(Model.IdType)>
     {
         @foreach (var item in Model.TypeColumnNames)
         {

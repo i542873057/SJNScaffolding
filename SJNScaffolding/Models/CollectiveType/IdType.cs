@@ -1,4 +1,4 @@
-﻿namespace SJNScaffolding.Models.TypeCollection
+﻿namespace SJNScaffolding.Models.CollectiveType
 {
     public static class IdType
     {

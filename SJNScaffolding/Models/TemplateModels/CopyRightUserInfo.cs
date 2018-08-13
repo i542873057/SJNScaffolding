@@ -7,5 +7,6 @@ namespace SJNScaffolding.Models.TemplateModels
         public string UserName { get; set; }
         public string EmailAddress { get; set; }
         public DateTime CreateTime { get; set; }
+        public string FileRemark { get; set; }
     }
 }

@@ -61,9 +61,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extend\RazorHelper.cs" />
-    <Compile Include="Models\TypeCollection\EasyuiType.cs" />
-    <Compile Include="Models\TypeCollection\IdType.cs" />
-    <Compile Include="Models\TypeCollection\TypeColumnName.cs" />
+    <Compile Include="Models\CollectiveType\EasyuiForm.cs" />
+    <Compile Include="Models\CollectiveType\IdType.cs" />
+    <Compile Include="Models\CollectiveType\TypeColumnName.cs" />
     <Compile Include="Models\TemplateModels\CopyRightUserInfo.cs" />
     <Resource Include="Templete\Views\Index.txt" />
     <Resource Include="Templete\Views\CreateOrUpdateModal.txt" />
