@@ -94,11 +94,9 @@ namespace SJNScaffolding.Models.TemplateModels
         {
             get
             {
-                
                 var webuploadControl = JsonConvert.SerializeObject(this.WebUploadList);
                 return webuploadControl;
             }
-
         }
 
         public List<WebUploadColunm> WebUploadList

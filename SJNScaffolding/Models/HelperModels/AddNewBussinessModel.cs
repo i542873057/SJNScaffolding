@@ -69,5 +69,7 @@ namespace SJNScaffolding.Models.HelperModels
 
         public string AreasFolder => "\\" + this._projectName + ".Web\\Areas\\" + _areas;
 
+        public string CoreEntityFolder => "\\" + this._projectName + ".Core\\Domain\\" + _areas + "\\" + _tableName + "s";
+
     }
 }

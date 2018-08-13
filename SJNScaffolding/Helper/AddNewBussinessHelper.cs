@@ -45,6 +45,8 @@ namespace SJNScaffolding.Helper
                 CreateViewModel();
             }
 
+            CreateCoreEntity();
+
         }
         private void CreateServiceInterfaceFile()
         {
@@ -124,6 +126,17 @@ namespace SJNScaffolding.Helper
             string fileName = _viewFileModel.TableName + "ViewModel.cs";
 
             CreateAndAddFile(_baseUrl + _parameter.ViewModelFolder, fileName, content);
+        }
+
+
+        private void CreateCoreEntity()
+        {
+            var path = _parameter.TemplateBaseUrl + "\\Domain\\EntityTemplate.cshtml";
+            var template = File.ReadAllText(path);
+            string content = Engine.Razor.RunCompile(template, "EntityTemplate", typeof(ViewFileModel), _viewFileModel);
+            string fileName = _viewFileModel.TableName + ".cs";
+
+            CreateAndAddFile(_baseUrl + _parameter.CoreEntityFolder, fileName, content);
         }
     }
 }
