@@ -85,7 +85,7 @@ namespace SJNScaffolding.Helper
                     }
                     else
                     {
-                        fileName += ".cshtml";
+                        fileName += "cshtml";
                     }
 
                     CreateAndAddFile(_baseUrl + _parameter.ViewFolder, fileName, content);
