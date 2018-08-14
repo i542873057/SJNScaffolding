@@ -43,8 +43,9 @@ namespace SJNScaffolding.Models.TemplateModels
                     className = _tableName.EndsWith("es") ?
                         _tableName.Substring(0, _tableName.Length - 2) :
                         _tableName.Substring(0, _tableName.Length - 1);
+                   return className;
                 }
-                return className;
+                return _tableName;
             }
             set => _tableName = value;
         }

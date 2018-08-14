@@ -372,7 +372,6 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                     IsRequired = i % 2 == 0 ? true : false,
                     IsVarchar = true,
                     StringLength = 50 + i,
-                    ClassName = className,
                     WebuploadColunm = webuploadColunm
 
                 });

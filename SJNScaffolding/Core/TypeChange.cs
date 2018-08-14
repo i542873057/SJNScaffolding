@@ -26,7 +26,7 @@ namespace SJNScaffolding.Core
             {"bool?","bool?"},
             {"long","long" },
             {"long?","long?" },
-
+            {"other","" }
         };
     }
 }

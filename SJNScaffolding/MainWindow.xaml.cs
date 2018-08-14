@@ -16,6 +16,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SJNScaffolding.Core;
 using SJNScaffolding.Core.Helper;
+using SJNScaffolding.Helper;
+using SJNScaffolding.Models.CollectiveType;
+using SJNScaffolding.Models.HelperModels;
+using SJNScaffolding.Models.TemplateModels;
 using Path = System.IO.Path;
 
 namespace SJNScaffolding
@@ -26,37 +30,20 @@ namespace SJNScaffolding
     public partial class MainWindow : Window
     {
         private const string BasePath = @"..\..\";
+        private static string IdType = "long";
         public MainWindow()
         {
             InitializeComponent();
+            rb_Guid.Checked += new RoutedEventHandler(radio_Checked);
+            rb_int.Checked += new RoutedEventHandler(radio_Checked);
+            rb_long.Checked += new RoutedEventHandler(radio_Checked);
+
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                TempleteProperty templeteProperty = new TempleteProperty
-                {
-                    ProjectName = this.ProjectName.Text,
-                    TableName = this.TableName.Text
-                };
-                //是否有下拉，没有的话清空
-                if (!this.IfCityPicker.IsChecked ?? false)
-                {
-                    templeteProperty.CityPickerCSSPath = "";
-                    templeteProperty.CityPickerJSPath = "";
-                }
-                //是否有上传，没有的话清空
-                if (!this.IfUpload.IsChecked ?? false)
-                {
-                    templeteProperty.UploadFileJSPath = "";
-                }
-                //模板所在文件夹
-                string currentRunTimePath = Path.Combine(BasePath, "Templete");
-                Dictionary<string, FileInfo> allFiles = new Dictionary<string, FileInfo>();
-                FileHelper.GetFile(currentRunTimePath, allFiles);
-                //获取对象所有属性
-                var properties = typeof(TempleteProperty).GetProperties();
                 //表中字段名
                 List<string> columnsList = this.Columns.Text.Split(new string[] { "\r\n" }, StringSplitOptions.None).Where(s => !string.IsNullOrEmpty(s)).Select(u => u.Trim()).ToList();
                 //中文名
@@ -76,112 +63,65 @@ namespace SJNScaffolding
                 {
                     throw new ArgumentException("字段之间个数不匹配！");
                 }
-
-                //为类文件填充字段
-                for (var i = 0; i < columnsList.Count; i++)
+                //生成每个字段对应的中文名-类型-以及是否必填，是否Combobox等内容
+                List<TypeColumnName> typeNameList = new List<TypeColumnName>();
+                for (int i = 0; i < columnsList.Count; i++)
                 {
-                    //添加注释
-                    string mark = "/// <summary>" + Environment.NewLine + Environment.CommandLine+"/// " + columnsNameList[i] + Environment.NewLine + Environment.CommandLine + "/// </summary>" + Environment.NewLine;
-                    templeteProperty.Content += mark + "public " + columnsTypeList[i] + " " + columnsList[i] + " { get; set; }" + Environment.NewLine;
-                }
-                //为CreateOrUpdateModal文件填充字段
-                string baseTag = "<tr>" + Environment.NewLine + "{0}</tr>";
-                string formBase = (await FileHelper.GetFileContent(Path.Combine(BasePath, "Core", "FormTemplete", "FormBase.txt"))).TrimStart().TrimEnd();//不跨行的
-                string formSpecial = (await FileHelper.GetFileContent(Path.Combine(BasePath, "Core", "FormTemplete", "FormSpecial.txt"))).TrimStart().TrimEnd();//跨行的
-                for (var i = 0; i < columnsList.Count; i++)
-                {
-                    //判断是否有跨列
-                    if (columnsHtmlList[i].Contains("CrossColumn"))
+                    if (columnsList[i].Contains("$") && columnsList[i].Contains("#"))
                     {
-                        templeteProperty.ContentHtml += string.Format(baseTag,
-                            formSpecial.Replace("{{ColumnsName}}", columnsNameList[i])
-                                .Replace("{{Columns}}", columnsList[i]).Replace("{{ColumnsHtml}}",
-                                    columnsHtmlList[i].Replace("CrossColumn", "").Replace("Combobox", ""))) + Environment.NewLine;
+                        throw new ArgumentException("无法同时上传图片和文件！");
+                    }
+                    string ColumnName = columnsList[i].Replace("*", "").Replace("#", "").Replace("$", "").Replace("%", "").Replace("@", "");
+                    //*是必填
+                    //#是上传图片
+                    //$是上传文件
+                    //%是跨行
+                    //@是下拉框
+                    WebUploadColunm webuploadColunm;
+                    if (columnsList[i].Contains("#"))
+                    {
+                        webuploadColunm = new WebUploadColunm(true, ColumnName, UploadType.img);
+                    }
+                    else if (columnsList[i].Contains("$"))
+                    {
+                        webuploadColunm = new WebUploadColunm(true, ColumnName, UploadType.file);
                     }
                     else
                     {
-                        string first = formBase.Replace("{{ColumnsName}}", columnsNameList[i])
-                            .Replace("{{Columns}}", columnsList[i]).Replace("{{ColumnsHtml}}",
-                                columnsHtmlList[i].Replace("CrossColumn", "")) + Environment.NewLine;
-                        if (i + 1 != columnsList.Count)
-                        {
-                            first += formBase.Replace("{{ColumnsName}}", columnsNameList[i + 1])
-                                         .Replace("{{Columns}}", columnsList[i + 1]).Replace("{{ColumnsHtml}}",
-                                             columnsHtmlList[i + 1].Replace("CrossColumn", "").Replace("Combobox", "")) + Environment.NewLine;
-                            i++;
-                        }
-                        templeteProperty.ContentHtml += string.Format(baseTag, first) + Environment.NewLine;
+                        webuploadColunm = new WebUploadColunm();
                     }
-                }
-                string comboboxPart = "";
-                //生成对应的Combobox
-                for (var i = 0; i < columnsHtmlList.Count; i++)
-                {
-                    if (columnsHtmlList[i].Contains("Combobox"))
+
+                    typeNameList.Add(new TypeColumnName()
                     {
-                        comboboxPart += $"'{columnsList[i]}',";
-                    }
+                        ColumnName = ColumnName,
+                        TypeName = columnsTypeList[i],
+                        ColumnsNameRemark = columnsNameList[i],
+                        IsRequired = columnsList[i].Contains("*") ? true : false,
+                        IsVarchar = columnsTypeList[i] == "string",
+                        StringLength = 100,
+                        IsCombobox = columnsList[i].Contains("@") ? true : false,
+                        IsColspan3 = columnsList[i].Contains("%") ? true : false,
+                        WebuploadColunm = webuploadColunm,
+                        DataOptions = columnsHtmlList[i]
+                    });
                 }
-                templeteProperty.ComboboxPart = comboboxPart.TrimStart(',').TrimEnd(',');
 
-                //按模板格式填充各字段的值
-                foreach (var keyValuePair in allFiles)
+                ViewFileModel vf = new ViewFileModel
                 {
-                    string basePathTem = "";
-                    using (var read = keyValuePair.Value.OpenRead())
-                    {
-                        int fsLen = (int)read.Length;
-                        byte[] heByte = new byte[fsLen];
-                        int r = await read.ReadAsync(heByte, 0, heByte.Length);
-                        string content = System.Text.Encoding.UTF8.GetString(heByte);
-                        string fileName = Path.GetFileName(read.Name);
-                        foreach (var propertyInfo in properties)
-                        {
-                            content = content.Replace("{{" + propertyInfo.Name + "}}", propertyInfo.GetValue(templeteProperty).ToString());
-                            fileName = fileName?.Replace("{{" + propertyInfo.Name + "}}", propertyInfo.GetValue(templeteProperty).ToString());//生成输出的文件名
-                        }
-                        //根据文件夹生成对应的文件类型
-                        if (read.Name.Contains("JS"))
-                        {
-                            basePathTem = templeteProperty.TableName;
-                            fileName = fileName.Replace(".txt", ".js");
-                        }
-                        else if (read.Name.Contains("Views"))
-                        {
-                            basePathTem = templeteProperty.TableName;
-                            fileName = fileName.Replace(".txt", ".cshtml");
-                        }
-                        else if (read.Name.Contains("Controllers"))
-                        {
-                            fileName = fileName.Replace(".txt", ".cs");
-                        }
-                        else if (read.Name.Contains("Domain"))
-                        {
-                            basePathTem = "Domain\\" + templeteProperty.TableName + "s";
-                            fileName = fileName.Replace(".txt", ".cs");
-                        }
-                        else if (read.Name.Contains("Application") && !read.Name.Contains("Dto"))
-                        {
-                            basePathTem = "Application\\" + templeteProperty.TableName + "s";
-                            fileName = fileName.Replace(".txt", ".cs");
-                        }
-                        else
-                        {
-                            basePathTem = "Application\\" + templeteProperty.TableName + "s" + "\\Dto";
-                            fileName = fileName.Replace(".txt", ".cs");
-                        }
-                        //转换后文件输出的文件夹
-                        string outputPath = Path.Combine(BasePath, "Output", basePathTem);
+                    CreateTime = DateTime.Now,
+                    EmailAddress = this.EmailAddress.Text,
+                    UserName = this.UserName.Text,
+                    TableName = this.TableName.Text,
+                    ProjectName = this.ProjectName.Text,
+                    TypeColumnNames = typeNameList,
+                    IdType = IdType,
+                };
 
-                        if (!Directory.Exists(outputPath))
-                        {
-                            Directory.CreateDirectory(outputPath);
-                        }
+                var busViewModel = new AddNewBussinessModel(vf.ProjectName, vf.TableName, @"..\..\Templates");
+                var bussiness = new AddNewBussinessHelper(busViewModel, vf, @"..\..\Outputs");
 
-                        // 创建文件
-                        FileHelper.OutputFile(Path.Combine(outputPath, fileName), content);
-                    }
-                }
+                bussiness.Execute();
+
                 MessageBox.Show("操作成功！");
             }
             catch (Exception exception)
@@ -193,6 +133,14 @@ namespace SJNScaffolding
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
+        }
+
+        private void radio_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton btn = sender as RadioButton;
+            if (btn == null)
+                return;
+            IdType = btn.Name.Replace("rb_", "");
         }
     }
 }

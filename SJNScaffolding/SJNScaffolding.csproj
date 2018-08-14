@@ -81,16 +81,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Resource Include="Templete\Views\Index.txt" />
-    <Resource Include="Templete\Views\CreateOrUpdateModal.txt" />
-    <Resource Include="Templete\JS\CreateOrUpdateModal.txt" />
-    <Resource Include="Templete\JS\Index.txt" />
-    <Resource Include="Templete\Application\{{TableName}}AppService.txt" />
-    <Resource Include="Templete\Application\I{{TableName}}AppService.txt" />
-    <Resource Include="Templete\Application\Dto\{{TableName}}InputDto.txt" />
-    <Resource Include="Templete\Application\Dto\{{TableName}}ListDto.txt" />
-    <Resource Include="Templete\Application\Dto\{{TableName}}SearchDto.txt" />
-    <Resource Include="Templete\Controllers\{{TableName}}Controller.txt" />
     <Resource Include="Core\FormTemplete\FormBase.txt" />
     <Resource Include="Core\FormTemplete\FormSpecial.txt" />
     <Page Include="MainWindow.xaml">
@@ -136,15 +126,25 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Templates\Application\AppServiceTemplate.cshtml" />
+    <None Include="Templates\Application\Dto\InputDtoTemplate.cshtml" />
+    <None Include="Templates\Application\Dto\ListDtoTemplate.cshtml" />
+    <None Include="Templates\Application\Dto\SearchDtoTemplate.cshtml" />
+    <None Include="Templates\Application\IAppServiceTemplate.cshtml" />
+    <None Include="Templates\Controllers\ControllerTemplate.cshtml" />
+    <None Include="Templates\CopyRightTemplate.cshtml" />
+    <None Include="Templates\Domain\EntityTemplate.cshtml" />
+    <None Include="Templates\JS\CreateOrUpdateModalTemplate.cshtml" />
+    <None Include="Templates\JS\IndexTemplate.cshtml" />
+    <None Include="Templates\ViewModel\EntityViewModel.cshtml" />
+    <None Include="Templates\Views\CreateOrUpdateModalTemplate.cshtml" />
+    <None Include="Templates\Views\IndexTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Templete\Domain\{{TableName}}.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

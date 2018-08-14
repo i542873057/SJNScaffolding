@@ -9,11 +9,11 @@
     <Grid Margin="0,0,-6.4,-6">
         <Button Content="确认" HorizontalAlignment="Left" Margin="1090,47,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Button Content="关闭" HorizontalAlignment="Left" Margin="1090,93,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" RenderTransformOrigin="0.32,-4.854"/>
-        <Label Content="项目名称：" HorizontalAlignment="Left" Margin="72,44,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="161,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" Name="ProjectName"/>
-        <Label Content="表名：" HorizontalAlignment="Left" Margin="72,86,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="161,86,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" Name="TableName"/>
-        <Label Content="表字段" HorizontalAlignment="Left" Margin="146,129,0,0" VerticalAlignment="Top"/>
+        <Label Content="项目名称：" HorizontalAlignment="Left" Margin="72,22,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="161,22,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" Name="ProjectName"/>
+        <Label Content="表名：" HorizontalAlignment="Left" Margin="72,50,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="161,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" Name="TableName"/>
+        <Label Content="表字段" HorizontalAlignment="Left" Margin="106,129,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="621" Margin="80,155,0,0" TextWrapping="Wrap" Name="Columns" VerticalAlignment="Top" Width="169" AcceptsReturn="True"/>
         <Label Content="表字段类型" HorizontalAlignment="Left" Margin="343,129,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="621" Margin="290,155,0,0" TextWrapping="Wrap" Name="ColumnsType" VerticalAlignment="Top" Width="169" AcceptsReturn="True"/>
@@ -21,10 +21,19 @@
         <TextBox HorizontalAlignment="Left" Height="621" Margin="479,155,0,0" TextWrapping="Wrap" Name="ColumnsName" VerticalAlignment="Top" Width="239" AcceptsReturn="True"/>
         <Label Content="字段渲染形式" HorizontalAlignment="Left" Margin="938,129,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="621" Margin="741,155,0,0" TextWrapping="Wrap" Name="ColumnsHtml" VerticalAlignment="Top" Width="438" AcceptsReturn="True"/>
-        <CheckBox Content="是否有上传" HorizontalAlignment="Left" Margin="494,47,0,0" VerticalAlignment="Top" Name="IfUpload"/>
-        <CheckBox Content="是否有省市区级联" HorizontalAlignment="Left" Margin="494,93,0,0" VerticalAlignment="Top" Name="IfCityPicker"/>
-        <Label MaxWidth="550" Margin="654,22,125,702" >
-            <TextBlock TextWrapping="Wrap" Text="每列中的数量要一致，有跨行使用CrossColumn，如果是下拉框直接添加Combobox" Width="411" />
+        <Label MaxWidth="550" Margin="494,22,285.4,702" >
+            <TextBlock TextWrapping="Wrap" Text="提示：在”表字段“列填可添加以下占位符：*是必填；#是上传图片；$是上传文件；%是跨行；@是下拉；" Width="411" />
         </Label>
+        <Label Content="添加人：" HorizontalAlignment="Left" Margin="72,78,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="161,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" Name="UserName"/>
+        <Label Content="邮箱：" HorizontalAlignment="Left" Margin="72,106,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="161,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" Name="EmailAddress"/>
+        <GroupBox Header="主键字段类型" HorizontalAlignment="Left" Height="104" Margin="343,22,0,0" VerticalAlignment="Top" Width="146">
+            <StackPanel Margin="0,0,50,0">
+                <RadioButton x:Name="rb_long" Content="Long型" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" GroupName="IdType" IsChecked="True"/>
+                <RadioButton x:Name="rb_int" Content="Int型" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top"  GroupName="IdType" />
+                <RadioButton x:Name="rb_Guid" Content="Guid型" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" GroupName="IdType"/>
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </Window>

@@ -19,7 +19,33 @@
         /// <summary>
         /// 编辑界面样式
         /// </summary>
-        public string ClassName { get; set; } = EasyuiForm.textbox;
+        public string ClassName
+        {
+            get
+            {
+                if (IsCombobox)
+                {
+                    return EasyuiForm.combobox;
+                }
+                switch (TypeName)
+                {
+                    case "int":
+                    case "int?":
+                    case "long":
+                    case "long?":
+                    case "decimal":
+                    case "decimal?": return EasyuiForm.numberbox;
+                    case "DateTime":
+                    case "DateTime?": return EasyuiForm.datebox;
+                    case "bool":
+                    case "bool?": return EasyuiForm.switchbutton;
+                    case "string": return EasyuiForm.textbox;
+                    default: return "";
+                }
+            }
+        }
+
+        public bool IsCombobox { get; set; } = false;
 
         /// <summary>
         /// 是否跨三列
@@ -78,7 +104,7 @@
             IsWebUpload = false;
         }
 
-        public WebUploadColunm(bool isWebUpload,string webuploadId, string uploadType = CollectiveType.UploadType.file)
+        public WebUploadColunm(bool isWebUpload, string webuploadId, string uploadType = CollectiveType.UploadType.file)
         {
             WebuploadId = webuploadId;
             UploadType = uploadType;

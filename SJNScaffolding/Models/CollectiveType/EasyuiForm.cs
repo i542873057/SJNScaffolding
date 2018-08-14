@@ -12,5 +12,6 @@
         public const string datebox = "easyui-datebox";
         public const string datetimebox = "easyui-datetimebox";
         public const string calendar = "easyui-calendar";
+        public const string switchbutton = "easyui-switchbutton";
     }
 }
