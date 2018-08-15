@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -20,7 +20,10 @@ using SJNScaffolding.Helper;
 using SJNScaffolding.Models.CollectiveType;
 using SJNScaffolding.Models.HelperModels;
 using SJNScaffolding.Models.TemplateModels;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
 using Path = System.IO.Path;
+using RadioButton = System.Windows.Controls.RadioButton;
 
 namespace SJNScaffolding
 {
@@ -115,10 +118,11 @@ namespace SJNScaffolding
                     ProjectName = this.ProjectName.Text,
                     TypeColumnNames = typeNameList,
                     IdType = IdType,
+                    TemplateFolder = @"..\..\Templates",
+                    OutputFolder=outputsFolder.Text??@"..\..\Outputs"
                 };
 
-                var busViewModel = new AddNewBussinessModel(vf.ProjectName, vf.TableName, @"..\..\Templates");
-                var bussiness = new AddNewBussinessHelper(busViewModel, vf, @"..\..\Outputs");
+                var bussiness = new AddNewBussinessHelper(vf);
 
                 bussiness.Execute();
 
@@ -142,5 +146,17 @@ namespace SJNScaffolding
                 return;
             IdType = btn.Name.Replace("rb_", "");
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            string folderName = "";
+            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+            if (folderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK) // Result could be true, false, or null
+            {
+                folderName = folderBrowser.SelectedPath;
+            }
+            outputsFolder.Text = folderName;
+        }
+
     }
 }

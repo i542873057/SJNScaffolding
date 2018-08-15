@@ -24,11 +24,11 @@ namespace SJNScaffolding.Helper
         private readonly AddNewBussinessModel _parameter;
         private readonly ViewFileModel _viewFileModel;
         private readonly string _baseUrl;
-        public AddNewBussinessHelper(AddNewBussinessModel parameter, ViewFileModel viewFileModel, string baseUrl = @"..\..\")
+        public AddNewBussinessHelper(ViewFileModel viewFileModel)
         {
-            this._parameter = parameter;
+            this._parameter = new AddNewBussinessModel(viewFileModel.ProjectName,viewFileModel.TableName,viewFileModel.TemplateFolder);
             this._viewFileModel = viewFileModel;
-            _baseUrl = baseUrl;
+            _baseUrl = viewFileModel.OutputFolder;
         }
 
         public void Execute()

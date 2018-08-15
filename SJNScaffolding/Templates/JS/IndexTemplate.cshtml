@@ -1,4 +1,5 @@
-﻿@using SJNScaffolding.Extend
+﻿@using System.Linq
+@using SJNScaffolding.Extend
 @using SJNScaffolding.Models.CollectiveType
 @model SJNScaffolding.Models.TemplateModels.ViewFileModel
 var gridUI = gridUI || {};
@@ -79,6 +80,18 @@ _context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限"
                                             return;
                                         }
                                         var formData = f.formSerialize();
+                                        @if(Model.WebUploadList.Any())
+                                        {
+                                            foreach (var item in Model.TypeColumnNames)
+                                            {
+                                                if (item.IsRequired && item.WebuploadColunm.IsWebUpload)
+                                                {
+@RazorHelper.RawHtml(@"                                         formData."+item.ColumnName+"=$(\'#"+item.ColumnName+ "\').GetFilesAddress();\r\n)");
+@RazorHelper.RawHtml(@"                                         if(formData." + item.ColumnName + "==\'\'){abp.message.warn(\'"+item.ColumnsNameRemark+"为必填项!\');return;}\r\n");
+                                                }
+                                            }
+                                        }
+
                                         com.setBusy(pDialog, true);
                                         _@(Model.TableNameCamel)Service.createOrUpdate(formData, { showMsg: true })
                                     .done(function() {

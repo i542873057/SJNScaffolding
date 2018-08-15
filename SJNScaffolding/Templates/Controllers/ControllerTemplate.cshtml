@@ -17,7 +17,7 @@ using System.Web.Mvc;
 using @(Model.ProjectName).Domain.Plat.@(Model.TableName)s;
 using @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto;
 using @(Model.ProjectName).Web.Controllers;
-
+using HbAssess.Domain.Common.Files;
 namespace @(Model.ProjectName).Web.Areas.Plat.Controllers
 {
     public class @(Model.TableName)Controller : @(Model.ProjectName)ControllerBase
@@ -60,7 +60,7 @@ namespace @(Model.ProjectName).Web.Areas.Plat.Controllers
                 {
                     webuploadParams+=",_fileAppService.GetFileOutput(output."+r.WebuploadId+")";
                 }
-@RazorHelper.RawHtml("              var "+Model.TableNameCamel+"ViewModel=new " +Model.TableNameCamel+"ViewModel(output"+webuploadParams+");\r\n");
+@RazorHelper.RawHtml("              var "+Model.TableNameCamel + "ViewModel=new " +Model.TableName + "ViewModel(output"+webuploadParams+");\r\n");
 @RazorHelper.RawHtml("          return Json("+Model.TableNameCamel+"ViewModel"+ ");\r\n");
             }
             else{

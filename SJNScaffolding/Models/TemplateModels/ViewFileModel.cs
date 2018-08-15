@@ -15,7 +15,11 @@ namespace SJNScaffolding.Models.TemplateModels
         /// 模板路径
         /// </summary>
 
-        public string ViewFolder { get; set; }
+        public string TemplateFolder { get; set; }
+        /// <summary>
+        /// 生成代码路径 
+        /// </summary>
+        public string OutputFolder { get; set; }
 
         /// <summary>
         /// 项目名称即数据库名
@@ -36,14 +40,12 @@ namespace SJNScaffolding.Models.TemplateModels
         {
             get
             {
-                string className = "";
                 if (_tableName?.Length > 2 && (_tableName.EndsWith("es") || _tableName.EndsWith("s")))
                 {
-
-                    className = _tableName.EndsWith("es") ?
+                    var className = _tableName.EndsWith("es") ?
                         _tableName.Substring(0, _tableName.Length - 2) :
                         _tableName.Substring(0, _tableName.Length - 1);
-                   return className;
+                    return className;
                 }
                 return _tableName;
             }
@@ -53,10 +55,6 @@ namespace SJNScaffolding.Models.TemplateModels
         /// id的类型
         /// </summary>
         public string IdType { get; set; } = CollectiveType.IdType.INT;
-
-        public string FileName { get; set; }
-
-        public bool IsPopup { get; set; }
         /// <summary>
         /// 首字母小写
         /// </summary>

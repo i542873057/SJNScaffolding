@@ -62,9 +62,9 @@ namespace SJNScaffolding.Models.HelperModels
         /// </summary>
         public string DtoFolder => this.ServiceFolder + "\\" + "Dto";
 
-        public string ControlFolder =>this.AreasFolder+ "\\Controller";
+        public string ControlFolder =>this.AreasFolder+ "\\Controllers";
 
-        public string ViewModelFolder =>this.AreasFolder+"\\Modles";
+        public string ViewModelFolder =>this.AreasFolder+"\\Models";
 
 
         public string AreasFolder => "\\" + this._projectName + ".Web\\Areas\\" + _areas;

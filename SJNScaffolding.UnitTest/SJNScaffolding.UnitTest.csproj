@@ -81,19 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Templates\Application\AppServiceTemplate.cshtml" />
-    <None Include="Templates\Application\Dto\InputDtoTemplate.cshtml" />
-    <None Include="Templates\Application\Dto\ListDtoTemplate.cshtml" />
-    <None Include="Templates\Application\Dto\SearchDtoTemplate.cshtml" />
-    <None Include="Templates\Application\IAppServiceTemplate.cshtml" />
-    <None Include="Templates\Controllers\ControllerTemplate.cshtml" />
-    <None Include="Templates\CopyRightTemplate.cshtml" />
-    <None Include="Templates\Domain\EntityTemplate.cshtml" />
-    <None Include="Templates\JS\CreateOrUpdateModalTemplate.cshtml" />
-    <None Include="Templates\JS\IndexTemplate.cshtml" />
-    <None Include="Templates\ViewModel\EntityViewModel.cshtml" />
-    <None Include="Templates\Views\CreateOrUpdateModalTemplate.cshtml" />
-    <None Include="Templates\Views\IndexTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SJNScaffolding\SJNScaffolding.csproj">

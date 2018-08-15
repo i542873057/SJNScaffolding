@@ -9,6 +9,7 @@
 * 修改说明：
 */
 @using System
+@using System.Collections.Generic
 @using SJNScaffolding.Extend
 @using SJNScaffolding.Models.CollectiveType
 @model SJNScaffolding.Models.TemplateModels.ViewFileModel
@@ -18,8 +19,8 @@ using @(Model.ProjectName).Domain.Common.Files.Dto;
 using @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto;
 namespace @(Model.ProjectName).Web.Areas.Plat.Models
 {
-    [AutoMapFrom(typeof(@(Model.TableName)Input))]
-    public class @(Model.TableName)ViewModel : @(Model.TableName)Input
+    [AutoMapFrom(typeof(@(Model.TableName)InputDto))]
+    public class @(Model.TableName)ViewModel : @(Model.TableName)InputDto
     {
     @{
         List<TypeColumnName> webuploadColunm = new List<TypeColumnName>();
@@ -31,9 +32,9 @@ namespace @(Model.ProjectName).Web.Areas.Plat.Models
             }
         }
     }
-        public @(Model.TableName)ViewModel(@(Model.TableName)Input @(Model.TableNameCamel)Input @foreach (TypeColumnName item in webuploadColunm)
+        public @(Model.TableName)ViewModel(@(Model.TableName)InputDto @(Model.TableNameCamel)Input @foreach (TypeColumnName item in webuploadColunm)
 {
-@RazorHelper.RawHtml(",List<AbpOutput> " + item.ColumnNameCamel + "Outputs" );
+@RazorHelper.RawHtml(",List<AbpFileOutput> " + item.ColumnNameCamel + "Outputs" );
 })
         {
             @(Model.TableNameCamel)Input.MapTo(this);

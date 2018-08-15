@@ -15,7 +15,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
     [TestClass]
     public class UnitTest1
     {
-        private const string BasePath = @"..\..\..\SJNScaffolding";
+        private const string BasePath = @"..\..\..\SJNScaffolding\";
 
         [TestMethod]
         public void TestMethod1()
@@ -29,7 +29,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
             templeteProperty.CityPickerJSPath = "";
             templeteProperty.UploadFileJSPath = "";
             //模板所在文件夹
-            string currentRunTimePath = Path.Combine(BasePath, "Templete");
+            string currentRunTimePath = Path.Combine(BasePath, "Templates");
             Dictionary<string, FileInfo> allFiles = new Dictionary<string, FileInfo>();
             FileHelper.GetFile(currentRunTimePath, allFiles);
             //获取对象所有属性
@@ -49,7 +49,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
         [TestMethod]
         public void testCorpyRight()
         {
-            var path = @"..\..\" + "Templates\\CopyRightTemplate.cshtml";
+            var path = BasePath + "Templates\\CopyRightTemplate.cshtml";
             var template = File.ReadAllText(path);
 
             string content = Engine.Razor.RunCompile(template, "CopyRightTemplate", typeof(CopyRightUserInfo), new CopyRightUserInfo
@@ -64,7 +64,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
         [TestMethod]
         public void testDomainEntity()
         {
-            var path = @"..\..\" + "Templates\\Domain\\EntityTemplate.cshtml";
+            var path = BasePath + "Templates\\Domain\\EntityTemplate.cshtml";
             var template = File.ReadAllText(path);
 
             var typeNameList = GetColunmsList();
@@ -88,7 +88,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
         [TestMethod]
         public void testContrrollerTemplate()
         {
-            var path = @"..\..\" + "Templates\\Controllers\\ControllerTemplate.cshtml";
+            var path = BasePath + "Templates\\Controllers\\ControllerTemplate.cshtml";
             var template = File.ReadAllText(path);
 
 
@@ -109,8 +109,8 @@ namespace SJNScaffolding.UnitTest.TemplateTest
         [TestMethod]
         public void testIAppservice()
         {
-            //var path = @"..\..\" + "Templates\\Application\\IAppServiceTemplate.cshtml";
-            var path = @"..\..\" + "Templates\\Application\\AppServiceTemplate.cshtml";
+            //var path = BasePath + "Templates\\Application\\IAppServiceTemplate.cshtml";
+            var path = BasePath + "Templates\\Application\\AppServiceTemplate.cshtml";
             var template = File.ReadAllText(path);
 
             var typeNameList = GetColunmsList();
@@ -140,7 +140,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
 
         public void testDto(string InputDtoTemplate = "InputDtoTemplate")
         {
-            var path = @"..\..\" + "Templates\\Application\\Dto\\" + InputDtoTemplate + ".cshtml";
+            var path = BasePath + "Templates\\Application\\Dto\\" + InputDtoTemplate + ".cshtml";
             var template = File.ReadAllText(path);
 
 
@@ -163,7 +163,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
         [TestMethod]
         public void testIndexTemplate()
         {
-            var path = @"..\..\" + "Templates\\Views\\IndexTemplate.cshtml";
+            var path = BasePath + "Templates\\Views\\IndexTemplate.cshtml";
             var template = File.ReadAllText(path);
 
             var typeNameList = GetColunmsList();
@@ -185,7 +185,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
         [TestMethod]
         public void testIndexjsTemplate()
         {
-            var path = @"..\..\" + "Templates\\JS\\IndexTemplate.cshtml";
+            var path = BasePath + "Templates\\JS\\IndexTemplate.cshtml";
             var template = File.ReadAllText(path);
 
             var typeNameList = GetColunmsList();
@@ -205,7 +205,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
         [TestMethod]
         public void testViewModelEntity()
         {
-            var path = @"..\..\" + "Templates\\ViewModel\\EntityViewModel.cshtml";
+            var path = BasePath + "Templates\\ViewModel\\EntityViewModel.cshtml";
             var template = File.ReadAllText(path);
 
             var typeNameList = GetColunmsList();
@@ -225,7 +225,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
         [TestMethod]
         public void testCreateOrUpdateModalTemplate()
         {
-            var path = @"..\..\" + "Templates\\JS\\CreateOrUpdateModalTemplate.cshtml";
+            var path = BasePath + "Templates\\JS\\CreateOrUpdateModalTemplate.cshtml";
             var template = File.ReadAllText(path);
 
             var typeNameList = GetColunmsList();
@@ -245,7 +245,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
         [TestMethod]
         public void testViewsCreateOrUpdateModal()
         {
-            var path = @"..\..\" + "Templates\\Views\\CreateOrUpdateModalTemplate.cshtml";
+            var path = BasePath + "Templates\\Views\\CreateOrUpdateModalTemplate.cshtml";
             var template = File.ReadAllText(path);
 
             var typeNameList = GetColunmsList();

@@ -53,10 +53,11 @@ namespace SJNScaffolding.UnitTest
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = UnitTest1.GetColunmsList(),
                 IdType = IdType.LONG,
+                TemplateFolder = @"..\..\..\SJNScaffolding\Templates",
+                OutputFolder=@"..\..\..\SJNScaffolding\Outputs"
             };
 
-            var busViewModel = new AddNewBussinessModel(vf.ProjectName, vf.TableName, @"..\..\Templates");
-            var bussiness = new AddNewBussinessHelper(busViewModel, vf,@"..\..\Outputs");
+            var bussiness = new AddNewBussinessHelper(vf);
 
             bussiness.Execute();
         }

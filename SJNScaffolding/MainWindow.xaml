@@ -21,7 +21,7 @@
         <TextBox HorizontalAlignment="Left" Height="621" Margin="479,155,0,0" TextWrapping="Wrap" Name="ColumnsName" VerticalAlignment="Top" Width="239" AcceptsReturn="True"/>
         <Label Content="字段渲染形式" HorizontalAlignment="Left" Margin="938,129,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="621" Margin="741,155,0,0" TextWrapping="Wrap" Name="ColumnsHtml" VerticalAlignment="Top" Width="438" AcceptsReturn="True"/>
-        <Label MaxWidth="550" Margin="494,22,285.4,702" >
+        <Label MaxWidth="550" Margin="500,83,278.733,640.667" >
             <TextBlock TextWrapping="Wrap" Text="提示：在”表字段“列填可添加以下占位符：*是必填；#是上传图片；$是上传文件；%是跨行；@是下拉；" Width="411" />
         </Label>
         <Label Content="添加人：" HorizontalAlignment="Left" Margin="72,78,0,0" VerticalAlignment="Top"/>
@@ -35,5 +35,7 @@
                 <RadioButton x:Name="rb_Guid" Content="Guid型" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" GroupName="IdType"/>
             </StackPanel>
         </GroupBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="600,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="380" x:Name="outputsFolder" />
+        <Button Content="选择生成路径" HorizontalAlignment="Left" Margin="510,31,0,0" VerticalAlignment="Top" Width="85" Click="Button_Click_2"/>
     </Grid>
 </Window>

@@ -28,7 +28,7 @@
                 if (item.IsColspan3||item.WebuploadColunm.IsWebUpload)
                 {
                 <tr>
-                    <td class="kv-label">@item.ColumnsNameRemark</td>
+                    <td class="kv-label">@if (item.IsRequired){@RazorHelper.RawHtml(@"<span class='font-red'>*</span>")}@item.ColumnsNameRemark</td>
                     <td class="kv-content" colspan="3">
                         @if(item.WebuploadColunm.IsWebUpload==true)
                         {
@@ -36,7 +36,7 @@
                         }
                         else
                         {
-                            CreateInput(item, styles);
+                            CreateInput(item, styles)
                         }
                     </td>
                 </tr>
@@ -45,16 +45,16 @@
                 {
                     i++;
                 <tr>
-                    <td class="kv-label">@item.ColumnsNameRemark</td>
-                    <td class="kv1-content" @(i < Model.TypeColumnNames.Count ? "" : "colspan=\'3\'")>
-                        @CreateInput(item,i < Model.TypeColumnNames.Count ? "" :styles);
+                    <td class="kv-label">@if (item.IsRequired){@RazorHelper.RawHtml(@"<span class='font-red'>*</span>")}@item.ColumnsNameRemark</td>
+                    <td class="kv-content" @(i < Model.TypeColumnNames.Count ? "" : "colspan=\'3\'")>
+                        @CreateInput(item,i < Model.TypeColumnNames.Count ? "" :styles)
                     </td>
                     @if (i< Model.TypeColumnNames.Count)
                     {
                     item = Model.TypeColumnNames[i];
-                    <td class="kv-label">@item.ColumnsNameRemark</td>
-                    <td class="kv2-content">
-                        @CreateInput(item,"");
+                    <td class="kv-label">@if (item.IsRequired){@RazorHelper.RawHtml(@"<span class='font-red'>*</span>")}@item.ColumnsNameRemark</td>
+                    <td class="kv-content">
+                        @CreateInput(item,"")
                     </td>
                     }
                 </tr>
