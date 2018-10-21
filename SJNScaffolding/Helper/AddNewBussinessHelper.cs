@@ -26,7 +26,7 @@ namespace SJNScaffolding.Helper
         private readonly string _baseUrl;
         public AddNewBussinessHelper(ViewFileModel viewFileModel)
         {
-            this._parameter = new AddNewBussinessModel(viewFileModel.ProjectName,viewFileModel.TableName,viewFileModel.TemplateFolder);
+            this._parameter = new AddNewBussinessModel(viewFileModel.ProjectName, viewFileModel.TableName, viewFileModel.TemplateFolder);
             this._viewFileModel = viewFileModel;
             _baseUrl = viewFileModel.OutputFolder;
         }
@@ -70,13 +70,16 @@ namespace SJNScaffolding.Helper
 
         private void CreateViewJsFiles()
         {
+            //用于标识不同的模板
+            int flag = 0;
+
             foreach (var itemFolder in new[] { "JS", "Views" })
             {
                 foreach (var templateName in new[] { "IndexTemplate", "CreateOrUpdateModalTemplate" })
                 {
                     var path = _parameter.TemplateBaseUrl + "\\" + itemFolder + "\\" + templateName + ".cshtml";
                     var template = File.ReadAllText(path);
-                    string content = Engine.Razor.RunCompile(template, itemFolder + templateName + "CreateViewJsFiles", typeof(ViewFileModel), _viewFileModel);
+                    string content = Engine.Razor.RunCompile(template, itemFolder + templateName + "CreateViewJsFiles" + flag++, typeof(ViewFileModel), _viewFileModel);
                     string fileName = templateName.Replace("Template", ".");
 
                     if (itemFolder.Equals("JS"))
