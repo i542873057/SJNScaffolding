@@ -1,0 +1,10 @@
+{
+  "BuildTasks": [
+    {
+      "TemplateNames": "/Application/IAppServiceTemplate.cshtml",
+    },
+    {
+
+    }
+  ]
+}

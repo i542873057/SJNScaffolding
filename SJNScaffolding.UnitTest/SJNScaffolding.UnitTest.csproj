@@ -83,8 +83,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SJNScaffolding\SJNScaffolding.csproj">
+    <ProjectReference Include="..\SJNScaffolding.WPF\SJNScaffolding.WPF.csproj">
       <Project>{f19fdab9-f060-4311-a70e-ccb71e1252a6}</Project>
+      <Name>SJNScaffolding.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SJNScaffolding\SJNScaffolding.csproj">
+      <Project>{571e3343-7861-4a39-98c5-f6f1eca1a91c}</Project>
       <Name>SJNScaffolding</Name>
     </ProjectReference>
   </ItemGroup>

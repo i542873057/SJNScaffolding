@@ -1,0 +1,66 @@
+﻿@using SJNScaffolding.Models.CollectiveType
+@using SJNScaffolding.WPF.Extend
+@model SJNScaffolding.Models.TemplateModels.ViewFileModel
+@RazorHelper.RawHtml("@{Layout=null;}")
+@helper CreateInput(TypeColumnName item,string styles)
+{
+    switch(item.ClassName)
+    {
+        case EasyuiForm.combo:
+        case EasyuiForm.combobox:
+            @RazorHelper.RawHtml(string.Format("<input id=\'{0}\' name=\'{0}\' {1} />", item.ColumnName,styles))
+            break;
+                                
+        default:
+            @RazorHelper.RawHtml(string.Format("<input id=\'{0}\' name=\'{0}\' class=\'{1}\' {2} data-options=\'{3}\'/>",item.ColumnName,item.ClassName,styles,item.DataOptions))
+            break;
+    }
+}
+@("@using Abp.Web.Mvc.Extensions")
+<div class="layui-layer-content">
+    <form id="editForm">
+        <input id="Id" name="Id" type="hidden" />
+        <table class="kv-table">
+            @for (int i=0;i<Model.TypeColumnNames.Count;i++)
+            {
+               TypeColumnName item = Model.TypeColumnNames[i];
+                string styles = "style=\'width:560px\'";
+                if (item.IsColspan3||item.WebuploadColunm.IsWebUpload)
+                {
+                <tr>
+                    <td class="kv-label">@if (item.IsRequired){@RazorHelper.RawHtml(@"<span class='font-red'>*</span>")}@item.ColumnsNameRemark</td>
+                    <td class="kv-content" colspan="3">
+                        @if(item.WebuploadColunm.IsWebUpload==true)
+                        {
+                        <div id="@(item.ColumnName)" style="position:relative"></div>
+                        }
+                        else
+                        {
+                            @CreateInput(item, styles)
+                        }
+                    </td>
+                </tr>
+                }
+                else
+                {
+                    i++;
+                <tr>
+                    <td class="kv-label">@if (item.IsRequired){@RazorHelper.RawHtml(@"<span class='font-red'>*</span>")}@item.ColumnsNameRemark</td>
+                    <td class="kv-content" @(i < Model.TypeColumnNames.Count ? "" : "colspan=\'3\'")>
+                        @CreateInput(item,i < Model.TypeColumnNames.Count ? "" :styles)
+                    </td>
+                    @if (i< Model.TypeColumnNames.Count)
+                    {
+                    item = Model.TypeColumnNames[i];
+                    <td class="kv-label">@if (item.IsRequired){@RazorHelper.RawHtml(@"<span class='font-red'>*</span>")}@item.ColumnsNameRemark</td>
+                    <td class="kv-content">
+                        @CreateInput(item,"")
+                    </td>
+                    }
+                </tr>
+                }
+            }
+        </table>
+    </form>
+</div>
+@RazorHelper.RawHtml("@Html.IncludeScript('~/Areas/Plat/Views/" + Model.TableName + "/CreateOrUpdateModal.js')")

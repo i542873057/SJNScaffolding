@@ -1,12 +1,12 @@
-﻿using System;
-using System.IO;
+﻿
+
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using RazorEngine;
 using RazorEngine.Templating;
 using SJNScaffolding.Helper;
 using SJNScaffolding.Models.CollectiveType;
-using SJNScaffolding.Models.HelperModels;
 using SJNScaffolding.Models.TemplateModels;
 using SJNScaffolding.UnitTest.TemplateTest;
 
@@ -57,9 +57,9 @@ namespace SJNScaffolding.UnitTest
                 OutputFolder=@"..\..\..\SJNScaffolding\Outputs"
             };
 
-            var bussiness = new AddNewBussinessHelper(vf);
+            //var bussiness = new AddNewBussinessHelper(vf);
 
-            bussiness.Execute();
+            //bussiness.Execute();
         }
     }
 }

@@ -10,76 +10,73 @@
 * 时间：
 * 修改说明：
 */
-using RazorEngine;
-using RazorEngine.Templating;
 using SJNScaffolding.Models.HelperModels;
 using SJNScaffolding.Models.TemplateModels;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SJNScaffolding.Helper
 {
     public class AddNewBussinessHelper : HelperBase<AddNewBussinessHelper>
     {
-        private readonly AddNewBussinessModel _parameter;
-        private readonly ViewFileModel _viewFileModel;
-        private readonly string _baseUrl;
-        public AddNewBussinessHelper(ViewFileModel viewFileModel)
+        private AddNewBussinessModel _parameter;
+        private ViewFileModel _viewFileModel;
+        private string _baseUrl;
+        private readonly ITemplateEngine _templateEngine;
+        public AddNewBussinessHelper(ITemplateEngine templateEngine)
+        {
+            _templateEngine = templateEngine;
+        }
+
+        public async Task Execute(ViewFileModel viewFileModel)
         {
             this._parameter = new AddNewBussinessModel(viewFileModel.ProjectName, viewFileModel.TableName, viewFileModel.TemplateFolder);
             this._viewFileModel = viewFileModel;
-            _baseUrl = viewFileModel.OutputFolder;
-        }
+            this._baseUrl = viewFileModel.OutputFolder;
 
-        public void Execute()
-        {
-            CreateServiceInterfaceFile();
-            CreateServiceFile();
-            CreateDtoFiles();
-            CreateViewJsFiles();
-
-            CreateContorlFiles();
+            await CreateServiceInterfaceFile();
+            await CreateServiceFile();
+            await CreateDtoFiles();
+            await CreateViewJsFiles();
+            await CreateContorlFiles();
 
             if (_viewFileModel.WebUploadList.Any())
             {
-                CreateViewModel();
+                await CreateViewModel();
             }
 
-            CreateCoreEntity();
+            await CreateCoreEntity();
 
         }
-        private void CreateServiceInterfaceFile()
+        private async Task CreateServiceInterfaceFile()
         {
+            _viewFileModel.TemplateNames = "/Application/IAppServiceTemplate.cshtml";
+            string content = await _templateEngine.Render(_viewFileModel);
             var fileName = _parameter.ServiceInterfaceName + ".cs";
-            var path = _parameter.TemplateBaseUrl + "\\Application\\IAppServiceTemplate.cshtml";
-            var template = File.ReadAllText(path);
-
-            string content = Engine.Razor.RunCompile(template, "CreateServiceInterfaceFile", typeof(ViewFileModel), _viewFileModel);
             CreateAndAddFile(_baseUrl + _parameter.ServiceFolder, fileName, content);
         }
 
-        private void CreateServiceFile()
+        private async Task CreateServiceFile()
         {
+            _viewFileModel.TemplateNames = "/Application/AppServiceTemplate.cshtml";
+
             var fileName = _parameter.ServiceName + ".cs";
-            var path = _parameter.TemplateBaseUrl + "\\Application\\AppServiceTemplate.cshtml";
-            var template = File.ReadAllText(path);
 
-            string content = Engine.Razor.RunCompile(template, "CreateServiceFile", typeof(ViewFileModel), _viewFileModel);
+            string content = await _templateEngine.Render(_viewFileModel);
+
             CreateAndAddFile(_baseUrl + _parameter.ServiceFolder, fileName, content);
         }
 
-        private void CreateViewJsFiles()
+        private async Task CreateViewJsFiles()
         {
-            //用于标识不同的模板
-            int flag = 0;
-
             foreach (var itemFolder in new[] { "JS", "Views" })
             {
                 foreach (var templateName in new[] { "IndexTemplate", "CreateOrUpdateModalTemplate" })
                 {
-                    var path = _parameter.TemplateBaseUrl + "\\" + itemFolder + "\\" + templateName + ".cshtml";
-                    var template = File.ReadAllText(path);
-                    string content = Engine.Razor.RunCompile(template, itemFolder + templateName + "CreateViewJsFiles" + flag++, typeof(ViewFileModel), _viewFileModel);
+                    _viewFileModel.TemplateNames = "/Html/" + itemFolder+"-"+templateName + ".cshtml";
+                    string content = await _templateEngine.Render(_viewFileModel);
+
                     string fileName = templateName.Replace("Template", ".");
 
                     if (itemFolder.Equals("JS"))
@@ -96,47 +93,38 @@ namespace SJNScaffolding.Helper
             }
         }
 
-        private void CreateDtoFiles()
+        private async Task CreateDtoFiles()
         {
-
             foreach (var templateName in new[] { "InputDtoTemplate", "ListDtoTemplate", "SearchDtoTemplate" })
             {
-                var path = _parameter.TemplateBaseUrl + "\\Application\\Dto\\" + templateName + ".cshtml";
-                var template = File.ReadAllText(path);
-                string content = Engine.Razor.RunCompile(template, templateName + "ControllerTemplate", typeof(ViewFileModel), _viewFileModel);
+                _viewFileModel.TemplateNames = "/Application/Dto/" + templateName + ".cshtml";
+                string content = await _templateEngine.Render(_viewFileModel);
                 string fileName = _viewFileModel.TableName + templateName.Replace("Template", ".cs");
-
-
                 CreateAndAddFile(_baseUrl + _parameter.DtoFolder, fileName, content);
             }
         }
 
-        private void CreateContorlFiles()
+        private async Task CreateContorlFiles()
         {
-            var path = _parameter.TemplateBaseUrl + "\\Controllers\\ControllerTemplate.cshtml";
-            var template = File.ReadAllText(path);
-            string content = Engine.Razor.RunCompile(template, "CreateDtoFiles", typeof(ViewFileModel), _viewFileModel);
+            _viewFileModel.TemplateNames = "/Controllers/ControllerTemplate.cshtml";
+            string content = await _templateEngine.Render(_viewFileModel);
             string fileName = _viewFileModel.TableName + "Controller.cs";
-
-
             CreateAndAddFile(_baseUrl + _parameter.ControlFolder, fileName, content);
         }
-        private void CreateViewModel()
+        private async Task CreateViewModel()
         {
-            var path = _parameter.TemplateBaseUrl + "\\ViewModel\\EntityViewModel.cshtml";
-            var template = File.ReadAllText(path);
-            string content = Engine.Razor.RunCompile(template, "EntityViewModel", typeof(ViewFileModel), _viewFileModel);
+            _viewFileModel.TemplateNames = "/ViewModel/EntityViewModel.cshtml";
+            string content = await _templateEngine.Render(_viewFileModel);
             string fileName = _viewFileModel.TableName + "ViewModel.cs";
 
             CreateAndAddFile(_baseUrl + _parameter.ViewModelFolder, fileName, content);
         }
 
 
-        private void CreateCoreEntity()
+        private async Task CreateCoreEntity()
         {
-            var path = _parameter.TemplateBaseUrl + "\\Domain\\EntityTemplate.cshtml";
-            var template = File.ReadAllText(path);
-            string content = Engine.Razor.RunCompile(template, "EntityTemplate", typeof(ViewFileModel), _viewFileModel);
+            _viewFileModel.TemplateNames = "/Domain/EntityTemplate.cshtml";
+            string content = await _templateEngine.Render(_viewFileModel);
             string fileName = _viewFileModel.TableName + ".cs";
 
             CreateAndAddFile(_baseUrl + _parameter.CoreEntityFolder, fileName, content);

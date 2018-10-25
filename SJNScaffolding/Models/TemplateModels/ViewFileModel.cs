@@ -7,6 +7,7 @@ namespace SJNScaffolding.Models.TemplateModels
 {
     public class ViewFileModel : CopyRightUserInfo
     {
+        public string TemplateNames { get; set; }
         /// <summary>
         /// 业务名-如用户管理
         /// </summary>
