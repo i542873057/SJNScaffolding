@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJNScaffolding.UnitTest", "SJNScaffolding.UnitTest\SJNScaffolding.UnitTest.csproj", "{00454A3C-9E42-4D37-BC61-E20850B076B7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJNScaffolding.WPF", "SJNScaffolding.WPF\SJNScaffolding.WPF.csproj", "{F19FDAB9-F060-4311-A70E-CCB71E1252A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJNScaffolding", "SJNScaffolding\SJNScaffolding.csproj", "{571E3343-7861-4A39-98C5-F6F1ECA1A91C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SJNScaffolding", "SJNScaffolding\SJNScaffolding.csproj", "{571E3343-7861-4A39-98C5-F6F1ECA1A91C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJNScaffolding.Mvc", "SJNScaffolding.Mvc\SJNScaffolding.Mvc.csproj", "{6D29C18A-95E9-49C0-95C6-0F96A64476EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SJNScaffolding.Mvc", "SJNScaffolding.Mvc\SJNScaffolding.Mvc.csproj", "{6D29C18A-95E9-49C0-95C6-0F96A64476EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJNScaffolding.WPF.UnitTest", "SJNScaffolding.UnitTest\SJNScaffolding.WPF.UnitTest.csproj", "{00454A3C-9E42-4D37-BC61-E20850B076B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{00454A3C-9E42-4D37-BC61-E20850B076B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00454A3C-9E42-4D37-BC61-E20850B076B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00454A3C-9E42-4D37-BC61-E20850B076B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00454A3C-9E42-4D37-BC61-E20850B076B7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F19FDAB9-F060-4311-A70E-CCB71E1252A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F19FDAB9-F060-4311-A70E-CCB71E1252A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F19FDAB9-F060-4311-A70E-CCB71E1252A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{6D29C18A-95E9-49C0-95C6-0F96A64476EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D29C18A-95E9-49C0-95C6-0F96A64476EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D29C18A-95E9-49C0-95C6-0F96A64476EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00454A3C-9E42-4D37-BC61-E20850B076B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00454A3C-9E42-4D37-BC61-E20850B076B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00454A3C-9E42-4D37-BC61-E20850B076B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00454A3C-9E42-4D37-BC61-E20850B076B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

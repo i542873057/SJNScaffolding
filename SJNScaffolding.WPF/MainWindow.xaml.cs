@@ -19,7 +19,7 @@ namespace SJNScaffolding.WPF
     public partial class MainWindow : Window
     {
         private const string BasePath = @"..\..\";
-        private static string IdType = "long";
+        private static string _idType = "long";
         public MainWindow()
         {
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace SJNScaffolding.WPF
                     {
                         string conlumsType = u.Trim().ToLower();
                         //将传入的参数按程序中的类型进行转换
-                        return TypeChange.typeChangeDictionary.FirstOrDefault(r => conlumsType.Contains(r.Key)).Value;
+                        return TypeChange.TypeChangeDictionary.FirstOrDefault(r => conlumsType.Contains(r.Key)).Value;
                     }).ToList();
 
                 if (columnsList.Count != columnsTypeList.Count || columnsList.Count != columnsNameList.Count)
@@ -60,7 +60,7 @@ namespace SJNScaffolding.WPF
                     {
                         throw new ArgumentException("无法同时上传图片和文件！");
                     }
-                    string ColumnName = columnsList[i].Replace("*", "").Replace("#", "").Replace("$", "").Replace("%", "").Replace("@", "");
+                    string columnName = columnsList[i].Replace("*", "").Replace("#", "").Replace("$", "").Replace("%", "").Replace("@", "");
                     //*是必填
                     //#是上传图片
                     //$是上传文件
@@ -69,11 +69,11 @@ namespace SJNScaffolding.WPF
                     WebUploadColunm webuploadColunm;
                     if (columnsList[i].Contains("#"))
                     {
-                        webuploadColunm = new WebUploadColunm(true, ColumnName, UploadType.img);
+                        webuploadColunm = new WebUploadColunm(true, columnName, UploadType.Img);
                     }
                     else if (columnsList[i].Contains("$"))
                     {
-                        webuploadColunm = new WebUploadColunm(true, ColumnName, UploadType.file);
+                        webuploadColunm = new WebUploadColunm(true, columnName, UploadType.File);
                     }
                     else
                     {
@@ -82,7 +82,7 @@ namespace SJNScaffolding.WPF
 
                     typeNameList.Add(new TypeColumnName()
                     {
-                        ColumnName = ColumnName,
+                        ColumnName = columnName,
                         TypeName = columnsTypeList[i],
                         ColumnsNameRemark = columnsNameList[i],
                         IsRequired = columnsList[i].Contains("*") ? true : false,
@@ -103,12 +103,12 @@ namespace SJNScaffolding.WPF
                     TableName = this.TableName.Text,
                     ProjectName = this.ProjectName.Text,
                     TypeColumnNames = typeNameList,
-                    IdType = IdType,
+                    IdType = _idType,
                     TemplateFolder = @"..\..\Templates",
                     OutputFolder=outputsFolder.Text??@"..\..\Outputs"
                 };
 
-                var bussiness = new AddNewBussinessHelper(vf);
+                var bussiness = new AddNewBussinessWpfHelper(vf);
 
                 bussiness.Execute();
 
@@ -130,7 +130,7 @@ namespace SJNScaffolding.WPF
             RadioButton btn = sender as RadioButton;
             if (btn == null)
                 return;
-            IdType = btn.Name.Replace("rb_", "");
+            _idType = btn.Name.Replace("rb_", "");
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

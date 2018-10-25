@@ -67,14 +67,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extend\RazorHelper.cs" />
-    <Compile Include="Helper\AddNewBussinessHelper.cs" />
-    <Compile Include="RazorEngine.xaml.cs">
-      <DependentUpon>RazorEngine.xaml</DependentUpon>
-    </Compile>
-    <Page Include="RazorEngine.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="Helper\AddNewBussinessWpfHelper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

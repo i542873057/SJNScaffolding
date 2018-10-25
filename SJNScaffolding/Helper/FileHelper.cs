@@ -13,23 +13,23 @@ namespace SJNScaffolding.Core.Helper
         /// 获取路径下所有文件以及子文件夹中文件
         /// </summary>
         /// <param name="path">全路径根目录</param>
-        /// <param name="FileList">存放所有文件的全路径</param>
+        /// <param name="fileList">存放所有文件的全路径</param>
         /// <returns></returns>
-        public static Dictionary<string, FileInfo> GetFile(string path, Dictionary<string, FileInfo> FileList)
+        public static Dictionary<string, FileInfo> GetFile(string path, Dictionary<string, FileInfo> fileList)
         {
             DirectoryInfo dir = new DirectoryInfo(path);
             FileInfo[] fil = dir.GetFiles();
             DirectoryInfo[] dii = dir.GetDirectories();
             foreach (FileInfo f in fil)
             {
-                FileList.Add(f.FullName, f);//添加文件路径到列表中
+                fileList.Add(f.FullName, f);//添加文件路径到列表中
             }
             //获取子文件夹内的文件列表，递归遍历
             foreach (DirectoryInfo d in dii)
             {
-                GetFile(d.FullName, FileList);
+                GetFile(d.FullName, fileList);
             }
-            return FileList;
+            return fileList;
         }
         /// <summary>
         /// 输出文件并新建文件

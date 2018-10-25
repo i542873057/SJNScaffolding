@@ -13,16 +13,16 @@ namespace SJNScaffolding.Core
         /// <summary>
         /// 上传文件JS目录
         /// </summary>
-        public string UploadFileJSPath { get; set; } = "<script src=\"~/bower_components/webuploader/dist/webuploader.extend.js\"></script>";
+        public string UploadFileJsPath { get; set; } = "<script src=\"~/bower_components/webuploader/dist/webuploader.extend.js\"></script>";
 
         /// <summary>
         /// 省市区下拉CSS目录
         /// </summary>
-        public string CityPickerCSSPath { get; set; } = "<link href=\"~/bower_components/city-picker/city-picker.css\" rel=\"stylesheet\" />";
+        public string CityPickerCssPath { get; set; } = "<link href=\"~/bower_components/city-picker/city-picker.css\" rel=\"stylesheet\" />";
         /// <summary>
         /// 省市区下拉JS目录
         /// </summary>
-        public string CityPickerJSPath { get; set; } = "<script src=\"~/bower_components/city-picker/city-picker.data.min.js\"></script>" + Environment.NewLine + "<script src = \"~/bower_components/city-picker/city-picker.min.js\" ></ script > ";
+        public string CityPickerJsPath { get; set; } = "<script src=\"~/bower_components/city-picker/city-picker.data.min.js\"></script>" + Environment.NewLine + "<script src = \"~/bower_components/city-picker/city-picker.min.js\" ></ script > ";
 
         #endregion
 

@@ -20,7 +20,7 @@ namespace SJNScaffolding.Models.CollectiveType
 {
     public static class UploadType
     {
-        public const string file = "file";
-        public const string img = "img";
+        public const string File = "file";
+        public const string Img = "img";
     }
 }

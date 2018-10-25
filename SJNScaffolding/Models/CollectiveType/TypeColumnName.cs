@@ -25,7 +25,7 @@
             {
                 if (IsCombobox)
                 {
-                    return EasyuiForm.combobox;
+                    return EasyuiForm.Combobox;
                 }
                 switch (TypeName)
                 {
@@ -34,12 +34,12 @@
                     case "long":
                     case "long?":
                     case "decimal":
-                    case "decimal?": return EasyuiForm.numberbox;
+                    case "decimal?": return EasyuiForm.Numberbox;
                     case "DateTime":
-                    case "DateTime?": return EasyuiForm.datebox;
+                    case "DateTime?": return EasyuiForm.Datebox;
                     case "bool":
-                    case "bool?": return EasyuiForm.switchbutton;
-                    case "string": return EasyuiForm.textbox;
+                    case "bool?": return EasyuiForm.Switchbutton;
+                    case "string": return EasyuiForm.Textbox;
                     default: return "";
                 }
             }
@@ -104,7 +104,7 @@
             IsWebUpload = false;
         }
 
-        public WebUploadColunm(bool isWebUpload, string webuploadId, string uploadType = CollectiveType.UploadType.file)
+        public WebUploadColunm(bool isWebUpload, string webuploadId, string uploadType = CollectiveType.UploadType.File)
         {
             WebuploadId = webuploadId;
             UploadType = uploadType;

@@ -55,7 +55,7 @@ namespace SJNScaffolding.Models.TemplateModels
         /// <summary>
         /// id的类型
         /// </summary>
-        public string IdType { get; set; } = CollectiveType.IdType.INT;
+        public string IdType { get; set; } = CollectiveType.IdType.Int;
         /// <summary>
         /// 首字母小写
         /// </summary>
@@ -77,7 +77,7 @@ namespace SJNScaffolding.Models.TemplateModels
                 List<dynamic> comboboxPart = new List<dynamic>();
                 TypeColumnNames?.ForEach(r =>
                 {
-                    if (r.ClassName == EasyuiForm.combo || r.ClassName == EasyuiForm.combobox)
+                    if (r.ClassName == EasyuiForm.Combo || r.ClassName == EasyuiForm.Combobox)
                     {
                         comboboxPart.Add(new
                         {

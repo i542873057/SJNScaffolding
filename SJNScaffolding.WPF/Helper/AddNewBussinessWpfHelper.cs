@@ -21,12 +21,12 @@ using SJNScaffolding.Models.TemplateModels;
 
 namespace SJNScaffolding.WPF.Helper
 {
-    public class AddNewBussinessHelper : HelperBase<AddNewBussinessHelper>
+    public class AddNewBussinessWpfHelper : HelperBase<AddNewBussinessWpfHelper>
     {
         private readonly AddNewBussinessModel _parameter;
         private readonly ViewFileModel _viewFileModel;
         private readonly string _baseUrl;
-        public AddNewBussinessHelper(ViewFileModel viewFileModel)
+        public AddNewBussinessWpfHelper(ViewFileModel viewFileModel)
         {
             this._parameter = new AddNewBussinessModel(viewFileModel.ProjectName, viewFileModel.TableName, viewFileModel.TemplateFolder);
             this._viewFileModel = viewFileModel;

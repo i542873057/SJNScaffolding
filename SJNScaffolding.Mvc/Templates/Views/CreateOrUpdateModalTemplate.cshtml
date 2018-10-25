@@ -7,8 +7,8 @@ public string CreateInput(TypeColumnName item, string styles)
 {
     switch (item.ClassName)
     {
-        case EasyuiForm.combo:
-        case EasyuiForm.combobox:
+        case EasyuiForm.Combo:
+        case EasyuiForm.Combobox:
             return string.Format("<input id=\'{0}\' name=\'{0}\' {1} />", item.ColumnName, styles);
 
         default:

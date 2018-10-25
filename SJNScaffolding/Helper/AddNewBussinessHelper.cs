@@ -12,7 +12,6 @@
 */
 using SJNScaffolding.Models.HelperModels;
 using SJNScaffolding.Models.TemplateModels;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -74,7 +73,7 @@ namespace SJNScaffolding.Helper
             {
                 foreach (var templateName in new[] { "IndexTemplate", "CreateOrUpdateModalTemplate" })
                 {
-                    _viewFileModel.TemplateNames = "/Html/" + itemFolder+"-"+templateName + ".cshtml";
+                    _viewFileModel.TemplateNames = "/" + itemFolder + "/" + templateName + ".cshtml";
                     string content = await _templateEngine.Render(_viewFileModel);
 
                     string fileName = templateName.Replace("Template", ".");

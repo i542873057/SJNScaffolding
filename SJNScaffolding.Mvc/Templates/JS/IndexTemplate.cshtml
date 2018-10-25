@@ -40,12 +40,12 @@ _context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限"
                     string formatterString="";
                     switch (item.ClassName)
                     {
-                        case EasyuiForm.datebox:
+                        case EasyuiForm.Datebox:
                         isFormatter=true;
                             formatterString = @",formatter:com.formatDate";
                         break;
-                        case EasyuiForm.combo:
-                        case EasyuiForm.combobox:
+                        case EasyuiForm.Combo:
+                        case EasyuiForm.Combobox:
                         isFormatter=true;
                             formatterString=@", formatter: function (value) {
                                 if (top.clients.dataItems &&top.clients.dataItems['"+item.ColumnName+@"']) {

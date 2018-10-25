@@ -1,16 +1,14 @@
-﻿
-
-using System;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using RazorEngine;
 using RazorEngine.Templating;
-using SJNScaffolding.Helper;
 using SJNScaffolding.Models.CollectiveType;
 using SJNScaffolding.Models.TemplateModels;
-using SJNScaffolding.UnitTest.TemplateTest;
+using SJNScaffolding.WPF.Helper;
+using SJNScaffolding.WPF.UnitTest.TemplateTest;
 
-namespace SJNScaffolding.UnitTest
+namespace SJNScaffolding.WPF.UnitTest
 {
     [TestClass]
     public class UnitTest2
@@ -30,10 +28,10 @@ namespace SJNScaffolding.UnitTest
 
 
         [TestMethod]
-        public void testJson()
+        public void TestJson()
         {
 
-            var a = new WebUploadColunm(true, UploadType.img);
+            var a = new WebUploadColunm(true, UploadType.Img);
 
             string jsonStrings = JsonConvert.SerializeObject(a);
 
@@ -42,7 +40,7 @@ namespace SJNScaffolding.UnitTest
 
 
         [TestMethod]
-        public void createService()
+        public void CreateService()
         {
             ViewFileModel vf = new ViewFileModel
             {
@@ -52,14 +50,14 @@ namespace SJNScaffolding.UnitTest
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = UnitTest1.GetColunmsList(),
-                IdType = IdType.LONG,
-                TemplateFolder = @"..\..\..\SJNScaffolding\Templates",
-                OutputFolder=@"..\..\..\SJNScaffolding\Outputs"
+                IdType = IdType.Long,
+                TemplateFolder = @"..\..\..\SJNScaffolding.WPF\Templates",
+                OutputFolder=@"..\..\..\SJNScaffolding.WPF\Outputs"
             };
 
-            //var bussiness = new AddNewBussinessHelper(vf);
+            var bussiness = new AddNewBussinessWpfHelper(vf);
 
-            //bussiness.Execute();
+            bussiness.Execute();
         }
     }
 }

@@ -2,8 +2,8 @@
 {
     public static class IdType
     {
-        public const string GUID = "Guid";
-        public const string LONG = "long";
-        public const string INT = "int";
+        public const string Guid = "Guid";
+        public const string Long = "long";
+        public const string Int = "int";
     }
 }

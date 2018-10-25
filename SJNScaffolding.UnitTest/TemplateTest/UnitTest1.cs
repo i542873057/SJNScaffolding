@@ -10,12 +10,12 @@ using SJNScaffolding.Core.Helper;
 using SJNScaffolding.Models.CollectiveType;
 using SJNScaffolding.Models.TemplateModels;
 
-namespace SJNScaffolding.UnitTest.TemplateTest
+namespace SJNScaffolding.WPF.UnitTest.TemplateTest
 {
     [TestClass]
     public class UnitTest1
     {
-        private const string BasePath = @"..\..\..\SJNScaffolding\";
+        private const string BasePath = @"..\..\..\SJNScaffolding.WPF\";
 
         [TestMethod]
         public void TestMethod1()
@@ -25,9 +25,9 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                 ProjectName = "SJNSaffolding",
                 TableName = "WebInfo"
             };
-            templeteProperty.CityPickerCSSPath = "";
-            templeteProperty.CityPickerJSPath = "";
-            templeteProperty.UploadFileJSPath = "";
+            templeteProperty.CityPickerCssPath = "";
+            templeteProperty.CityPickerJsPath = "";
+            templeteProperty.UploadFileJsPath = "";
             //模板所在文件夹
             string currentRunTimePath = Path.Combine(BasePath, "Templates");
             Dictionary<string, FileInfo> allFiles = new Dictionary<string, FileInfo>();
@@ -36,18 +36,18 @@ namespace SJNScaffolding.UnitTest.TemplateTest
             var properties = typeof(TempleteProperty).GetProperties();
             var d = GetCommonData();
             //为类文件填充字段
-            for (var i = 0; i < d.columnsList.Count; i++)
+            for (var i = 0; i < d.ColumnsList.Count; i++)
             {
                 //添加注释
-                string mark = "/// <summary>" + Environment.NewLine + "/// " + d.columnsNameList[i] + Environment.NewLine + "/// </summary>" + Environment.NewLine;
-                templeteProperty.Content += mark + "public " + d.columnsTypeList[i] + " " + d.columnsList[i] + " { get; set; }" + Environment.NewLine;
+                string mark = "/// <summary>" + Environment.NewLine + "/// " + d.ColumnsNameList[i] + Environment.NewLine + "/// </summary>" + Environment.NewLine;
+                templeteProperty.Content += mark + "public " + d.ColumnsTypeList[i] + " " + d.ColumnsList[i] + " { get; set; }" + Environment.NewLine;
             }
 
         }
 
 
         [TestMethod]
-        public void testCorpyRight()
+        public void TestCorpyRight()
         {
             var path = BasePath + "Templates\\CopyRightTemplate.cshtml";
             var template = File.ReadAllText(path);
@@ -62,7 +62,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
         }
 
         [TestMethod]
-        public void testDomainEntity()
+        public void TestDomainEntity()
         {
             var path = BasePath + "Templates\\Domain\\EntityTemplate.cshtml";
             var template = File.ReadAllText(path);
@@ -77,7 +77,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
-                IdType = IdType.LONG,
+                IdType = IdType.Long,
             });
 
 
@@ -86,7 +86,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
 
 
         [TestMethod]
-        public void testContrrollerTemplate()
+        public void TestContrrollerTemplate()
         {
             var path = BasePath + "Templates\\Controllers\\ControllerTemplate.cshtml";
             var template = File.ReadAllText(path);
@@ -102,12 +102,12 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
-                IdType = IdType.LONG,
+                IdType = IdType.Long,
             });
         }
 
         [TestMethod]
-        public void testIAppservice()
+        public void TestIAppservice()
         {
             //var path = BasePath + "Templates\\Application\\IAppServiceTemplate.cshtml";
             var path = BasePath + "Templates\\Application\\AppServiceTemplate.cshtml";
@@ -123,30 +123,30 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
-                IdType = IdType.LONG,
+                IdType = IdType.Long,
                 BusinessName = "信息管理"
             });
         }
 
         [TestMethod]
-        public void testAll()
+        public void TestAll()
         {
             string[] ss = new[] { "InputDtoTemplate", "ListDtoTemplate", "SearchDtoTemplate" };
             foreach (var s in ss)
             {
-                testDto(s);
+                TestDto(s);
             }
         }
 
-        public void testDto(string InputDtoTemplate = "InputDtoTemplate")
+        public void TestDto(string inputDtoTemplate = "InputDtoTemplate")
         {
-            var path = BasePath + "Templates\\Application\\Dto\\" + InputDtoTemplate + ".cshtml";
+            var path = BasePath + "Templates\\Application\\Dto\\" + inputDtoTemplate + ".cshtml";
             var template = File.ReadAllText(path);
 
 
             var typeNameList = GetColunmsList();
 
-            string content = Engine.Razor.RunCompile(template, InputDtoTemplate, typeof(ViewFileModel), new ViewFileModel()
+            string content = Engine.Razor.RunCompile(template, inputDtoTemplate, typeof(ViewFileModel), new ViewFileModel()
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
@@ -154,14 +154,14 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
-                IdType = IdType.LONG,
+                IdType = IdType.Long,
             });
         }
 
 
 
         [TestMethod]
-        public void testIndexTemplate()
+        public void TestIndexTemplate()
         {
             var path = BasePath + "Templates\\Views\\IndexTemplate.cshtml";
             var template = File.ReadAllText(path);
@@ -176,14 +176,14 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
-                IdType = IdType.LONG,
+                IdType = IdType.Long,
             });
         }
 
 
 
         [TestMethod]
-        public void testIndexjsTemplate()
+        public void TestIndexjsTemplate()
         {
             var path = BasePath + "Templates\\JS\\IndexTemplate.cshtml";
             var template = File.ReadAllText(path);
@@ -198,12 +198,12 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
-                IdType = IdType.LONG,
+                IdType = IdType.Long,
             });
         }
 
         [TestMethod]
-        public void testViewModelEntity()
+        public void TestViewModelEntity()
         {
             var path = BasePath + "Templates\\ViewModel\\EntityViewModel.cshtml";
             var template = File.ReadAllText(path);
@@ -218,12 +218,12 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
-                IdType = IdType.LONG,
+                IdType = IdType.Long,
             });
         }
 
         [TestMethod]
-        public void testCreateOrUpdateModalTemplate()
+        public void TestCreateOrUpdateModalTemplate()
         {
             var path = BasePath + "Templates\\JS\\CreateOrUpdateModalTemplate.cshtml";
             var template = File.ReadAllText(path);
@@ -238,12 +238,12 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
-                IdType = IdType.LONG,
+                IdType = IdType.Long,
             });
         }
 
         [TestMethod]
-        public void testViewsCreateOrUpdateModal()
+        public void TestViewsCreateOrUpdateModal()
         {
             var path = BasePath + "Templates\\Views\\CreateOrUpdateModalTemplate.cshtml";
             var template = File.ReadAllText(path);
@@ -258,7 +258,7 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
-                IdType = IdType.LONG,
+                IdType = IdType.Long,
             });
         }
 
@@ -318,14 +318,14 @@ namespace SJNScaffolding.UnitTest.TemplateTest
 
                     }
                     //将传入的参数按程序中的类型进行转换
-                    return TypeChange.typeChangeDictionary.FirstOrDefault(r => conlumsType.Contains(r.Key)).Value;
+                    return TypeChange.TypeChangeDictionary.FirstOrDefault(r => conlumsType.Contains(r.Key)).Value;
                 }).ToList();
 
             return new ColunmsData
             {
-                columnsList = columnsList,
-                columnsNameList = columnsNameList,
-                columnsTypeList = columnsTypeList
+                ColumnsList = columnsList,
+                ColumnsNameList = columnsNameList,
+                ColumnsTypeList = columnsTypeList
             };
         }
 
@@ -336,10 +336,10 @@ namespace SJNScaffolding.UnitTest.TemplateTest
 
             var typeNameList = new List<TypeColumnName>();
             int i = 0;
-            d.columnsList.ForEach(r =>
+            d.ColumnsList.ForEach(r =>
             {
                 WebUploadColunm webuploadColunm;
-                string className = EasyuiForm.textbox;
+                string className = EasyuiForm.Textbox;
 
                 if (i == 0)
                 {
@@ -347,12 +347,12 @@ namespace SJNScaffolding.UnitTest.TemplateTest
                 }
                 else if (i == 1)
                 {
-                    webuploadColunm = new WebUploadColunm(true, r, UploadType.img);
+                    webuploadColunm = new WebUploadColunm(true, r, UploadType.Img);
 
                 }
                 else if (i == 2)
                 {
-                    className = EasyuiForm.combobox;
+                    className = EasyuiForm.Combobox;
                     webuploadColunm = new WebUploadColunm();
                 }
                 else
@@ -362,13 +362,13 @@ namespace SJNScaffolding.UnitTest.TemplateTest
 
                 if (i == 3)
                 {
-                    className = EasyuiForm.combo;
+                    className = EasyuiForm.Combo;
                 }
                 typeNameList.Add(new TypeColumnName()
                 {
                     ColumnName = r,
-                    TypeName = d.columnsTypeList[i],
-                    ColumnsNameRemark = d.columnsNameList[i],
+                    TypeName = d.ColumnsTypeList[i],
+                    ColumnsNameRemark = d.ColumnsNameList[i],
                     IsRequired = i % 2 == 0 ? true : false,
                     IsVarchar = true,
                     StringLength = 50 + i,
@@ -383,9 +383,9 @@ namespace SJNScaffolding.UnitTest.TemplateTest
 
     public class ColunmsData
     {
-        public List<string> columnsList { get; set; }
+        public List<string> ColumnsList { get; set; }
 
-        public List<string> columnsNameList { get; set; }
-        public List<string> columnsTypeList { get; set; }
+        public List<string> ColumnsNameList { get; set; }
+        public List<string> ColumnsTypeList { get; set; }
     }
 }

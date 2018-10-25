@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,8 +14,8 @@
     <Content Remove="Templates\Controllers\ControllerTemplate.cshtml" />
     <Content Remove="Templates\CopyRightTemplate.cshtml" />
     <Content Remove="Templates\Domain\EntityTemplate.cshtml" />
-    <Content Remove="Templates\Html\JS-CreateOrUpdateModalTemplate.cshtml" />
-    <Content Remove="Templates\Html\JS-IndexTemplate.cshtml" />
+    <Content Remove="Templates\Views\JS-CreateOrUpdateModalTemplate.cshtml" />
+    <Content Remove="Templates\Views\JS-IndexTemplate.cshtml" />
     <Content Remove="Templates\ViewModel\EntityViewModel.cshtml" />
   </ItemGroup>
 
@@ -43,19 +44,19 @@
     <None Include="Templates\Domain\EntityTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Templates\Html\JS-CreateOrUpdateModalTemplate.cshtml">
+    <None Include="Templates\JS\CreateOrUpdateModalTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Templates\Html\JS-IndexTemplate.cshtml">
+    <None Include="Templates\JS\IndexTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Templates\ViewModel\EntityViewModel.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Templates\Html\Views-CreateOrUpdateModalTemplate.cshtml">
+    <None Include="Templates\Views\CreateOrUpdateModalTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Templates\Html\Views-IndexTemplate.cshtml">
+    <None Include="Templates\Views\IndexTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -68,5 +69,23 @@
   <ItemGroup>
     <ProjectReference Include="..\SJNScaffolding\SJNScaffolding.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
 
 </Project>
