@@ -75,6 +75,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TemplateTest\Class1.cs" />
+    <Compile Include="TemplateTest\TempleteProperty.cs" />
     <Compile Include="TemplateTest\UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest2.cs" />

@@ -95,7 +95,9 @@
 
 
 
-
+    /// <summary>
+    /// 上传控件属性
+    /// </summary>
     public class WebUploadColunm
     {
         public string WebuploadId { get; set; }

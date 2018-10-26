@@ -45,7 +45,7 @@ namespace SJNScaffolding.WPF
                     {
                         string conlumsType = u.Trim().ToLower();
                         //将传入的参数按程序中的类型进行转换
-                        return TypeChange.TypeChangeDictionary.FirstOrDefault(r => conlumsType.Contains(r.Key)).Value;
+                        return TypeHelper.TypeChangeDictionary.FirstOrDefault(r => conlumsType.Contains(r.Key)).Value;
                     }).ToList();
 
                 if (columnsList.Count != columnsTypeList.Count || columnsList.Count != columnsNameList.Count)
@@ -99,7 +99,7 @@ namespace SJNScaffolding.WPF
                 {
                     CreateTime = DateTime.Now,
                     EmailAddress = this.EmailAddress.Text,
-                    UserName = this.UserName.Text,
+                    Author = this.UserName.Text,
                     TableName = this.TableName.Text,
                     ProjectName = this.ProjectName.Text,
                     TypeColumnNames = typeNameList,

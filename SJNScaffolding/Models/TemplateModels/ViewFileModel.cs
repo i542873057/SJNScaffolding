@@ -7,7 +7,10 @@ namespace SJNScaffolding.Models.TemplateModels
 {
     public class ViewFileModel : CopyRightUserInfo
     {
-        public string TemplateNames { get; set; }
+        /// <summary>
+        /// 模板文件相对位置
+        /// </summary>
+        public string TemplateFolderNames { get; set; }
         /// <summary>
         /// 业务名-如用户管理
         /// </summary>
@@ -32,7 +35,6 @@ namespace SJNScaffolding.Models.TemplateModels
         /// </summary>
         ///
         private string _tableName;
-
 
         /// <summary>
         /// 如果有s或者es则去掉

@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace SJNScaffolding.Helper
 {
-    public class AddNewBussinessHelper : HelperBase<AddNewBussinessHelper>
+    public class AddNewBussinessHelper
     {
         private AddNewBussinessModel _parameter;
         private ViewFileModel _viewFileModel;
@@ -50,21 +50,21 @@ namespace SJNScaffolding.Helper
         }
         private async Task CreateServiceInterfaceFile()
         {
-            _viewFileModel.TemplateNames = "/Application/IAppServiceTemplate.cshtml";
+            _viewFileModel.TemplateFolderNames = "/Application/IAppServiceTemplate.cshtml";
             string content = await _templateEngine.Render(_viewFileModel);
             var fileName = _parameter.ServiceInterfaceName + ".cs";
-            CreateAndAddFile(_baseUrl + _parameter.ServiceFolder, fileName, content);
+            FileHelper.CreateFile(_baseUrl + _parameter.ServiceFolder, fileName, content);
         }
 
         private async Task CreateServiceFile()
         {
-            _viewFileModel.TemplateNames = "/Application/AppServiceTemplate.cshtml";
+            _viewFileModel.TemplateFolderNames = "/Application/AppServiceTemplate.cshtml";
 
             var fileName = _parameter.ServiceName + ".cs";
 
             string content = await _templateEngine.Render(_viewFileModel);
 
-            CreateAndAddFile(_baseUrl + _parameter.ServiceFolder, fileName, content);
+            FileHelper.CreateFile(_baseUrl + _parameter.ServiceFolder, fileName, content);
         }
 
         private async Task CreateViewJsFiles()
@@ -73,7 +73,7 @@ namespace SJNScaffolding.Helper
             {
                 foreach (var templateName in new[] { "IndexTemplate", "CreateOrUpdateModalTemplate" })
                 {
-                    _viewFileModel.TemplateNames = "/" + itemFolder + "/" + templateName + ".cshtml";
+                    _viewFileModel.TemplateFolderNames = "/" + itemFolder + "/" + templateName + ".cshtml";
                     string content = await _templateEngine.Render(_viewFileModel);
 
                     string fileName = templateName.Replace("Template", ".");
@@ -87,7 +87,7 @@ namespace SJNScaffolding.Helper
                         fileName += "cshtml";
                     }
 
-                    CreateAndAddFile(_baseUrl + _parameter.ViewFolder, fileName, content);
+                    FileHelper.CreateFile(_baseUrl + _parameter.ViewFolder, fileName, content);
                 }
             }
         }
@@ -96,37 +96,37 @@ namespace SJNScaffolding.Helper
         {
             foreach (var templateName in new[] { "InputDtoTemplate", "ListDtoTemplate", "SearchDtoTemplate" })
             {
-                _viewFileModel.TemplateNames = "/Application/Dto/" + templateName + ".cshtml";
+                _viewFileModel.TemplateFolderNames = "/Application/Dto/" + templateName + ".cshtml";
                 string content = await _templateEngine.Render(_viewFileModel);
                 string fileName = _viewFileModel.TableName + templateName.Replace("Template", ".cs");
-                CreateAndAddFile(_baseUrl + _parameter.DtoFolder, fileName, content);
+                FileHelper.CreateFile(_baseUrl + _parameter.DtoFolder, fileName, content);
             }
         }
 
         private async Task CreateContorlFiles()
         {
-            _viewFileModel.TemplateNames = "/Controllers/ControllerTemplate.cshtml";
+            _viewFileModel.TemplateFolderNames = "/Controllers/ControllerTemplate.cshtml";
             string content = await _templateEngine.Render(_viewFileModel);
             string fileName = _viewFileModel.TableName + "Controller.cs";
-            CreateAndAddFile(_baseUrl + _parameter.ControlFolder, fileName, content);
+            FileHelper.CreateFile(_baseUrl + _parameter.ControlFolder, fileName, content);
         }
         private async Task CreateViewModel()
         {
-            _viewFileModel.TemplateNames = "/ViewModel/EntityViewModel.cshtml";
+            _viewFileModel.TemplateFolderNames = "/ViewModel/EntityViewModel.cshtml";
             string content = await _templateEngine.Render(_viewFileModel);
             string fileName = _viewFileModel.TableName + "ViewModel.cs";
 
-            CreateAndAddFile(_baseUrl + _parameter.ViewModelFolder, fileName, content);
+            FileHelper.CreateFile(_baseUrl + _parameter.ViewModelFolder, fileName, content);
         }
 
 
         private async Task CreateCoreEntity()
         {
-            _viewFileModel.TemplateNames = "/Domain/EntityTemplate.cshtml";
+            _viewFileModel.TemplateFolderNames = "/Domain/EntityTemplate.cshtml";
             string content = await _templateEngine.Render(_viewFileModel);
             string fileName = _viewFileModel.TableName + ".cs";
 
-            CreateAndAddFile(_baseUrl + _parameter.CoreEntityFolder, fileName, content);
+            FileHelper.CreateFile(_baseUrl + _parameter.CoreEntityFolder, fileName, content);
         }
     }
 }

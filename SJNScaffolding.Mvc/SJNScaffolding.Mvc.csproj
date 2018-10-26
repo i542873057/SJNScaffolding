@@ -70,6 +70,10 @@
     <ProjectReference Include="..\SJNScaffolding\SJNScaffolding.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AppBuilder\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">

@@ -1,10 +1,73 @@
 {
-  "BuildTasks": [
-    {
-      "TemplateNames": "/Application/IAppServiceTemplate.cshtml",
-    },
-    {
-
-    }
-  ]
+  "EmailAddress": "710277267@qq.com",
+  "Author": "IGeekFan",
+  "Version": "1.0.0",
+  "OutputPath": "E://SmartSql-Starter",
+  "BuildTasks": {
+    "Templates": [
+      {
+        "Key": "/Application/IAppServiceTemplate.cshtml",
+        "IsExcute": true, 
+        "Output": {
+          "Name": "/{{_viewFileModel.ProjectName}}.Application/Domain/Plat/{{_viewFileModel.TableName}}s/I{{_viewFileModel.TableName}}AppService.cs"
+        }
+      },
+      {
+        "Key": "/Application/AppServiceTemplate.cshtml",
+        "IsExcute": true,
+        "Output": {
+          "Name": "/{{_viewFileModel.ProjectName}}.Application/Domain/Plat/{{_viewFileModel.TableName}}s/{{_viewFileModel.TableName}}AppService.cs"
+        }
+      },
+      {
+        "Key": "/Application/Dto/InputDtoTemplate.cshtml",
+        "IsExcute": true,
+        "Output": {
+          "Name": "/{{_viewFileModel.ProjectName}}.Application/Domain/Plat/{{_viewFileModel.TableName}}s/Dto/{{_viewFileModel.TableName}}InputDtoTemplate.cs"
+        }
+      },
+      {
+        "Key": "/Application/Dto/ListDtoTemplate.cshtml",
+        "IsExcute": true,
+        "Output": {
+          "Name": "/{{_viewFileModel.ProjectName}}.Application/Domain/Plat/{{_viewFileModel.TableName}}s/Dto/{{_viewFileModel.TableName}}ListDto.cs"
+        }
+      },
+      {
+        "Key": "/Application/Dto/SearchDtoTemplate.cshtml",
+        "IsExcute": true,
+        "Output": {
+          "Name": "/{{_viewFileModel.ProjectName}}.Application/Domain/Plat/{{_viewFileModel.TableName}}s/Dto/{{_viewFileModel.TableName}}SearchDto.cs"
+        }
+      },
+      {
+        "Key": "/JS/IndexTemplate.cshtml",
+        "IsExcute": true,
+        "Output": {
+          "Name": "/{{_viewFileModel.ProjectName}}.Web/Areas/Plat/Index.js"
+        }
+      },
+      {
+        "Key": "/JS/CreateOrUpdateModalTemplate.cshtml",
+        "IsExcute": true,
+        "Output": {
+          "Name": "/{{_viewFileModel.ProjectName}}.Web/Areas/Plat/CreateOrUpdateModal.js"
+        }
+      },
+      {
+        "Key": "/Views/IndexTemplate.cshtml",
+        "IsExcute": true,
+        "Output": {
+          "Name": "/{{_viewFileModel.ProjectName}}.Web/Areas/Plat/Index.cshtml"
+        }
+      },
+      {
+        "Key": "/Views/CreateOrUpdateModalTemplate.cshtml",
+        "IsExcute": true,
+        "Output": {
+          "Name": "/{{_viewFileModel.ProjectName}}.Web/Areas/Plat/CreateOrUpdateModal.cshtml"
+        }
+      }
+    ]
+  }
 }

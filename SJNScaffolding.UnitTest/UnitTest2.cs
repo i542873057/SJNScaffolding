@@ -46,7 +46,7 @@ namespace SJNScaffolding.WPF.UnitTest
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
-                UserName = "IGeekFan",
+                Author = "IGeekFan",
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = UnitTest1.GetColunmsList(),

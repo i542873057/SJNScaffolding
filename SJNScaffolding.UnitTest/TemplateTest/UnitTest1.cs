@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RazorEngine;
 using RazorEngine.Templating;
 using SJNScaffolding.Core;
-using SJNScaffolding.Core.Helper;
+using SJNScaffolding.Helper;
 using SJNScaffolding.Models.CollectiveType;
 using SJNScaffolding.Models.TemplateModels;
 
@@ -56,7 +56,7 @@ namespace SJNScaffolding.WPF.UnitTest.TemplateTest
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
-                UserName = "IGeekFan"
+                Author = "IGeekFan"
             });
 
         }
@@ -73,7 +73,7 @@ namespace SJNScaffolding.WPF.UnitTest.TemplateTest
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
-                UserName = "IGeekFan",
+                Author = "IGeekFan",
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
@@ -98,7 +98,7 @@ namespace SJNScaffolding.WPF.UnitTest.TemplateTest
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
-                UserName = "IGeekFan",
+                Author = "IGeekFan",
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
@@ -119,7 +119,7 @@ namespace SJNScaffolding.WPF.UnitTest.TemplateTest
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
-                UserName = "IGeekFan",
+                Author = "IGeekFan",
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
@@ -150,7 +150,7 @@ namespace SJNScaffolding.WPF.UnitTest.TemplateTest
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
-                UserName = "IGeekFan",
+                Author = "IGeekFan",
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
@@ -172,7 +172,7 @@ namespace SJNScaffolding.WPF.UnitTest.TemplateTest
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
-                UserName = "IGeekFan",
+                Author = "IGeekFan",
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
@@ -194,7 +194,7 @@ namespace SJNScaffolding.WPF.UnitTest.TemplateTest
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
-                UserName = "IGeekFan",
+                Author = "IGeekFan",
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
@@ -214,7 +214,7 @@ namespace SJNScaffolding.WPF.UnitTest.TemplateTest
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
-                UserName = "IGeekFan",
+                Author = "IGeekFan",
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
@@ -234,7 +234,7 @@ namespace SJNScaffolding.WPF.UnitTest.TemplateTest
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
-                UserName = "IGeekFan",
+                Author = "IGeekFan",
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
@@ -254,7 +254,7 @@ namespace SJNScaffolding.WPF.UnitTest.TemplateTest
             {
                 CreateTime = DateTime.Now,
                 EmailAddress = "710277267@qq.com",
-                UserName = "IGeekFan",
+                Author = "IGeekFan",
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
                 TypeColumnNames = typeNameList,
@@ -318,7 +318,7 @@ namespace SJNScaffolding.WPF.UnitTest.TemplateTest
 
                     }
                     //将传入的参数按程序中的类型进行转换
-                    return TypeChange.TypeChangeDictionary.FirstOrDefault(r => conlumsType.Contains(r.Key)).Value;
+                    return TypeHelper.TypeChangeDictionary.FirstOrDefault(r => conlumsType.Contains(r.Key)).Value;
                 }).ToList();
 
             return new ColunmsData

@@ -33,7 +33,7 @@ namespace SJNScaffolding.Impl
             using (var serviceScope = _scopeFactory.CreateScope())
             {
                 var helper = serviceScope.ServiceProvider.GetRequiredService<OfficialRazorViewToStringRenderer>();
-                return helper.RenderViewToStringAsync(context.TemplateNames, context);
+                return helper.RenderViewToStringAsync(context.TemplateFolderNames, context);
             }
         }
 

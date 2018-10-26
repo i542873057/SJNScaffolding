@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.ObjectPool;
+using SJNScaffolding.ConfigBuilders;
 using SJNScaffolding.Helper;
 using SJNScaffolding.Impl;
 using SJNScaffolding.Utilities;
@@ -31,6 +32,7 @@ namespace SJNScaffolding.Mvc
         }
 
         public IConfiguration Configuration { get; }
+        public String AppDirectory { get { return AppDomain.CurrentDomain.BaseDirectory; } }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -41,6 +43,9 @@ namespace SJNScaffolding.Mvc
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddOptions();
+            services.Configure<Project>(Configuration.GetSection("SJNScaffolding.json"));
 
             IFileProvider fileProvider = new PhysicalFileProvider(AppPath.Relative("Templates"));
             services.AddSingleton<IHostingEnvironment>(new HostingEnvironment

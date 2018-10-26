@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SJNScaffolding.Core.Helper
+namespace SJNScaffolding.Helper
 {
     public class FileHelper
     {
@@ -61,6 +59,37 @@ namespace SJNScaffolding.Core.Helper
                 int r = await fs.ReadAsync(heByte, 0, heByte.Length);
                 string content = System.Text.Encoding.UTF8.GetString(heByte);
                 return content;
+            }
+        }
+
+
+        public static void CreateFile(string sourePath, string fileName, string content)
+        {
+            string path = Path.GetTempPath();
+            Directory.CreateDirectory(path);
+            string file = Path.Combine(path, fileName);
+            File.WriteAllText(file, content, Encoding.UTF8);
+            try
+            {
+                if (string.IsNullOrEmpty(sourePath))
+                {
+                    sourePath = @"..\..\";
+                }
+
+                if (!File.Exists(sourePath))
+                {
+                    Directory.CreateDirectory(sourePath);
+                }
+                string soureUrl = Path.Combine(sourePath, fileName);
+                if (File.Exists(soureUrl))
+                {
+                    File.Delete(soureUrl);
+                }
+                File.Copy(file, soureUrl);
+            }
+            finally
+            {
+                File.Delete(file);
             }
         }
     }
