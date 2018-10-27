@@ -11,17 +11,17 @@
 * 修改说明：
 */
 
-using System.IO;
-using System.Linq;
 using RazorEngine;
 using RazorEngine.Templating;
 using SJNScaffolding.Helper;
 using SJNScaffolding.Models.HelperModels;
 using SJNScaffolding.Models.TemplateModels;
+using System.IO;
+using System.Linq;
 
 namespace SJNScaffolding.WPF.Helper
 {
-    public class AddNewBussinessWpfHelper : HelperBase<AddNewBussinessWpfHelper>
+    public class AddNewBussinessWpfHelper
     {
         private readonly AddNewBussinessModel _parameter;
         private readonly ViewFileModel _viewFileModel;
@@ -57,7 +57,7 @@ namespace SJNScaffolding.WPF.Helper
             var template = File.ReadAllText(path);
 
             string content = Engine.Razor.RunCompile(template, "CreateServiceInterfaceFile", typeof(ViewFileModel), _viewFileModel);
-            CreateAndAddFile(_baseUrl + _parameter.ServiceFolder, fileName, content);
+            FileHelper.CreateFile(_baseUrl + _parameter.ServiceFolder, fileName, content);
         }
 
         private void CreateServiceFile()
@@ -67,7 +67,7 @@ namespace SJNScaffolding.WPF.Helper
             var template = File.ReadAllText(path);
 
             string content = Engine.Razor.RunCompile(template, "CreateServiceFile", typeof(ViewFileModel), _viewFileModel);
-            CreateAndAddFile(_baseUrl + _parameter.ServiceFolder, fileName, content);
+            FileHelper.CreateFile(_baseUrl + _parameter.ServiceFolder, fileName, content);
         }
 
         private void CreateViewJsFiles()
@@ -93,7 +93,7 @@ namespace SJNScaffolding.WPF.Helper
                         fileName += "cshtml";
                     }
 
-                    CreateAndAddFile(_baseUrl + _parameter.ViewFolder, fileName, content);
+                    FileHelper.CreateFile(_baseUrl + _parameter.ViewFolder, fileName, content);
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace SJNScaffolding.WPF.Helper
                 string fileName = _viewFileModel.TableName + templateName.Replace("Template", ".cs");
 
 
-                CreateAndAddFile(_baseUrl + _parameter.DtoFolder, fileName, content);
+                FileHelper.CreateFile(_baseUrl + _parameter.DtoFolder, fileName, content);
             }
         }
 
@@ -121,7 +121,7 @@ namespace SJNScaffolding.WPF.Helper
             string fileName = _viewFileModel.TableName + "Controller.cs";
 
 
-            CreateAndAddFile(_baseUrl + _parameter.ControlFolder, fileName, content);
+            FileHelper.CreateFile(_baseUrl + _parameter.ControlFolder, fileName, content);
         }
         private void CreateViewModel()
         {
@@ -130,7 +130,7 @@ namespace SJNScaffolding.WPF.Helper
             string content = Engine.Razor.RunCompile(template, "EntityViewModel", typeof(ViewFileModel), _viewFileModel);
             string fileName = _viewFileModel.TableName + "ViewModel.cs";
 
-            CreateAndAddFile(_baseUrl + _parameter.ViewModelFolder, fileName, content);
+            FileHelper.CreateFile(_baseUrl + _parameter.ViewModelFolder, fileName, content);
         }
 
 
@@ -141,7 +141,7 @@ namespace SJNScaffolding.WPF.Helper
             string content = Engine.Razor.RunCompile(template, "EntityTemplate", typeof(ViewFileModel), _viewFileModel);
             string fileName = _viewFileModel.TableName + ".cs";
 
-            CreateAndAddFile(_baseUrl + _parameter.CoreEntityFolder, fileName, content);
+            FileHelper.CreateFile(_baseUrl + _parameter.CoreEntityFolder, fileName, content);
         }
     }
 }

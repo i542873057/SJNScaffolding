@@ -17,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace SJNScaffolding.Helper
 {
+    /// <summary>
+    /// 此方法需要写好模板后增加方法，已改成配置项
+    /// </summary>
     public class AddNewBussinessHelper
     {
         private AddNewBussinessModel _parameter;
@@ -73,10 +76,10 @@ namespace SJNScaffolding.Helper
             {
                 foreach (var templateName in new[] { "IndexTemplate", "CreateOrUpdateModalTemplate" })
                 {
-                    _viewFileModel.TemplateFolderNames = "/" + itemFolder + "/" + templateName + ".cshtml";
+                    _viewFileModel.TemplateFolderNames = "/Views/" + itemFolder + "-" + templateName + ".cshtml";
                     string content = await _templateEngine.Render(_viewFileModel);
 
-                    string fileName = templateName.Replace("Template", ".");
+                    string fileName = templateName.Replace("JS", "").Replace("Template", ".").Replace("Views", ".");
 
                     if (itemFolder.Equals("JS"))
                     {

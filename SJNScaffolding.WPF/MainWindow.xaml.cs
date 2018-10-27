@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
-using SJNScaffolding.Core;
+using SJNScaffolding.Helper;
 using SJNScaffolding.Models.CollectiveType;
 using SJNScaffolding.Models.TemplateModels;
 using SJNScaffolding.WPF.Helper;

@@ -1,0 +1,131 @@
+﻿@page "{handler?}"
+@using Models.CollectiveType
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@section scripts{
+    <script>
+        //监听提交
+        layui.form.on('submit(formSettings)', function (data) {
+
+            $.ajax({
+                url: '/Index?handler=SaveSettings',
+                type:'post',
+                data: data.field,
+                dataType:'json',
+                success: function (d) {
+                    debugger;
+                    if (d.code == 0) {
+                        layer.msg(d.msg);
+                    } else {
+                        layer.msg('error');
+                    }
+                }
+            });
+            return false;
+        });
+
+        //第一个实例
+        layui.table.render({
+            elem: '#buildTaskTable'
+            , height: 512
+            , method: 'post'
+            , url: '/Index' //数据接口
+            , page: false //开启分页
+            , where: {
+                '__RequestVerificationToken': $('input:hidden[name="__RequestVerificationToken"]').val()
+            }
+            , cols: [[ //表头
+                { field: 'Key', title: '模板名', width: '30%',fixed: 'left' }
+                , { field: 'Remark', title: '备注', width: '10%' }
+                , { field: 'IsExcute', title: '是否执行', width: '8%' }
+                , { field: 'Folder', title: '生成目录', width: '30%' }
+                , { field: 'Name', title: '生成文件名', width: '20%' }
+            ]]
+            , parseData: function (res) {
+                if (res.code == 0) {
+
+                    $.each(res.data,
+                        function (i, v) {
+                            res.data[i].Folder = res.data[i].Output.Folder;
+                            res.data[i].Name = res.data[i].Output.Name;
+                        });
+                    return {
+                        "code": res.code, //解析接口状态
+                        "msg": res.msg, //解析提示文本
+                        "count": res.count, //解析数据长度
+                        "data": res.data //解析数据列表
+                    };
+                }
+                return res;
+            }
+        });
+    </script>
+}
+<div class="layui-row">
+    <div class="layui-col-md12">
+        <form class="layui-form" action="">
+            @Html.AntiForgeryToken()
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">作者</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Author" autocomplete="off" class="layui-input" value="@Model.Project.Author">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="EmailAdress" lay-verify="email" class="layui-input" value="@Model.Project.EmailAddress">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">版本</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Version" autocomplete="off" class="layui-input" value="@Model.Project.Version">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">表名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="TableName" autocomplete="off" class="layui-input" value="@Model.TableName">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">项目名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="ProjectName"  class="layui-input" value="@Model.ProjectName">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">主键类型</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="IdType" value="Int" title="Int" @(Model.IdType==IdType.Int?"checked='checked'":"")>
+                        <input type="radio" name="IdType" value="Long" title="Long" @(Model.IdType==IdType.Long?"checked='checked'":"")>
+                        <input type="radio" name="IdType" value="Guid" title="Guid"  @(Model.IdType==IdType.Guid?"checked='checked'":"")>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">输出目录</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="OutputPath" class="layui-input" value="@Model.Project.OutputPath" style="width: 500px;">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formSettings">保存配置</button>
+                    <button class="layui-btn" lay-submit lay-filter="formGenerCode">生成代码</button>
+                </div>
+            </div>
+        </form>
+
+        <table id="buildTaskTable" lay-filter="buildTaskTable"></table>
+    </div>
+
+</div>

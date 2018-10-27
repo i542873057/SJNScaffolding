@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using RazorEngine;
 using RazorEngine.Templating;
+using SJNScaffolding.Helper;
 using SJNScaffolding.Models.CollectiveType;
 using SJNScaffolding.Models.TemplateModels;
 using SJNScaffolding.WPF.Helper;
@@ -49,7 +50,7 @@ namespace SJNScaffolding.WPF.UnitTest
                 Author = "IGeekFan",
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
-                TypeColumnNames = UnitTest1.GetColunmsList(),
+                TypeColumnNames = TestHelper.GetColunmsList(),
                 IdType = IdType.Long,
                 TemplateFolder = @"..\..\..\SJNScaffolding.WPF\Templates",
                 OutputFolder=@"..\..\..\SJNScaffolding.WPF\Outputs"

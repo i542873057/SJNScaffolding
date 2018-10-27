@@ -1,0 +1,45 @@
+﻿/*
+* 创建人:            @Model.Author
+* 创建时间:          @Model.CreateTime
+* 邮箱：             @Model.EmailAddress
+* 文件功能描述：      @Model.FileRemark
+*
+* 修改人：
+* 时间：
+* 修改说明：
+*/
+
+@model SJNScaffolding.Models.TemplateModels.ViewFileModel
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
+using System.ComponentModel.DataAnnotations;
+namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto
+{
+    [AutoMap(typeof(@(Model.TableName)))]
+    public class @(Model.TableName)InputDto : EntityDto<@(Model.IdType)>
+    {
+        @if(Model.TypeColumnNames!=null)
+        {
+                foreach (var item in Model.TypeColumnNames)
+                {
+@("     ///" )<summary>
+@("     ///" + item.ColumnsNameRemark) 
+@("     ///" )</summary>
+    if(item.IsRequired)
+    {
+@Html.Raw("      [Required(ErrorMessage=\""+item.ColumnsNameRemark+"为必填项\")] \r\n")
+    }
+    if(item.IsVarchar)
+    {
+@Html.Raw("      [StringLength(" + item.StringLength+ ",ErrorMessage=\""+item.ColumnsNameRemark+"的长度应在"+item.StringLength+"字符以内\")] \r\n")
+    }
+@("     public " + item.TypeName + " " + item.ColumnName + "{get;set;} \r\n")
+                }
+        }
+    }
+}

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SJNScaffolding.RazorPage</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    <link href="~/lib/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/lib/jqGrid/css/ui.jqgrid.css" rel="stylesheet" />
+</head>
+<body>
+
+    <ul class="layui-nav">
+        <li class="layui-nav-item layui-this"><a href="/">首页</a></li>
+    </ul>
+    <partial name="_CookieConsentPartial" />
+    <div class="layui-container" style="margin-top: 30px;">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2018 - SJNScaffolding.RazorPage</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    <script src="~/lib/layui/layui.all.js"></script>
+    <script src="~/lib/jqGrid/js/jquery.jqGrid.js"></script>
+    <script src="~/lib/jqGrid/js/jquery.jqGrid.extend.js"></script>
+    <script src="~/lib/jqGrid/plugins/jquery.tablednd.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

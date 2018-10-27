@@ -1,0 +1,133 @@
+﻿@{
+    Layout=null;
+}
+@model SJNScaffolding.Models.TemplateModels.ViewFileModel
+@using SJNScaffolding.Models.CollectiveType
+var gridUI = gridUI || {};
+(function() {
+    var _@(Model.TableNameCamel)Service = abp.services.app.@(Model.TableNameCamel);
+    var gridUrl = '/Plat/@(Model.TableName)/GetGridByCondition';
+    var editModalUrl = '/Plat/@(Model.TableName)/CreateOrUpdateModal';
+    var dgGrid, dgGridId = "#dgGrid";
+
+    $.extend(gridUI,
+        {
+            loadGrid: function() {
+                var baseEnCode = 'Plat.@(Model.TableName).';
+
+                var toolbar = [
+                            { text: "刷新", iconCls: "icon-reload", handler: function () { com.btnRefresh(dgGridId); } },
+                            { text: "新增", EnCode: baseEnCode + 'Add', iconCls: "icon-add", handler: gridUI.btnAdd },
+                            { text: "编辑", EnCode: baseEnCode + 'Edit', iconCls: "icon-edit", handler: gridUI.btnEdit },
+                            { text: "删除", EnCode: baseEnCode + 'Delete', iconCls: "icon-remove", handler: gridUI.btnDelete }
+                        ];
+                    toolbar = com.authorizeButton(toolbar);
+                   @Html.Raw("/*")
+_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "权限",EnCode = "Plat.@(Model.TableName)", TypeCode = menu, LinkUrl = "/Plat/@(Model.TableName)/Index", SortCode = 1 });
+_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "列表权限",EnCode = "Plat.@(Model.TableName).GetGrid", TypeCode = permission,  SortCode = 1 });
+_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "新增权限",EnCode = "Plat.@(Model.TableName).Add", TypeCode = permission,  SortCode = 2 });
+_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "编辑权限",EnCode = "Plat.@(Model.TableName).Edit", TypeCode = permission,  SortCode = 3 });
+_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限",EnCode = "Plat.@(Model.TableName).Delete", TypeCode = permission, SortCode = 4});
+                 @Html.Raw("*/")
+
+                dgGrid = $(dgGridId).datagrid({
+                    url: gridUrl,
+                    toolbar: toolbar,
+                    columns: [[
+                            @{int i=0;}
+                            @if(Model.TypeColumnNames!=null){
+                                    foreach (var item in Model.TypeColumnNames)
+                                    {
+                                        bool isFormatter = false;
+                                        string formatterString="";
+                                        switch (item.ClassName)
+                                        {
+                                            case EasyuiForm.Datebox:
+                                            isFormatter=true;
+                                                formatterString = @",formatter:com.formatDate";
+                                            break;
+                                            case EasyuiForm.Combo:
+                                            case EasyuiForm.Combobox:
+                                            isFormatter=true;
+                                                formatterString=@", formatter: function (value) {
+                                                    if (top.clients.dataItems &&top.clients.dataItems['"+item.ColumnName+@"']) {
+                                                        return top.clients.dataItems['"+item.ColumnName+@"'][value];
+                                                    } else {
+                                                        return '';
+                                                    }
+                                                }";
+                                            break;
+                                            default:break;
+                                        }
+            @Html.Raw("                         { field: '"+item.ColumnName+"', title: '"+item.ColumnsNameRemark+"', width: 80"+ (isFormatter == true ? formatterString+ " \r\n                         " : "") + "}" + (i==(Model.TypeColumnNames.Count-1)?"": ",") +"\r\n")
+                                        i++;
+                                }
+                            }
+                        ]]
+                });
+            },
+            editInfo: function(title, icon, id) {
+                        var pDialog = com.dialog({
+                            title: title,
+                            width: 800,
+                            height: 830,
+                            href: editModalUrl,
+                            iconCls: icon,
+                            buttons: [{
+                                    text: '确认',
+                                    iconCls: icon,
+                                    handler: function() {
+                                        var f = pDialog.find('#editForm');
+                                        var isValid = f.form('validate');
+                                        if (!isValid) {
+                                            return;
+                                        }
+                                        var formData = f.formSerialize();
+                                        @if(Model.WebUploadList!=null&&Model.WebUploadList.Any()&&Model.TypeColumnNames!=null)
+                                        {
+                                            foreach (var item in Model.TypeColumnNames)
+                                            {
+                                                if (item.IsRequired && item.WebuploadColunm.IsWebUpload)
+                                                {
+@Html.Raw(@"                                         formData."+item.ColumnName+"=$(\'#"+item.ColumnName+ "\').GetFilesAddress();\r\n)");
+@Html.Raw(@"                                         if(formData." + item.ColumnName + "==\'\'){abp.message.warn(\'"+item.ColumnsNameRemark+"为必填项!\');return;}\r\n");
+                                                }
+                                            }
+                                        }
+
+                                        com.setBusy(pDialog, true);
+                                        _@(Model.TableNameCamel)Service.createOrUpdate(formData, { showMsg: true })
+                                    .done(function() {
+                                            com.btnRefresh();
+                                            pDialog.dialog('close');
+                                        })
+                                    .always(function() {
+                                            com.setBusy(pDialog, false);
+                                        });
+                                    }
+                                }
+                    ],
+                    onLoad: function() {
+                                    editUI.setForm(id,pDialog);
+                                }
+                            });
+                        },
+            btnEdit: function() {
+                        com.edit(dgGridId,
+                            function(id) {
+                            gridUI.editInfo("编辑", 'icon-edit', id);
+                        });
+                        },
+            btnDelete: function() {
+                        com.deleted(_@(Model.TableNameCamel)Service, dgGridId);
+                        },
+            btnAdd: function() {
+                        gridUI.editInfo('新增', 'icon-add');
+                    }
+            });
+
+    $(function() {
+        gridUI.loadGrid();
+    });
+
+})();
