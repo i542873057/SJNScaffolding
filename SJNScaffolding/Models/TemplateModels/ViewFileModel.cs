@@ -79,11 +79,11 @@ namespace SJNScaffolding.Models.TemplateModels
                 List<dynamic> comboboxPart = new List<dynamic>();
                 TypeColumnNames?.ForEach(r =>
                 {
-                    if (r.ClassName == EasyuiForm.Combo || r.ClassName == EasyuiForm.Combobox)
+                    if (r.ShowType == FormControl.Combo || r.ShowType == FormControl.Combobox)
                     {
                         comboboxPart.Add(new
                         {
-                            ClassName = r.ClassName.Replace("easyui-",""),
+                            ClassName = r.ShowType.Replace("easyui-",""),
                             r.ColumnName
                         });
                     }

@@ -2,10 +2,19 @@
 {
     public class TypeColumnName
     {
+        public string FieldValid { get; set; }
+        public string IsPk { get; set; }
+        public string ColumnType { get; set; }
+        public int ColumnSort { get; set; }
+        public string IsQuery { get; set; }
+        public string IsList { get; set; }
+        public string IsUpdate { get; set; }
+        public string IsEdit { get; set; }
+        public string IsInsert { get; set; }
         /// <summary>
         /// 属性的类型
         /// </summary>
-        public string TypeName { get; set; }
+        public string AttrType { get; set; }
 
         /// <summary>
         /// 属性名 即字段名
@@ -14,32 +23,33 @@
         /// <summary>
         /// 属性的备注
         /// </summary>
-        public string ColumnsNameRemark { get; set; }
+        public string Comments { get; set; }
 
         /// <summary>
         /// 编辑界面样式
         /// </summary>
-        public string ClassName
+        public string ShowType
         {
             get
             {
                 if (IsCombobox)
                 {
-                    return EasyuiForm.Combobox;
+                    return FormControl.Combobox;
                 }
-                switch (TypeName)
+
+                switch (AttrType)
                 {
                     case "int":
                     case "int?":
                     case "long":
                     case "long?":
                     case "decimal":
-                    case "decimal?": return EasyuiForm.Numberbox;
+                    case "decimal?": return FormControl.Numberbox;
                     case "DateTime":
-                    case "DateTime?": return EasyuiForm.Datebox;
+                    case "DateTime?": return FormControl.Datebox;
                     case "bool":
-                    case "bool?": return EasyuiForm.Switchbutton;
-                    case "string": return EasyuiForm.Textbox;
+                    case "bool?": return FormControl.Switchbutton;
+                    case "string": return FormControl.Textbox;
                     default: return "";
                 }
             }
@@ -73,7 +83,7 @@
         /// <summary>
         /// varchar nvarchar 长度
         /// </summary>
-        public int StringLength { get; set; } = 50;
+        public int DataLength { get; set; } = 50;
         /// <summary>
         /// 是否是必填
         /// </summary>

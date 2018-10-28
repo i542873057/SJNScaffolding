@@ -6,6 +6,10 @@
 @section styles{
     <link href="~/lib/iCheck/skins/all.css" rel="stylesheet" />
     <link href="~/lib/select2/dist/css/select2.css" rel="stylesheet" />
+    <style>
+        .layui-container { width: 100%; }
+        .layui-input-block { margin-left: 0px; }
+    </style>
 }
 
 @section scripts{
@@ -16,382 +20,80 @@
     <script>
         var columnList = [
             {
-                "isNewRecord": true,
-                "showType": "hidden",
-                "columnName": "log_nr_",
-                "comments": "log_nr_",
-                "isEdit": "1",
-                "columnLabel": "log_nr_",
-                "attrName": "logNr",
-                "isInsert": "1",
+                //控件类型
+                "ShowType": "Hidden",
+                "columnName": "Id",
+                //列说明
+                "comments": "主键",
                 "attrType": "Long",
-                "optionMap": { "fieldValid": "abc" },
-                "isNull": "0",
+                "fieldValid": "",
+                //是否是主键
                 "isPk": "1",
-                "columnType": "bigint(20)",
+                //字段类型
+                "columnType": "int",
                 "columnSort": 10,
-                "dataLength": "20",
-                "columnNameAndComments": "log_nr_  :  ",
-                "attrNameForGetMethod": "getLogNr()",
-                "simpleAttrType": "Long",
-                "simpleAttrName": "logNr",
+                //数据长度
+                "dataLength": "30",
                 "isRequired": "1",
-                "fullAttrName": "logNr",
-                "attrNames": [],
-                "attrName2": ""
-            },
-            {
-                "isNewRecord": true,
-                "showType": "input",
-                "isList": "1",
                 "isQuery": "1",
-                "columnName": "type_",
-                "comments": "type_",
-                "isEdit": "1",
-                "columnLabel": "type_",
-                "attrName": "type",
-                "isInsert": "1",
-                "attrType": "String",
-                "optionMap": {},
-                "isNull": "1",
-                "isUpdate": "1",
-                "columnType": "varchar(64)",
-                "columnSort": 20,
-                "dataLength": "64",
-                "columnNameAndComments": "type_  :  ",
-                "attrNameForGetMethod": "getType()",
-                "simpleAttrType": "String",
-                "simpleAttrName": "type",
-                "isRequired": "0",
-                "fullAttrName": "type",
-                "attrNames": [],
-                "attrName2": ""
-            },
-            {
-                "isNewRecord": true,
-                "showType": "input",
                 "isList": "1",
-                "isQuery": "1",
-                "columnName": "proc_def_id_",
-                "comments": "proc_def_id_",
-                "isEdit": "1",
-                "columnLabel": "proc_def_id_",
-                "attrName": "procDefId",
-                "isInsert": "1",
-                "attrType": "String",
-                "optionMap": {},
-                "isNull": "1",
                 "isUpdate": "1",
-                "columnType": "varchar(64)",
-                "columnSort": 30,
-                "dataLength": "64",
-                "columnNameAndComments": "proc_def_id_  :  ",
-                "attrNameForGetMethod": "getProcDefId()",
-                "simpleAttrType": "String",
-                "simpleAttrName": "procDefId",
-                "isRequired": "0",
-                "fullAttrName": "procDefId",
-                "attrNames": [],
-                "attrName2": ""
-            },
-            {
-                "isNewRecord": true,
-                "showType": "input",
-                "isList": "1",
-                "isQuery": "1",
-                "columnName": "proc_inst_id_",
-                "comments": "proc_inst_id_",
                 "isEdit": "1",
-                "columnLabel": "proc_inst_id_",
-                "attrName": "procInstId",
                 "isInsert": "1",
-                "attrType": "String",
-                "optionMap": {},
-                "isNull": "1",
-                "isUpdate": "1",
-                "columnType": "varchar(64)",
-                "columnSort": 40,
-                "dataLength": "64",
-                "columnNameAndComments": "proc_inst_id_  :  ",
-                "attrNameForGetMethod": "getProcInstId()",
-                "simpleAttrType": "String",
-                "simpleAttrName": "procInstId",
-                "isRequired": "0",
-                "fullAttrName": "procInstId",
-                "attrNames": [],
-                "attrName2": ""
-            },
-            {
-                "isNewRecord": true,
-                "showType": "input",
-                "isList": "1",
-                "isQuery": "1",
-                "columnName": "execution_id_",
-                "comments": "execution_id_",
-                "isEdit": "1",
-                "columnLabel": "execution_id_",
-                "attrName": "executionId",
-                "isInsert": "1",
-                "attrType": "String",
-                "optionMap": {},
-                "isNull": "1",
-                "isUpdate": "1",
-                "columnType": "varchar(64)",
-                "columnSort": 50,
-                "dataLength": "64",
-                "columnNameAndComments": "execution_id_  :  ",
-                "attrNameForGetMethod": "getExecutionId()",
-                "simpleAttrType": "String",
-                "simpleAttrName": "executionId",
-                "isRequired": "0",
-                "fullAttrName": "executionId",
-                "attrNames": [],
-                "attrName2": ""
-            },
-            {
-                "isNewRecord": true,
-                "showType": "input",
-                "isList": "1",
-                "isQuery": "1",
-                "columnName": "task_id_",
-                "comments": "task_id_",
-                "isEdit": "1",
-                "columnLabel": "task_id_",
-                "attrName": "taskId",
-                "isInsert": "1",
-                "attrType": "String",
-                "optionMap": {},
-                "isNull": "1",
-                "isUpdate": "1",
-                "columnType": "varchar(64)",
-                "columnSort": 60,
-                "dataLength": "64",
-                "columnNameAndComments": "task_id_  :  ",
-                "attrNameForGetMethod": "getTaskId()",
-                "simpleAttrType": "String",
-                "simpleAttrName": "taskId",
-                "isRequired": "0",
-                "fullAttrName": "taskId",
-                "attrNames": [],
-                "attrName2": ""
-            },
-            {
-                "isNewRecord": true,
-                "showType": "dateselect",
-                "isList": "1",
-                "isQuery": "1",
-                "columnName": "time_stamp_",
-                "comments": "time_stamp_",
-                "isEdit": "1",
-                "columnLabel": "time_stamp_",
-                "attrName": "timeStamp",
-                "isInsert": "1",
-                "attrType": "java.util.Date",
-                "optionMap": {},
-                "isNull": "0",
-                "isUpdate": "1",
-                "columnType": "timestamp",
-                "columnSort": 70,
-                "dataLength": "0",
-                "columnNameAndComments": "time_stamp_  :  ",
-                "attrNameForGetMethod": "getTimeStamp()",
-                "simpleAttrType": "Date",
-                "simpleAttrName": "timeStamp",
-                "isRequired": "1",
-                "fullAttrName": "timeStamp",
-                "attrNames": [],
-                "attrName2": ""
-            },
-            {
-                "isNewRecord": true,
-                "showType": "input",
-                "isList": "1",
-                "isQuery": "1",
-                "columnName": "user_id_",
-                "comments": "user_id_",
-                "isEdit": "1",
-                "columnLabel": "user_id_",
-                "attrName": "userId",
-                "isInsert": "1",
-                "attrType": "String",
-                "optionMap": {},
-                "isNull": "1",
-                "isUpdate": "1",
-                "columnType": "varchar(255)",
-                "columnSort": 80,
-                "dataLength": "255",
-                "columnNameAndComments": "user_id_  :  ",
-                "attrNameForGetMethod": "getUserId()",
-                "simpleAttrType": "String",
-                "simpleAttrName": "userId",
-                "isRequired": "0",
-                "fullAttrName": "userId",
-                "attrNames": [],
-                "attrName2": ""
-            },
-            {
-                "isNewRecord": true,
-                "showType": "input",
-                "isList": "1",
-                "isQuery": "1",
-                "columnName": "data_",
-                "comments": "data_",
-                "isEdit": "1",
-                "columnLabel": "data_",
-                "attrName": "data",
-                "isInsert": "1",
-                "attrType": "String",
-                "optionMap": {},
-                "isNull": "1",
-                "isUpdate": "1",
-                "columnType": "longblob",
-                "columnSort": 90,
-                "dataLength": "0",
-                "columnNameAndComments": "data_  :  ",
-                "attrNameForGetMethod": "getData()",
-                "simpleAttrType": "String",
-                "simpleAttrName": "data",
-                "isRequired": "0",
-                "fullAttrName": "data",
-                "attrNames": [],
-                "attrName2": ""
-            },
-            {
-                "isNewRecord": true,
-                "showType": "input",
-                "isList": "1",
-                "isQuery": "1",
-                "columnName": "lock_owner_",
-                "comments": "lock_owner_",
-                "isEdit": "1",
-                "columnLabel": "lock_owner_",
-                "attrName": "lockOwner",
-                "isInsert": "1",
-                "attrType": "String",
-                "optionMap": {},
-                "isNull": "1",
-                "isUpdate": "1",
-                "columnType": "varchar(255)",
-                "columnSort": 100,
-                "dataLength": "255",
-                "columnNameAndComments": "lock_owner_  :  ",
-                "attrNameForGetMethod": "getLockOwner()",
-                "simpleAttrType": "String",
-                "simpleAttrName": "lockOwner",
-                "isRequired": "0",
-                "fullAttrName": "lockOwner",
-                "attrNames": [],
-                "attrName2": ""
-            },
-            {
-                "isNewRecord": true,
-                "showType": "dateselect",
-                "isList": "1",
-                "isQuery": "1",
-                "columnName": "lock_time_",
-                "comments": "lock_time_",
-                "isEdit": "1",
-                "columnLabel": "lock_time_",
-                "attrName": "lockTime",
-                "isInsert": "1",
-                "attrType": "java.util.Date",
-                "optionMap": {},
-                "isNull": "1",
-                "isUpdate": "1",
-                "columnType": "timestamp",
-                "columnSort": 110,
-                "dataLength": "0",
-                "columnNameAndComments": "lock_time_  :  ",
-                "attrNameForGetMethod": "getLockTime()",
-                "simpleAttrType": "Date",
-                "simpleAttrName": "lockTime",
-                "isRequired": "0",
-                "fullAttrName": "lockTime",
-                "attrNames": [],
-                "attrName2": ""
-            },
-            {
-                "isNewRecord": true,
-                "showType": "input",
-                "isList": "1",
-                "isQuery": "1",
-                "columnName": "is_processed_",
-                "comments": "is_processed_",
-                "isEdit": "1",
-                "columnLabel": "is_processed_",
-                "attrName": "isProcessed",
-                "isInsert": "1",
-                "attrType": "Integer",
-                "optionMap": { "fieldValid": "digits" },
-                "isNull": "1",
-                "isUpdate": "1",
-                "columnType": "tinyint(4)",
-                "columnSort": 120,
-                "dataLength": "4",
-                "columnNameAndComments": "is_processed_  :  ",
-                "attrNameForGetMethod": "getIsProcessed()",
-                "simpleAttrType": "Integer",
-                "simpleAttrName": "isProcessed",
-                "isRequired": "0",
-                "fullAttrName": "isProcessed",
-                "attrNames": [],
-                "attrName2": ""
+                "isColspan3": "1"
             }
         ],
             config = {
                 attrTypeList: [
-                    { "label": "String", "value": "String" }, { "label": "Long", "value": "Long" },
-                    { "label": "Integer", "value": "Integer" }, { "label": "Double", "value": "Double" },
-                    { "label": "Date", "value": "java.util.Date" },
-                    { "label": "User", "value": "com.jeesite.modules.sys.entity.User" },
-                    { "label": "Office", "value": "com.jeesite.modules.sys.entity.Office" },
-                    { "label": "This", "value": "This", "description": "生成当前对象" }
+                    { "label": "string", "value": "string" }, { "label": "long", "value": "long" },
+                    { "label": "long?", "value": "long?" },
+                    { "label": "int", "value": "int" }, { "label": "int?", "value": "int?" },
+                    { "label": "DateTime", "value": "DateTime" },
+                    { "label": "DateTime?", "value": "DateTime?" },
+                    { "label": "decimal", "value": "decimal" },
+                    { "label": "decimal?", "value": "decimal?" },
+                    { "label": "bool", "value": "bool" },
+                    { "label": "bool?", "value": "bool?" }
                 ],
                 queryTypeList: [
                     { "label": "=", "value": "EQ" }, { "label": "!=", "value": "NE" }, { "label": ">", "value": "GT" },
                     { "label": ">=", "value": "GTE" }, { "label": "<", "value": "LT" },
                     { "label": "<=", "value": "LTE" }, { "label": "Between", "value": "BETWEEN" },
-                    { "label": "Like", "value": "LIKE" }, { "label": "左 Like", "value": "LEFT_LIKE" },
-                    { "label": "右 Like", "value": "RIGHT_LIKE" }
+                    { "label": "Like", "value": "LIKE" }
                 ],
                 showTypeList: [
-                    { "label": "单行文本框", "value": "input" }, { "label": "多行文本框", "value": "textarea" },
-                    { "label": "隐藏域字段", "value": "hidden" }, { "label": "单选下拉框", "value": "select" },
-                    { "label": "多选下拉框", "value": "select_multiple" }, { "label": "单选按钮", "value": "radio" },
-                    { "label": "复选框", "value": "checkbox" }, { "label": "日期选择", "value": "date" },
-                    { "label": "日期时间", "value": "datetime" }, { "label": "人员选择", "value": "userselect" },
-                    { "label": "机构选择", "value": "officeselect" }, { "label": "区域选择", "value": "areaselect" }
+                    { "label": "文本框Textbox", "value": "Textbox" },
+                    { "label": "验证框Validatebox", "value": "Validatebox" }, { "label": "隐藏文本", "value": "Hidden" },
+                    { "label": "密码框Passwordbox", "value": "Passwordbox" }, { "label": "自定义下拉框Combo", "value": "Combo" },
+                    { "label": "下拉列表框Combobox", "value": "Combobox" },
+                    { "label": "树形下拉框Combotree", "value": "Combotree" },
+                    { "label": "数值输入框Numberbox", "value": "Numberbox" },
+                    { "label": "日期输入框Datebox", "value": "Datebox" },
+                    { "label": "日期时间输入框Datetimebox", "value": "Datetimebox" },
+                    { "label": "日历Calendar", "value": "Calendar" },
+                    { "label": "开关按钮Switchbutton", "value": "Switchbutton" },
+                    { "label": "图片上传", "value": "WebUploaderImg" }, { "label": "文件上传", "value": "WebUploaderFile" }
                 ],
                 fieldValidList: [
                     { "label": "电子邮件", "value": "email" }, { "label": "网址", "value": "url" },
-                    { "label": "日期", "value": "date" }, { "label": "数值", "value": "number" },
-                    { "label": "整数", "value": "integer" }, { "label": "正整数", "value": "digits" },
-                    { "label": "登录账号", "value": "userName" }, { "label": "真实姓名", "value": "realName" },
-                    { "label": "字母数字下划线", "value": "abc" }, { "label": "手机号", "value": "mobile" },
-                    { "label": "固定电话", "value": "simplePhone" }, { "label": "手机或电话", "value": "phone" },
-                    { "label": "邮政编码", "value": "zipCode" }, { "label": "IPv4", "value": "ipv4" },
-                    { "label": "IPv6", "value": "ipv6" }, { "label": "QQ", "value": "qq" },
-                    { "label": "身份证", "value": "idcard" }
-                ],
-                gridRowColList: [
-                    { "label": "6/4/8  两列", "value": "6/4/8" }, { "label": "12/2/10  一列", "value": "12/2/10" },
-                    { "label": "12/2/8  小一列", "value": "12/2/8" }, { "label": "12/2/5  中一列", "value": "12/2/5" },
-                    { "label": "4/4/8  三列", "value": "4/4/8" }, { "label": "3/4/8  四列", "value": "3/4/8" }
+                    { "label": "length[0,50]", "value": "length[0,50]" }
                 ]
-            }
+            },
 
-        lang = 'zh_CN', ctx = '/js/a', ctxPath = '/js', ctxAdmin = '/js/a', ctxFront = '/js/f', ctxStatic = '/js/static', Global = { OP_EDIT: 'edit', FALSE: 'false', OP_AUTH: 'auth', OP_ADD: 'add', USERFILES_BASE_URL: '/userfiles/', NO: '0', YES: '1', SHOW: '1', HIDE: '0', TRUE: 'true', STATUS_NORMAL: '0', STATUS_DRAFT: '9', STATUS_AUDIT_BACK: '5', STATUS_DISABLE: '2', STATUS_AUDIT: '4', STATUS_FREEZE: '3', STATUS_DELETE: '1' }
-        $("#tableSettings").dataGrid({
+            lang = 'zh_CN', ctx = '/js/a', ctxPath = '/js', ctxAdmin = '/js/a', ctxFront = '/js/f', ctxStatic = '/js/static', Global = { OP_EDIT: 'edit', FALSE: 'false', OP_AUTH: 'auth', OP_ADD: 'add', USERFILES_BASE_URL: '/userfiles/', NO: '0', YES: '1', SHOW: '1', HIDE: '0', TRUE: 'true', STATUS_NORMAL: '0', STATUS_DRAFT: '9', STATUS_AUDIT_BACK: '5', STATUS_DISABLE: '2', STATUS_AUDIT: '4', STATUS_FREEZE: '3', STATUS_DELETE: '1' }
+
+
+        $("#dataGrid").dataGrid({
             data: columnList,
             datatype: "local",
             rowNum: 3000,
             sortableColumn: false,
             dataId: "aa",
             autoGridHeight: function () {
-                return $(window).height()
+                return $(window).height();
             },
             autoGridWidth: function () {
-                return $(".main-content").width() - 25
+                return $(".main-content").width() - 25;
             },
             columnModel: [{
                 header: "编码",
@@ -399,15 +101,13 @@
                 frozen: true,
                 hidden: true,
                 editable: true
-            },
-            {
+            }, {
                 header: "状态",
                 name: "status",
                 frozen: true,
                 hidden: true,
                 editable: true
-            },
-            {
+            }, {
                 header: "列名",
                 name: "columnSort",
                 width: 30,
@@ -426,8 +126,7 @@
                     }
                 },
                 classes: "columnSort"
-            },
-            {
+            }, {
                 header: "列名",
                 name: "columnName",
                 width: 110,
@@ -438,15 +137,13 @@
                     }
                     return c.columnName
                 }
-            },
-            {
+            }, {
                 header: "列名",
                 name: "columnName",
                 frozen: true,
                 hidden: true,
                 editable: true
-            },
-            {
+            }, {
                 header: "列说明",
                 name: "comments",
                 width: 110,
@@ -457,25 +154,22 @@
                     maxlength: "100",
                     "class": "form-control required"
                 }
-            },
-            {
+            }, {
                 header: "字段类型",
                 name: "columnType",
                 hidden: true,
                 editable: true
-            },
-            {
+            }, {
                 header: "字段类型",
                 name: "columnType",
                 width: 110,
                 formatter: function (d, b, c, a) {
                     return c.columnType
                 }
-            },
-            {
+            }, {
                 header: "属性类型",
                 name: "attrType",
-                width: 90,
+                width: 120,
                 editable: true,
                 edittype: "select",
                 editoptions: {
@@ -485,23 +179,14 @@
                     itemLabel: "label",
                     itemValue: "value",
                     dataInit: function (a) {
-
+                        $(a).select2().on("change", function () {
+                            try {
+                                $(this).valid()
+                            } catch (b) { }
+                        })
                     }
                 }
-            },
-            {
-                header: '属性名称 <i class="fa icon-question" title="实体对象的属性字段支持复杂格式：对象名.属性名|属性名2，例如：用户user.userCode|userName，主要用于树选择组件；如果子表，则写主表实体类名 + 主键，例如：formEntity.entityId"></i>',
-                name: "fullAttrName",
-                width: 100,
-                editable: true,
-                edittype: "text",
-                editoptions: {
-                    maxlength: "100",
-                    "class": "form-control required",
-                    "data-msg-required": "请选择属性名称"
-                }
-            },
-            {
+            }, {
                 header: "主键",
                 name: "isPk",
                 width: 40,
@@ -512,16 +197,14 @@
                     "class": "form-control",
                     value: "1",
                     dataInit: function (a) {
-                        $(a).iCheck().on("change",
-                            function () {
-                                try {
-                                    $(this).valid()
-                                } catch (b) { }
-                            })
+                        $(a).iCheck().on("change", function () {
+                            try {
+                                $(this).valid()
+                            } catch (b) { }
+                        })
                     }
                 }
-            },
-            {
+            }, {
                 header: "插入",
                 name: "isInsert",
                 width: 40,
@@ -532,16 +215,14 @@
                     "class": "form-control",
                     value: "1",
                     dataInit: function (a) {
-                        $(a).iCheck().on("change",
-                            function () {
-                                try {
-                                    $(this).valid()
-                                } catch (b) { }
-                            })
+                        $(a).iCheck().on("change", function () {
+                            try {
+                                $(this).valid()
+                            } catch (b) { }
+                        })
                     }
                 }
-            },
-            {
+            }, {
                 header: "更新",
                 name: "isUpdate",
                 width: 40,
@@ -552,16 +233,14 @@
                     "class": "form-control",
                     value: "1",
                     dataInit: function (a) {
-                        $(a).iCheck().on("change",
-                            function () {
-                                try {
-                                    $(this).valid()
-                                } catch (b) { }
-                            })
+                        $(a).iCheck().on("change", function () {
+                            try {
+                                $(this).valid()
+                            } catch (b) { }
+                        })
                     }
                 }
-            },
-            {
+            }, {
                 header: "列表",
                 name: "isList",
                 width: 40,
@@ -572,16 +251,14 @@
                     "class": "form-control",
                     value: "1",
                     dataInit: function (a) {
-                        $(a).iCheck().on("change",
-                            function () {
-                                try {
-                                    $(this).valid()
-                                } catch (b) { }
-                            })
+                        $(a).iCheck().on("change", function () {
+                            try {
+                                $(this).valid()
+                            } catch (b) { }
+                        })
                     }
                 }
-            },
-            {
+            }, {
                 header: "查询",
                 name: "isQuery",
                 width: 40,
@@ -592,16 +269,14 @@
                     "class": "form-control",
                     value: "1",
                     dataInit: function (a) {
-                        $(a).iCheck().on("change",
-                            function () {
-                                try {
-                                    $(this).valid()
-                                } catch (b) { }
-                            })
+                        $(a).iCheck().on("change", function () {
+                            try {
+                                $(this).valid()
+                            } catch (b) { }
+                        })
                     }
                 }
-            },
-            {
+            }, {
                 header: "匹配方式",
                 name: "queryType",
                 width: 100,
@@ -614,31 +289,14 @@
                     itemLabel: "label",
                     itemValue: "value",
                     dataInit: function (a) {
-
+                        $(a).select2().on("change", function () {
+                            try {
+                                $(this).valid()
+                            } catch (b) { }
+                        })
                     }
                 }
-            },
-            {
-                header: "编辑",
-                name: "isEdit",
-                width: 40,
-                align: "center",
-                editable: true,
-                edittype: "checkbox",
-                editoptions: {
-                    "class": "form-control",
-                    value: "1",
-                    dataInit: function (a) {
-                        $(a).iCheck().on("change",
-                            function () {
-                                try {
-                                    $(this).valid()
-                                } catch (b) { }
-                            })
-                    }
-                }
-            },
-            {
+            }, {
                 header: "必填",
                 name: "isRequired",
                 width: 40,
@@ -649,19 +307,35 @@
                     "class": "form-control",
                     value: "1",
                     dataInit: function (a) {
-                        $(a).iCheck().on("change",
-                            function () {
-                                try {
-                                    $(this).valid()
-                                } catch (b) { }
-                            })
+                        $(a).iCheck().on("change", function () {
+                            try {
+                                $(this).valid()
+                            } catch (b) { }
+                        })
                     }
                 }
-            },
-            {
+            }, {
+                header: "是否跨三列",
+                name: "isColspan3",
+                width: 80,
+                align: "center",
+                editable: true,
+                edittype: "checkbox",
+                editoptions: {
+                    "class": "form-control",
+                    value: "1",
+                    dataInit: function (a) {
+                        $(a).iCheck().on("change", function () {
+                            try {
+                                $(this).valid()
+                            } catch (b) { }
+                        })
+                    }
+                }
+            }, {
                 header: "控件类型",
-                name: "showType",
-                width: 120,
+                name: "ShowType",
+                width: 160,
                 editable: true,
                 edittype: "select",
                 editoptions: {
@@ -671,78 +345,16 @@
                     itemLabel: "label",
                     itemValue: "value",
                     dataInit: function (a) {
-
-                    }
-                }
-            },
-            {
-                header: '栅格 <i class="fa icon-question" title="栅格定义：行/标签/输入框"></i>',
-                name: "optionMap['gridRowCol']",
-                width: 90,
-                editable: true,
-                edittype: "select",
-                editoptions: {
-                    "class": "form-control",
-                    items: (config.gridRowColList),
-                    itemLabel: "label",
-                    itemValue: "value",
-                    dataInit: function (a) {
-
-                    }
-                }
-            },
-            {
-                header: '<span title="强制新行、换行，强制输出一个&lt;div class=&quot;row&quot;&gt;&lt;/div&gt;">新行</span>',
-                name: "optionMap['isNewLine']",
-                align: "center",
-                width: 40,
-                editable: true,
-                edittype: "checkbox",
-                editoptions: {
-                    "class": "form-control",
-                    value: "1",
-                    dataInit: function (a) {
-                        $(a).iCheck().on("change",
-                            function () {
-                                try {
-                                    $(this).valid()
-                                } catch (b) { }
-                            })
-                    }
-                }
-            },
-            {
-                header: "字典类型",
-                name: "optionMap['dictType']",
-                width: 120,
-                formatter: function (d, b, c, a) {
-                    b.colModel.data[b.rowId + "_dictName"] = js.val(c, "optionMap.dictName");
-                    return b.colModel.data[b.rowId]
-                },
-                unformat: function (c, b, a) {
-                    return b.colModel.data[b.rowId] + "|" + b.colModel.data[b.rowId + "_dictName"]
-                },
-                editable: true,
-                edittype: "custom",
-                editoptions: {
-                    custom_element: function (b, a) {
-                        return js.template("treeselectTpl", {
-                            id: "dict_" + a.id.replace(/[\'\[\]]/g, "_"),
-                            title: "字段类型",
-                            name: "optionMap['dictType']",
-                            value: b.split("|")[0],
-                            labelName: "optionMap['dictName']",
-                            labelValue: b.split("|")[1],
-                            url: ctx + "/sys/dictType/treeData",
-                            isReturnValue: "true",
-                            cssClass: ""
+                        $(a).select2().on("change", function () {
+                            try {
+                                $(this).valid()
+                            } catch (b) { }
                         })
                     }
                 }
-            },
-            {
+            }, {
                 header: "字段验证",
-                name: "optionMap['fieldValid']",
+                name: "fieldValid",
                 width: 170,
                 editable: true,
                 edittype: "select",
@@ -753,24 +365,26 @@
                     itemLabel: "label",
                     itemValue: "value",
                     dataInit: function (a) {
-
+                        $(a).select2().on("change", function () {
+                            try {
+                                $(this).valid()
+                            } catch (b) { }
+                        })
                     }
                 }
             }],
             groupHeaders: {
                 twoLevel: [{
                     startColumnName: "id",
-                    numberOfColumns: 13,
+                    numberOfColumns: 12,
                     titleText: "字段"
-                },
-                {
+                }, {
                     startColumnName: "isList",
                     numberOfColumns: 3,
                     titleText: "列表"
-                },
-                {
-                    startColumnName: "isEdit",
-                    numberOfColumns: 7,
+                }, {
+                    startColumnName: "isRequired",
+                    numberOfColumns: 4,
                     titleText: "表单"
                 }]
             },
@@ -783,37 +397,56 @@
                 status: Global.STATUS_NORMAL
             },
             editGridInputFormListName: "columnList",
-            editGridInputFormListAttrs: "id,status,columnName,comments,columnType,attrType,fullAttrName,isPk,isRequired,isInsert,isUpdate,columnSort,isList,isQuery,queryType,isEdit,showType,optionMap['isNewLine'],optionMap['gridRowCol'],optionMap['fieldValid'],optionMap['dictType'],optionMap['dictName']",
+            editGridInputFormListAttrs: "id,status,columnName,comments,columnType,attrType,isPk,isRequired,isInsert,isUpdate,columnSort,isList,isQuery,queryType,isEdit,ShowType",
             ajaxSuccess: function (a) {
                 $("#dataGrid_columnSort").attr("colspan", "2").next().hide()
             }
         });
-        $("#tableSettings").tableDnD({
+        $("#dataGrid").tableDnD({
             onDragClass: "dragClass",
             dragHandle: "columnSort",
             onDrop: function (a, b) {
                 $(a).find("input.columnSort").each(function (c) {
                     $(this).val((c + 1) * 10)
-                })
+                });
             }
         });
 
-        $("#tplCategory").change(function () {
-            $(".options").addClass("hide");
-            var a = $(this).val();
-            if (a != "") {
-                $("." + $(this).val()).removeClass("hide")
-            }
-        }).change();
-        $("#btnDefaultBaseDir").click(function () {
-            $.get(ctx + "/gen/genTable/getDefaultBaseDir",
-                function (a) {
-                    $("#genBaseDir").val(a);
-                    js.showMessage("设置默认生成基础路径完成！")
-                })
+
+        layui.form.on('submit(importTable)', function (data) {
+
+            layer.msg(data.filed);
+            return false;
+            $.ajax({
+                url: '/Index?handler=SaveSettings',
+                type: 'post',
+                data: data.field,
+                dataType: 'json',
+                success: function (d) {
+                    if (d.code == 0) {
+                        layer.msg(d.msg);
+                    } else {
+                        layer.msg('error');
+                    }
+                }
+            });
+            return false;
         });
     </script>
 
 }
+<form class="layui-form" action="">
+    <div class="layui-form-item layui-form-text">
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" name="formTable" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="btn btn-default" lay-submit lay-filter="importTable">导入字段</button>
+            <button class="btn btn-primary" lay-submit lay-filter="formGenerCode">生成代码</button>
+        </div>
+    </div>
 
-<table id="tableSettings"></table>
+</form>
+<table id="dataGrid"></table>

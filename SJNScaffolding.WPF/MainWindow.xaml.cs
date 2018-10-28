@@ -1,12 +1,12 @@
-﻿using System;
+﻿using SJNScaffolding.Helper;
+using SJNScaffolding.Models.CollectiveType;
+using SJNScaffolding.Models.TemplateModels;
+using SJNScaffolding.WPF.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
-using SJNScaffolding.Helper;
-using SJNScaffolding.Models.CollectiveType;
-using SJNScaffolding.Models.TemplateModels;
-using SJNScaffolding.WPF.Helper;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 using RadioButton = System.Windows.Controls.RadioButton;
@@ -83,11 +83,11 @@ namespace SJNScaffolding.WPF
                     typeNameList.Add(new TypeColumnName()
                     {
                         ColumnName = columnName,
-                        TypeName = columnsTypeList[i],
-                        ColumnsNameRemark = columnsNameList[i],
+                        AttrType = columnsTypeList[i],
+                        Comments = columnsNameList[i],
                         IsRequired = columnsList[i].Contains("*") ? true : false,
                         IsVarchar = columnsTypeList[i] == "string",
-                        StringLength = 100,
+                        DataLength = 100,
                         IsCombobox = columnsList[i].Contains("@") ? true : false,
                         IsColspan3 = columnsList[i].Contains("%") ? true : false,
                         WebuploadColunm = webuploadColunm,
@@ -105,7 +105,7 @@ namespace SJNScaffolding.WPF
                     TypeColumnNames = typeNameList,
                     IdType = _idType,
                     TemplateFolder = @"..\..\Templates",
-                    OutputFolder=outputsFolder.Text??@"..\..\Outputs"
+                    OutputFolder = outputsFolder.Text ?? @"..\..\Outputs"
                 };
 
                 var bussiness = new AddNewBussinessWpfHelper(vf);

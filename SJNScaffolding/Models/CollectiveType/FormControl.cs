@@ -1,6 +1,6 @@
 ﻿namespace SJNScaffolding.Models.CollectiveType
 {
-    public static class EasyuiForm
+    public static class FormControl
     {
         public const string Validatebox = "easyui-validatebox";
         public const string Textbox = "easyui-textbox";
@@ -13,5 +13,8 @@
         public const string Datetimebox = "easyui-datetimebox";
         public const string Calendar = "easyui-calendar";
         public const string Switchbutton = "easyui-switchbutton";
+        public const string Hidden = "hidden";
+        public const string WebUploaderFile = "WebUploaderFile";
+        public const string WebUploaderImg = "WebUploaderImg";
     }
 }

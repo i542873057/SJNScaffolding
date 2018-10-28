@@ -25,9 +25,9 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto
         @foreach (var item in Model.TypeColumnNames)
         {
 @("     ///" )<summary>
-@("     ///" + item.ColumnsNameRemark) 
+@("     ///" + item.Comments) 
 @("     ///" )</summary>
-@("     public " + item.TypeName + " " + item.ColumnName + "{get;set;} \r\n")
+@("     public " + item.AttrType + " " + item.ColumnName + "{get;set;} \r\n")
         }
     }
 }

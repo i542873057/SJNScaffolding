@@ -12,14 +12,15 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    @*<link href="~/lib/layui/css/layui.css" rel="stylesheet" />*@
+    <link href="~/lib/layui/css/layui.css" rel="stylesheet" />
     <link href="~/lib/jqGrid/css/ui.jqgrid.css" rel="stylesheet" />
-    @RenderSection("styles",required:false)
+    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    @RenderSection("styles", required: false)
 </head>
 <body>
 
     <ul class="layui-nav">
-        <li class="layui-nav-item layui-this"><a href="/">首页</a></li>
+        <li class="layui-nav-item"><a href="/">首页</a></li>
         <li class="layui-nav-item"><a href="/TableSettings">表结构设置</a></li>
     </ul>
     <partial name="_CookieConsentPartial" />
@@ -56,6 +57,13 @@
     <script src="~/lib/jqGrid/js/jquery.jqGrid.extend.js"></script>
     <script src="~/lib/jqGrid/plugins/jquery.tablednd.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script>
+        $('.layui-nav .layui-nav-item').each(function (i, v) {
+            if ($(v).text() == '@Html.Raw(ViewData["Title"])') {
+            $(v).addClass('layui-this');
+        }
+    })
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

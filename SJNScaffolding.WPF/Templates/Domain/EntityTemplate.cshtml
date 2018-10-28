@@ -22,17 +22,17 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s
         @foreach (var item in Model.TypeColumnNames)
         {
 @("     ///" )<summary>
-@("     ///" + item.ColumnsNameRemark) 
+@("     ///" + item.Comments) 
 @("     ///" )</summary>
     if(item.IsRequired)
     {
-@RazorHelper.RawHtml("      [Required(ErrorMessage=\""+item.ColumnsNameRemark+"为必填项\")] \r\n")
+@RazorHelper.RawHtml("      [Required(ErrorMessage=\""+item.Comments+"为必填项\")] \r\n")
     }
     if(item.IsVarchar)
      {
-@RazorHelper.RawHtml("      [StringLength(" + item.StringLength+ ",ErrorMessage=\""+item.ColumnsNameRemark+"的长度应在"+item.StringLength+"字符以内\")]\r\n")
+@RazorHelper.RawHtml("      [StringLength(" + item.DataLength + ",ErrorMessage=\""+item.Comments+"的长度应在"+item.DataLength + "字符以内\")]\r\n")
      }
-@("     public " + item.TypeName + " " + item.ColumnName + "{get;set;} \r\n")
+@RazorHelper.RawHtml("     public " + item.AttrType + " " + item.ColumnName + "{get;set;} \r\n")
         }
     }
 }

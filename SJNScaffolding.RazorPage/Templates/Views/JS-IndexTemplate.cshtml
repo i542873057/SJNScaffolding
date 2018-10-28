@@ -40,14 +40,14 @@ _context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限"
                                     {
                                         bool isFormatter = false;
                                         string formatterString="";
-                                        switch (item.ClassName)
+                                        switch (item.ShowType)
                                         {
-                                            case EasyuiForm.Datebox:
+                                            case FormControl.Datebox:
                                             isFormatter=true;
                                                 formatterString = @",formatter:com.formatDate";
                                             break;
-                                            case EasyuiForm.Combo:
-                                            case EasyuiForm.Combobox:
+                                            case FormControl.Combo:
+                                            case FormControl.Combobox:
                                             isFormatter=true;
                                                 formatterString=@", formatter: function (value) {
                                                     if (top.clients.dataItems &&top.clients.dataItems['"+item.ColumnName+@"']) {
@@ -59,7 +59,7 @@ _context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限"
                                             break;
                                             default:break;
                                         }
-            @Html.Raw("                         { field: '"+item.ColumnName+"', title: '"+item.ColumnsNameRemark+"', width: 80"+ (isFormatter == true ? formatterString+ " \r\n                         " : "") + "}" + (i==(Model.TypeColumnNames.Count-1)?"": ",") +"\r\n")
+            @Html.Raw("                         { field: '"+item.ColumnName+"', title: '"+item.Comments+"', width: 80"+ (isFormatter == true ? formatterString+ " \r\n                         " : "") + "}" + (i==(Model.TypeColumnNames.Count-1)?"": ",") +"\r\n")
                                         i++;
                                 }
                             }
@@ -90,7 +90,7 @@ _context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限"
                                                 if (item.IsRequired && item.WebuploadColunm.IsWebUpload)
                                                 {
 @Html.Raw(@"                                         formData."+item.ColumnName+"=$(\'#"+item.ColumnName+ "\').GetFilesAddress();\r\n");
-@Html.Raw(@"                                         if(formData." + item.ColumnName + "==\'\'){abp.message.warn(\'"+item.ColumnsNameRemark+"为必填项!\');return;}\r\n");
+@Html.Raw(@"                                         if(formData." + item.ColumnName + "==\'\'){abp.message.warn(\'"+item.Comments + "为必填项!\');return;}\r\n");
                                                 }
                                             }
                                         }
