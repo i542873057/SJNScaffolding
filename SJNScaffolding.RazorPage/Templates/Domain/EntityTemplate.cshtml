@@ -3,12 +3,16 @@
 * 创建时间:          @Model.CreateTime
 * 邮箱：             @Model.EmailAddress
 * 文件功能描述：      @Model.FileRemark
-* 
-* 修改人： 
+*
+* 修改人：
 * 时间：
 * 修改说明：
 */
+@{
+    Layout = null;
+}
 @using System
+@using SJNScaffolding.Builders
 @model SJNScaffolding.Models.TemplateModels.ViewFileModel
 using System;
 using Abp.Domain.Entities.Auditing;
@@ -18,23 +22,23 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s
 {
     public class @Model.TableName : FullAuditedEntity<@(Model.IdType)>
     {
-        @if(Model.TypeColumnNames!=null)
+        @if (Model.TypeColumnNames != null)
         {
-                foreach (var item in Model.TypeColumnNames)
-                {
+            foreach (var item in Model.TypeColumnNames)
+            {
 @("     ///" )<summary>
-@("     ///" + item.ColumnsNameRemark) 
+@Html.Raw($"     ///{item.ColumnsNameRemark}")
 @("     ///" )</summary>
-    if(item.IsRequired)
-    {
-@Html.Raw("      [Required(ErrorMessage=\""+item.ColumnsNameRemark+"为必填项\")] \r\n")
-    }
-    if(item.IsVarchar)
-    {
-@Html.Raw("      [StringLength(" + item.StringLength+ ",ErrorMessage=\""+item.ColumnsNameRemark+"的长度应在"+item.StringLength+"字符以内\")]\r\n")
-    }
-@("     public " + item.TypeName + " " + item.ColumnName + "{get;set;} \r\n")
-        }
+if (item.IsRequired)
+{
+@Html.Raw("     [Required(ErrorMessage=\"" + item.ColumnsNameRemark + "为必填项\")]\r\n") 
+}
+if (item.IsVarchar)
+{
+@Html.Raw("     [StringLength(" + item.StringLength + ",ErrorMessage=\"" + item.ColumnsNameRemark + "的长度应在" + item.StringLength + "字符以内\")]\r\n")
+}
+@Html.Raw("     public " + item.TypeName + " " + item.ColumnName + "{get;set;}\r\n")
+            }
         }
     }
 }

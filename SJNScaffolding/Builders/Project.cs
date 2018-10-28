@@ -1,4 +1,6 @@
-﻿namespace SJNScaffolding.Builders
+﻿using System.Collections.Generic;
+
+namespace SJNScaffolding.Builders
 {
     public class Project
     {
@@ -6,12 +8,16 @@
         public string Author { get; set; }
         public string OutputPath { get; set; }
         public string Version { get; set; }
+        public string TableName { get; set; }
+        public string ProjectName { get; set; }
+        public string IdType { get; set; }
         public Buildtasks BuildTasks { get; set; }
 
     }
 
     public class Buildtasks
     {
+        public List<string> ProjectNames { get; set; }
         public Template[] Templates { get; set; }
     }
 

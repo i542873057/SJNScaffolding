@@ -44,15 +44,74 @@
     <None Include="Templates\ViewModel\EntityViewModel.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="wwwroot\lib\iCheck\icheck.js" />
+    <None Include="wwwroot\lib\iCheck\icheck.min.js" />
     <None Include="wwwroot\lib\jqGrid\js\i18n\zh_CN.js" />
     <None Include="wwwroot\lib\jqGrid\js\jquery.jqGrid.extend.js" />
     <None Include="wwwroot\lib\jqGrid\js\jquery.jqGrid.js" />
     <None Include="wwwroot\lib\jqGrid\plugins\jquery.tablednd.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\ar.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\az.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\bg.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\ca.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\cs.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\da.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\de.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\el.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\en.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\es.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\et.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\eu.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\fa.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\fi.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\fr.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\gl.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\he.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\hi.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\hr.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\hu.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\id.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\is.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\it.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\ja.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\km.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\ko.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\lt.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\lv.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\mk.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\ms.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\nb.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\nl.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\pl.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\pt-BR.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\pt.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\ro.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\ru.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\sk.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\sr-Cyrl.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\sr.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\sv.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\th.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\tr.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\uk.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\vi.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\zh-CN.js" />
+    <None Include="wwwroot\lib\select2\dist\js\i18n\zh-TW.js" />
+    <None Include="wwwroot\lib\select2\dist\js\select2.full.js" />
+    <None Include="wwwroot\lib\select2\dist\js\select2.full.min.js" />
+    <None Include="wwwroot\lib\select2\dist\js\select2.js" />
+    <None Include="wwwroot\lib\select2\dist\js\select2.min.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build" Version="15.8.166" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
@@ -67,20 +126,27 @@
     <Content Update="appsettings.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="SJNScaffolding.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Templates\Views\JS-CreateOrUpdateModalTemplate.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Templates\Views\JS-IndexTemplate.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Templates\Views\Views-CreateOrUpdateModalTemplate.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Templates\Views\Views-IndexTemplate.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="" SJNScaffolding_1json__JSONSchema="http://json.schemastore.org/band-manifest" /></VisualStudio></ProjectExtensions>
 
 </Project>

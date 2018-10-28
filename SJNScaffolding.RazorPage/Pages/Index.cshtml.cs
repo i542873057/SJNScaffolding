@@ -1,12 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SJNScaffolding.Builders;
 using SJNScaffolding.Db;
 using SJNScaffolding.Helper;
+using SJNScaffolding.Models.CollectiveType;
 using SJNScaffolding.Models.TemplateModels;
+using SJNScaffolding.RazorPage.Models;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,28 +23,30 @@ namespace SJNScaffolding.RazorPage.Pages
         private readonly IProjectBuilder _projectBuilder;
         private readonly AddNewBussinessHelper _addNewBussinessHelper;
         private readonly ITemplateEngine _templateEngine;
+        private readonly IMapper _mapper;
+        private readonly IHostingEnvironment _hostingEnvironment;
         public Project Project { get; private set; }
 
-        public string TableName { get; set; }
-        public string ProjectName { get; set; }
-        public string IdType { get; set; }
-
-        public IndexModel(IOptions<Project> p, IProjectBuilder projectBuilder, ITemplateEngine templateEngine, AddNewBussinessHelper addNewBussinessHelper)
+        public IndexModel(IOptionsSnapshot<Project> p, IProjectBuilder projectBuilder, ITemplateEngine templateEngine, AddNewBussinessHelper addNewBussinessHelper, IMapper mapper, IHostingEnvironment hostingEnvironment)
         {
             _projectBuilder = projectBuilder;
             _templateEngine = templateEngine;
             _addNewBussinessHelper = addNewBussinessHelper;
             Project = p.Value;
-            IdType = Models.CollectiveType.IdType.Long;
+            _mapper = mapper;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public void OnGet()
         {
         }
 
-        public IActionResult OnPostSaveSettings()
+        public IActionResult OnPostSaveSettings(ProjectInputDto projectInputDto)
         {
+            var project = _mapper.Map<Project>(projectInputDto);
+            project.BuildTasks = Project.BuildTasks;
 
+            System.IO.File.WriteAllText(Path.Combine(_hostingEnvironment.ContentRootPath, "SJNScaffolding.json"), JObject.FromObject(new { Project = project }).ToString());
 
             return Json(new LayuiResultDto("保存配置成功!"));
         }
@@ -47,7 +55,7 @@ namespace SJNScaffolding.RazorPage.Pages
         public IActionResult OnPost()
         {
 
-            var templates = Project.BuildTasks.Templates.ToList();
+            var templates = Project.BuildTasks?.Templates.ToList();
 
             return Json(new LayuiResultDto<Template>(templates.Count, templates));
 
@@ -74,7 +82,7 @@ namespace SJNScaffolding.RazorPage.Pages
                 Author = Project.Author,
                 TableName = "WebInfos",
                 ProjectName = "SJNScaffolding",
-                IdType = Models.CollectiveType.IdType.Long,
+                IdType = IdType.Long,
                 TemplateFolder = @"..\..\..\SJNScaffolding.WPF\Templates",
                 OutputFolder = Project.OutputPath,
                 TypeColumnNames = TestHelper.GetColunmsList()

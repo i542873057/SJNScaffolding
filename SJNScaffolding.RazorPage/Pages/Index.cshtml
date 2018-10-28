@@ -1,5 +1,5 @@
 ﻿@page "{handler?}"
-@using Models.CollectiveType
+@using SJNScaffolding.Models.CollectiveType
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -11,17 +11,37 @@
 
             $.ajax({
                 url: '/Index?handler=SaveSettings',
-                type:'post',
+                type: 'post',
                 data: data.field,
-                dataType:'json',
+                dataType: 'json',
                 success: function (d) {
-                    debugger;
                     if (d.code == 0) {
                         layer.msg(d.msg);
                     } else {
                         layer.msg('error');
                     }
                 }
+            });
+            return false;
+        });
+
+        layui.form.on('submit(formGenerCode)', function (data) {
+            var index = layer.load();
+            $.ajax({
+                url: '/Index?handler=CodeGenerator',
+                type: 'post',
+                data: data.field,
+                dataType: 'json',
+                success: function (d) {
+                    if (d.code == 0) {
+                        layer.msg(d.msg);
+                    } else {
+                        layer.msg('error');
+                    }
+                }
+            }).always(function () {
+                layer.close(index);
+
             });
             return false;
         });
@@ -37,7 +57,7 @@
                 '__RequestVerificationToken': $('input:hidden[name="__RequestVerificationToken"]').val()
             }
             , cols: [[ //表头
-                { field: 'Key', title: '模板名', width: '30%',fixed: 'left' }
+                { field: 'Key', title: '模板名', width: '30%', fixed: 'left' }
                 , { field: 'Remark', title: '备注', width: '10%' }
                 , { field: 'IsExcute', title: '是否执行', width: '8%' }
                 , { field: 'Folder', title: '生成目录', width: '30%' }
@@ -77,7 +97,7 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">邮箱</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="EmailAdress" lay-verify="email" class="layui-input" value="@Model.Project.EmailAddress">
+                        <input type="text" name="EmailAddress" lay-verify="email" class="layui-input" value="@Model.Project.EmailAddress">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -91,21 +111,21 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">表名</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="TableName" autocomplete="off" class="layui-input" value="@Model.TableName">
+                        <input type="text" name="TableName" autocomplete="off" class="layui-input" value="@Model.Project.TableName">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">项目名</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="ProjectName"  class="layui-input" value="@Model.ProjectName">
+                        <input type="text" name="ProjectName" class="layui-input" value="@Model.Project.ProjectName">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">主键类型</label>
                     <div class="layui-input-inline">
-                        <input type="radio" name="IdType" value="Int" title="Int" @(Model.IdType==IdType.Int?"checked='checked'":"")>
-                        <input type="radio" name="IdType" value="Long" title="Long" @(Model.IdType==IdType.Long?"checked='checked'":"")>
-                        <input type="radio" name="IdType" value="Guid" title="Guid"  @(Model.IdType==IdType.Guid?"checked='checked'":"")>
+                        <input type="radio" name="IdType" value="Int" title="Int" @(Model.Project.IdType == IdType.Int ? "checked='checked'" : "")>
+                        <input type="radio" name="IdType" value="Long" title="Long" @(Model.Project.IdType == IdType.Long ? "checked='checked'" : "")>
+                        <input type="radio" name="IdType" value="Guid" title="Guid" @(Model.Project.IdType == IdType.Guid ? "checked='checked'" : "")>
                     </div>
                 </div>
             </div>

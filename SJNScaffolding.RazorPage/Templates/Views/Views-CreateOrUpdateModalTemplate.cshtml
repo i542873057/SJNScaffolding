@@ -35,7 +35,7 @@ public string CreateInput(TypeColumnName item, string styles)
                         {
                             <tr>
                                 <td class="kv-label">@if (item.IsRequired)
-                                {@Html.Raw(@"<span class='font-red'>*</span>")}@item.ColumnsNameRemark</td>
+                                {@Html.Raw(@"<span class='font-red'>*</span>")} @Html.Raw(item.ColumnsNameRemark) </td>
                                 <td class="kv-content" colspan="3">
                                     @if (item.WebuploadColunm.IsWebUpload == true)
                                     {
@@ -43,7 +43,7 @@ public string CreateInput(TypeColumnName item, string styles)
                                     }
                                     else
                                     {
-                                        CreateInput(item, styles);
+                                        @Html.Raw(CreateInput(item, styles))
                                     }
                                 </td>
                             </tr>
@@ -53,17 +53,17 @@ public string CreateInput(TypeColumnName item, string styles)
                             i++;
                             <tr>
                                 <td class="kv-label">@if (item.IsRequired)
-                                {@Html.Raw(@"<span class='font-red'>*</span>")}@item.ColumnsNameRemark</td>
+                                {@Html.Raw(@"<span class='font-red'>*</span>")}@Html.Raw(item.ColumnsNameRemark)</td>
                                 <td class="kv-content" @(i < Model.TypeColumnNames.Count ? "" : "colspan=\'3\'")>
-                                    @CreateInput(item, i < Model.TypeColumnNames.Count ? "" : styles)
+                                    @Html.Raw(CreateInput(item, i < Model.TypeColumnNames.Count ? "" : styles))
                                 </td>
                                 @if (i < Model.TypeColumnNames.Count)
                                 {
                                     item = Model.TypeColumnNames[i];
                                     <td class="kv-label">@if (item.IsRequired)
-                                    {@Html.Raw(@"<span class='font-red'>*</span>")}@item.ColumnsNameRemark</td>
+                                    {@Html.Raw(@"<span class='font-red'>*</span>")}@Html.Raw(item.ColumnsNameRemark)</td>
                                     <td class="kv-content">
-                                        @CreateInput(item, "")
+                                        @Html.Raw(CreateInput(item, ""))
                                     </td>
                                 }
                             </tr>

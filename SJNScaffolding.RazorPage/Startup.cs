@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using HandlebarsDotNet;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.ObjectPool;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using SJNScaffolding.Builders;
 using SJNScaffolding.Helper;
+using SJNScaffolding.RazorPage.Maps;
 using SJNScaffolding.Utilities;
 
 namespace SJNScaffolding.RazorPage
@@ -28,7 +24,7 @@ namespace SJNScaffolding.RazorPage
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get;  }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,13 +39,8 @@ namespace SJNScaffolding.RazorPage
             services.AddOptions();
             services.Configure<Project>(Configuration.GetSection("Project"));
 
-            IFileProvider fileProvider = new PhysicalFileProvider(AppPath.Relative("Templates"));
 
-            //services.AddSingleton<IHostingEnvironment>(new HostingEnvironment
-            //{
-            //    ApplicationName = Assembly.GetEntryAssembly().GetName().Name,
-            //    WebRootFileProvider = fileProvider,
-            //});
+            IFileProvider fileProvider = new PhysicalFileProvider(AppPath.Relative("Templates"));
 
             services.Configure<RazorViewEngineOptions>(options =>
             {
@@ -57,12 +48,16 @@ namespace SJNScaffolding.RazorPage
                 options.FileProviders.Add(fileProvider);
             });
 
-            services.AddLogging();
+            services.AddLogging(builder => builder
+                    .AddConfiguration(Configuration.GetSection("Logging"))
+                    .AddConsole());
+
             services.AddTransient<OfficialRazorViewToStringRenderer>();
 
             services.AddSingleton<ITemplateEngine, OfficialRazorTemplateEngine>();
             services.AddSingleton<AddNewBussinessHelper>();
-            services.AddSingleton<IProjectBuilder, ProjectBuilder>();
+            services.AddScoped<IProjectBuilder, ProjectBuilder>();
+            services.AddAutoMapper();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -78,12 +73,6 @@ namespace SJNScaffolding.RazorPage
             {
                 app.UseExceptionHandler("/Error");
             }
-
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
 
             app.UseStaticFiles();
             app.UseCookiePolicy();

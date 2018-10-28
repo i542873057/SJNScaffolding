@@ -3,7 +3,6 @@
 }
 @("@using Abp.Web.Mvc.Extensions")
 @model SJNScaffolding.Models.TemplateModels.ViewFileModel
-
 @Html.Raw("@{ViewBag.Title =\"\";}")
 @("@section styles{")
 @{
@@ -14,7 +13,7 @@
 }
 @("}")
 @("@section scripts{")
-@Html.Raw("@Html.IncludeScript(\"~/Areas/Plat/Views/" + Model.TableName + "/Index.js\")")
+@Html.Raw("         @Html.IncludeScript(\"~/Areas/Plat/Views/" + Model.TableName + "/Index.js\")")
 @{
     if (Model.WebUploadList.Count > 0)
     {

@@ -1,0 +1,129 @@
+﻿{
+  "Project": {
+    "EmailAddress": "igeekfan@foxmail.com",
+    "Author": "IGeekFan",
+    "OutputPath": "E://svn/XwFinanciaWarning",
+    "Version": "1.1.1",
+    "TableName": "Info",
+    "ProjectName": "XwFinanciaWarning",
+    "IdType": "Guid",
+    "BuildTasks": {
+      "ProjectNames": [
+        "{{ProjectName}}.Application",
+        "{{ProjectName}}.Core",
+        "{{ProjectName}}.EntityFramework",
+        "{{ProjectName}}.Web"
+      ],
+      "Templates": [
+        {
+          "Key": "/Application/IAppServiceTemplate.cshtml",
+          "Remark": "服务接口",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Application/Domain/Plat/{{TableName}}s",
+            "Name": "I{{TableName}}AppService.cs"
+          }
+        },
+        {
+          "Key": "/Application/AppServiceTemplate.cshtml",
+          "Remark": "服务实现类",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Application/Domain/Plat/{{TableName}}s/",
+            "Name": "{{TableName}}AppService.cs"
+          }
+        },
+        {
+          "Key": "/Application/Dto/InputDtoTemplate.cshtml",
+          "Remark": "InputDto",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Application/Domain/Plat/{{TableName}}s/Dto",
+            "Name": "{{TableName}}InputDto.cs"
+          }
+        },
+        {
+          "Key": "/Application/Dto/ListDtoTemplate.cshtml",
+          "Remark": "ListDto",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Application/Domain/Plat/{{TableName}}s/Dto",
+            "Name": "{{TableName}}ListDto.cs"
+          }
+        },
+        {
+          "Key": "/Application/Dto/SearchDtoTemplate.cshtml",
+          "Remark": "SearchDto",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Application/Domain/Plat/{{TableName}}s/Dto",
+            "Name": "{{TableName}}SearchDto.cs"
+          }
+        },
+        {
+          "Key": "/Views/JS-IndexTemplate.cshtml",
+          "Remark": "Index.js",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Web/Areas/Plat/Views/{{TableName}}",
+            "Name": "Index.js"
+          }
+        },
+        {
+          "Key": "/Views/JS-CreateOrUpdateModalTemplate.cshtml",
+          "Remark": "CreateOrUpdateModal.js",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Web/Areas/Plat/Views/{{TableName}}",
+            "Name": "CreateOrUpdateModal.js"
+          }
+        },
+        {
+          "Key": "/Views/Views-IndexTemplate.cshtml",
+          "Remark": "Index.cshtml",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Web/Areas/Plat/Views/{{TableName}}",
+            "Name": "Index.cshtml"
+          }
+        },
+        {
+          "Key": "/Views/Views-CreateOrUpdateModalTemplate.cshtml",
+          "Remark": "CreateOrUpdateModal.cshtml",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Web/Areas/Plat/Views/{{TableName}}",
+            "Name": "CreateOrUpdateModal.cshtml"
+          }
+        },
+        {
+          "Key": "/Controllers/ControllerTemplate.cshtml",
+          "Remark": "Controller",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Web/Areas/Plat/Controllers",
+            "Name": "{{TableName}}Controller.cs"
+          }
+        },
+        {
+          "Key": "/Domain/EntityTemplate.cshtml",
+          "Remark": "Core类",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Core/Domain/Plat/{{TableName}}s",
+            "Name": "{{TableName}}.cs"
+          }
+        },
+        {
+          "Key": "/ViewModel/EntityViewModel.cshtml",
+          "Remark": "ViewModel",
+          "IsExcute": true,
+          "Output": {
+            "Folder": "/{{ProjectName}}.Web/Areas/Plat/Models",
+            "Name": "{{TableName}}ViewModel.cs"
+          }
+        }
+      ]
+    }
+  }
+}
