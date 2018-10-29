@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SJNScaffolding.Builders;
 using SJNScaffolding.Db;
@@ -54,16 +52,14 @@ namespace SJNScaffolding.RazorPage.Pages
 
         public IActionResult OnPost()
         {
-
-            var templates = Project.BuildTasks?.Templates.ToList();
+            var templates = Project.BuildTasks.Templates.ToList();
 
             return Json(new LayuiResultDto<Template>(templates.Count, templates));
-
         }
 
         public async Task<IActionResult> OnPostCodeGeneratorAsync()
         {
-            await _projectBuilder.Build();
+            await _projectBuilder.Build(TestHelper.GetColunmsList());
             return Json(new LayuiResultDto("生成成功！"));
         }
 

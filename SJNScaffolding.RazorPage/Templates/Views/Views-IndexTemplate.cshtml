@@ -8,20 +8,20 @@
 @{
     if (Model.WebUploadList.Count>0)
     {
-        <link href="~/bower_components/webuploader/dist/webuploader.css"/>
+        <link href="~/bower_components/webuploader/webuploader.css"/>
     }
 }
 @("}")
 @("@section scripts{")
-@Html.Raw("         @Html.IncludeScript(\"~/Areas/Plat/Views/" + Model.TableName + "/Index.js\")")
+@Html.Raw("         @Html.IncludeScript(\"/Areas/Plat/Views/" + Model.TableName + "/Index.js\")")
 @{
     if (Model.WebUploadList.Count > 0)
     {
-        <script src="~/bower_components/webuploader/dist/webuploader.min.js"></script>
+        <script src="~/bower_components/webuploader/webuploader.min.js"></script>
     }
     if (Model.WebUploadList.Any())
     {
-        <script src="~/bower_components/webuploader/dist/webuploader.extend.js"></script>
+        <script src="~/bower_components/staticfile/libs/abp.webuploader.js"></script>
     }
 }
 @("}")

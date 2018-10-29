@@ -20,10 +20,10 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto
 {
     public class @(Model.TableName)SearchDto : PageDto
     {
-        @if(Model.TypeColumnNames!=null)
+        @if(Model.SearchColumnNames != null)
         {
-                foreach (var item in Model.TypeColumnNames)
-                {
+            foreach (var item in Model.SearchColumnNames)
+            {
 @("     ///" )<summary>
 @Html.Raw("     ///" + item.Comments) 
 @("     ///" )</summary>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using SJNScaffolding.Db;
 
 namespace SJNScaffolding.RazorPage.Models
 {
@@ -13,6 +14,11 @@ namespace SJNScaffolding.RazorPage.Models
         public IActionResult Json(object o)
         {
             return Content(JsonConvert.SerializeObject(o));
+        }
+
+        public IActionResult Success(string msg)
+        {
+            return Json(new LayuiResultDto(msg));
         }
     }
 }

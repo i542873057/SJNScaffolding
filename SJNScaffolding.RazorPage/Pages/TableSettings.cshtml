@@ -236,50 +236,32 @@
                             maxlength: "100",
                             "class": "form-control"
                         }
-                    }, {
-                        header: "主键",
-                        name: "IsPk",
-                        width: 40,
-                        align: "center",
-                        editable: true,
-                        edittype: "checkbox",
-                        editoptions: {
-                            "class": "form-control",
-                            value: "1",
-                            dataInit: function (a) {
-                                $(a).iCheck().on("change",
-                                    function () {
-                                        try {
-                                            $(this).valid()
-                                        } catch (b) {
-                                        }
-                                    })
-                            }
-                        }
-                    }, {
-                        header: "插入",
-                        name: "IsInsert",
-                        width: 40,
-                        align: "center",
-                        editable: true,
-                        edittype: "checkbox",
-                        editoptions: {
-                            "class": "form-control",
-                            value: "1",
-                            dataInit: function (a) {
-                                $(a).iCheck().on("change",
-                                    function () {
-                                        try {
-                                            $(this).valid()
-                                        } catch (b) {
-                                        }
-                                    })
-                            }
-                        }
-                    }, {
-                        header: "更新",
+                    },
+                    //{
+                    //    header: "主键",
+                    //    name: "IsPk",
+                    //    width: 40,
+                    //    align: "center",
+                    //    editable: true,
+                    //    edittype: "checkbox",
+                    //    editoptions: {
+                    //        "class": "form-control",
+                    //        value: "1",
+                    //        dataInit: function (a) {
+                    //            $(a).iCheck().on("change",
+                    //                function () {
+                    //                    try {
+                    //                        $(this).valid()
+                    //                    } catch (b) {
+                    //                    }
+                    //                })
+                    //        }
+                    //    }
+                    //} , 
+                   {
+                       header: "插入/更新",
                         name: "IsEdit",
-                        width: 40,
+                        width: 90,
                         align: "center",
                         editable: true,
                         edittype: "checkbox",
@@ -336,29 +318,31 @@
                                     })
                             }
                         }
-                    }, {
-                        header: "匹配方式",
-                        name: "queryType",
-                        width: 100,
-                        editable: true,
-                        edittype: "select",
-                        editoptions: {
-                            "class": "form-control required",
-                            "data-msg-required": "请选择匹配方式",
-                            items: (config.queryTypeList),
-                            itemLabel: "label",
-                            itemValue: "value",
-                            dataInit: function (a) {
-                                $(a).select2().on("change",
-                                    function () {
-                                        try {
-                                            $(this).valid()
-                                        } catch (b) {
-                                        }
-                                    })
-                            }
-                        }
-                    }, {
+                    },
+                    //{
+                    //    header: "匹配方式",
+                    //    name: "queryType",
+                    //    width: 100,
+                    //    editable: true,
+                    //    edittype: "select",
+                    //    editoptions: {
+                    //        "class": "form-control required",
+                    //        "data-msg-required": "请选择匹配方式",
+                    //        items: (config.queryTypeList),
+                    //        itemLabel: "label",
+                    //        itemValue: "value",
+                    //        dataInit: function (a) {
+                    //            $(a).select2().on("change",
+                    //                function () {
+                    //                    try {
+                    //                        $(this).valid()
+                    //                    } catch (b) {
+                    //                    }
+                    //                })
+                    //        }
+                    //    }
+                    //},
+                    {
                         header: "必填",
                         name: "IsRequired",
                         width: 40,
@@ -414,7 +398,7 @@
                                 $(a).select2().on("change",
                                     function () {
                                         try {
-                                            $(this).valid()
+                                            $(this).valid();
                                         } catch (b) {
                                         }
                                     })
@@ -434,12 +418,12 @@
                             itemValue: "value",
                             dataInit: function (a) {
                                 $(a).select2().on("change",
-                                    function () {
+                                    function() {
                                         try {
-                                            $(this).valid()
+                                            $(this).valid();
                                         } catch (b) {
                                         }
-                                    })
+                                    });
                             }
                         }
                     }
@@ -448,7 +432,7 @@
                     twoLevel: [
                         {
                             startColumnName: "id",
-                            numberOfColumns: 13,
+                            numberOfColumns: 12,
                             titleText: "字段"
                         }, {
                             startColumnName: "IsList",
@@ -471,7 +455,7 @@
                 },
                 editGridInputFormListName: "columnList",
                 editGridInputFormListAttrs:
-                    "id,status,ColumnName,Comments,ColumnType,AttrType,IsPk,IsRequired,IsInsert,ColumnSort,IsList,IsQuery,queryType,IsEdit,ShowType",
+                    "id,status,ColumnName,Comments,ColumnType,AttrType,IsPk,IsRequired,ColumnSort,IsList,IsQuery,queryType,IsEdit,ShowType",
                 ajaxSuccess: function (a) {
                     $("#dataGrid_columnSort").attr("colspan", "2").next().hide()
                 }
@@ -523,7 +507,7 @@
                     var $this = $(this);
                     var name = $this.attr('name');
                     var type = $this.attr('type');
-                    if (name == undefined) return;
+                    if (name == undefined||name.indexOf('!')==1) return;
 
                     var val = "";
                     if (type == 'checkbox') {
@@ -559,7 +543,8 @@
                     jsonArray.push(newObj)
                 }
 
-               
+            var index = layer.load();
+
 
                 $.ajax({
                     url: '/TableSettings?handler=FormGenerCode',
@@ -571,12 +556,15 @@
                     dataType: 'json',
                     success: function (d) {
                         if (d.code == 0) {
-                            layer.msg(data.msg);
+                            layer.msg(d.msg);
                         } else {
                             layer.msg('error');
                         }
                     }
-                });
+                }).always(function () {
+                    layer.close(index);
+
+                });;
                 return false;
             });
 

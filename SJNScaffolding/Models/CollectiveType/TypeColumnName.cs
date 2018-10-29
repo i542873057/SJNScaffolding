@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,18 +7,19 @@ namespace SJNScaffolding.Models.CollectiveType
 {
     public class TypeColumnName
     {
-        public string FieldValid { get; set; }
-        public string IsPk { get; set; }
+        public List<string> FieldValid { get; set; }
+        //public string IsPk { get; set; }
 
         /// <summary>
         /// 字段类型 varchar
         /// </summary>
         public string ColumnType { get; set; }
+
         public int ColumnSort { get; set; }
         public string IsQuery { get; set; } = "0";
         public string IsList { get; set; } = "1";
         public string IsEdit { get; set; } = "1";
-        public string IsInsert { get; set; } = "1";
+
         /// <summary>
         /// 属性的类型(string,int)
         /// </summary>
@@ -27,6 +29,7 @@ namespace SJNScaffolding.Models.CollectiveType
         /// 属性名 即字段名
         /// </summary>
         public string ColumnName { get; set; }
+
         /// <summary>
         /// 属性的备注
         /// </summary>
@@ -35,22 +38,22 @@ namespace SJNScaffolding.Models.CollectiveType
         /// <summary>
         /// 编辑界面样式"easyui-numberbox"
         /// </summary>
-        public string ShowType{get;set;}
+        public string ShowType { get; set; }
 
         public bool IsCombobox { get; set; } = false;
 
         /// <summary>
         /// 是否跨三列
         /// </summary>
-        private bool _isColspan3;
+        private string _isColspan3;
 
-        public bool IsColspan3
+        public string IsColspan3
         {
             get
             {
                 if (WebuploadColunm != null && WebuploadColunm.IsWebUpload)
                 {
-                    return true;
+                    return "1";
                 }
 
                 return _isColspan3;
@@ -62,6 +65,7 @@ namespace SJNScaffolding.Models.CollectiveType
         /// varchar nvarchar 长度
         /// </summary>
         public int DataLength { get; set; } = 0;
+
         /// <summary>
         /// 是否是必填
         /// </summary>
@@ -69,7 +73,7 @@ namespace SJNScaffolding.Models.CollectiveType
 
         public TypeColumnName()
         {
-            IsColspan3 = false;
+            IsColspan3 = "0";
         }
 
         public WebUploadColunm WebuploadColunm
@@ -91,7 +95,15 @@ namespace SJNScaffolding.Models.CollectiveType
             }
         }
 
-        public object DataOptions { get; set; }
+        public class FormOptions
+        {
+            public bool required { get; set; }
+        }
+
+        public string DataOptions => JsonConvert.SerializeObject(new FormOptions
+        {
+            required = IsRequired == "1" ? true : false
+        });
         /// <summary>
         /// 属性名变成小驼峰
         /// </summary>
@@ -196,13 +208,13 @@ namespace SJNScaffolding.Models.CollectiveType
                     case "long":
                     case "long?":
                     case "decimal":
-                    case "decimal?": column.ShowType = FormControl.Numberbox;break;
+                    case "decimal?": column.ShowType = FormControl.Numberbox; break;
                     case "DateTime":
                     case "DateTime?": column.ShowType = FormControl.Datebox; break;
                     case "bool":
                     case "bool?": column.ShowType = FormControl.Switchbutton; break;
                     case "string": column.ShowType = FormControl.Textbox; break;
-                    default:break;
+                    default: break;
                 }
 
                 typeColumnNames.Add(column);

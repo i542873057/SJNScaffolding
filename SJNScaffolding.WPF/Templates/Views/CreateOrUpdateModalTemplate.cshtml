@@ -25,7 +25,7 @@
             {
                TypeColumnName item = Model.TypeColumnNames[i];
                 string styles = "style=\'width:560px\'";
-                if (item.IsColspan3||item.WebuploadColunm.IsWebUpload)
+                if (item.IsColspan3=="1"||item.WebuploadColunm.IsWebUpload)
                 {
                 <tr>
                     <td class="kv-label">@if (item.IsRequired){@RazorHelper.RawHtml(@"<span class='font-red'>*</span>")}@item.Comments</td>

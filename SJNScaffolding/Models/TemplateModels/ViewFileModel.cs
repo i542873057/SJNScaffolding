@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SJNScaffolding.Models.CollectiveType;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SJNScaffolding.Models.TemplateModels
 {
@@ -83,7 +83,7 @@ namespace SJNScaffolding.Models.TemplateModels
                     {
                         comboboxPart.Add(new
                         {
-                            ClassName = r.ShowType.Replace("easyui-",""),
+                            ClassName = r.ShowType.Replace("easyui-", ""),
                             r.ColumnName
                         });
                     }
@@ -117,10 +117,32 @@ namespace SJNScaffolding.Models.TemplateModels
             }
         }
 
-        
+
         /// <summary>
         /// 查询条件
         /// </summary>
-        public List<TypeColumnName> SearchColumnNames { get; set; }
+        public List<TypeColumnName> SearchColumnNames
+        {
+            get
+            {
+                return TypeColumnNames.Where(r => r.IsQuery == "1").ToList();
+            }
+        }
+
+        public List<TypeColumnName> ListColumnNames
+        {
+            get
+            {
+                return TypeColumnNames.Where(r => r.IsList == "1").ToList();
+            }
+        }
+
+        public List<TypeColumnName> IsAddOrEditColumnNames
+        {
+            get
+            {
+                return TypeColumnNames.Where(r => r.IsEdit == "1").ToList();
+            }
+        }
     }
 }

@@ -1,12 +1,12 @@
-﻿{
+{
   "Project": {
     "EmailAddress": "igeekfan@foxmail.com",
     "Author": "IGeekFan",
-    "OutputPath": "E://svn/XwFinanciaWarning",
+    "OutputPath": "E://SS/XwFinanciaWarning",
     "Version": "1.1.1",
     "TableName": "Info",
     "ProjectName": "XwFinanciaWarning",
-    "IdType": "Guid",
+    "IdType": "Long",
     "BuildTasks": {
       "ProjectNames": [
         "{{ProjectName}}.Application",

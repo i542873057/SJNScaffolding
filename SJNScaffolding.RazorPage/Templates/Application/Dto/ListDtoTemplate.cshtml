@@ -22,9 +22,9 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto
     [AutoMapFrom(typeof(@(Model.TableName)))]
     public class @(Model.TableName)ListDto : EntityDto<@(Model.IdType)>
     {
-        @if(Model.TypeColumnNames!=null)
+        @if(Model.ListColumnNames != null)
         {
-        foreach (var item in Model.TypeColumnNames)
+            foreach (var item in Model.ListColumnNames)
             {
 @("     ///" )<summary>
 @Html.Raw("     ///" + item.Comments) 

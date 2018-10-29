@@ -13,7 +13,7 @@
         public const string Datetimebox = "easyui-datetimebox";
         public const string Calendar = "easyui-calendar";
         public const string Switchbutton = "easyui-switchbutton";
-        public const string Hidden = "hidden";
+        public const string Hidden = "Hidden";
         public const string WebUploaderFile = "WebUploaderFile";
         public const string WebUploaderImg = "WebUploaderImg";
     }

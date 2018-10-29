@@ -41,7 +41,31 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s
 
         protected override IQueryable<@(Model.TableName)> CreateFilteredQuery(@(Model.TableName)SearchDto input)
         {
-            return base.CreateFilteredQuery(input);
+         @if(Model.SearchColumnNames!=null)
+         {
+             string tempRaw="base.CreateFilteredQuery(input)";
+             foreach(var item in Model.SearchColumnNames)
+             {
+                 switch (item.AttrType)
+                 {
+                    case "string":
+                        tempRaw+=$"\r\n             .WhereIf(input.{item.ColumnName}.IsNotNullOrWhiteSpace(),u=>u.{item.ColumnName}.Contains(input.{item.ColumnName}))";
+                        break;
+                     case "int":
+                         tempRaw+=$"\r\n                .WhereIf(input.{item.ColumnName}!=0,u=>u.{item.ColumnName}=={item.ColumnName})";
+                         break;
+                     case "int?":
+                         tempRaw+=$"\r\n                .WhereIf(input.{item.ColumnName}!=0&&input.{item.ColumnName}!=null,u=>u.{item.ColumnName}=={item.ColumnName})";
+                         break;
+                    default:break;
+                 }
+             }
+             tempRaw += ";\r\n";
+             @Html.Raw("                "+tempRaw);
+         }
+         else{
+            @("return base.CreateFilteredQuery(input);")
+         }
         }
     }
 }

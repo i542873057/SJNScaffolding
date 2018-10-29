@@ -1,6 +1,6 @@
 ﻿
 @{
-    Layout=null;
+    Layout = null;
 }
 @using SJNScaffolding.Models.CollectiveType
 @model SJNScaffolding.Models.TemplateModels.ViewFileModel
@@ -19,58 +19,99 @@ public string CreateInput(TypeColumnName item, string styles)
     }
 }
 }
-
 @("@using Abp.Web.Mvc.Extensions")
 <div class="layui-layer-content">
     <form id="editForm">
         <input id="Id" name="Id" type="hidden" />
         <table class="kv-table">
-            @if(Model.TypeColumnNames!=null)
+            @if (Model.TypeColumnNames != null)
             {
                 for (int i = 0; i < Model.TypeColumnNames.Count; i++)
+                {
+                    TypeColumnName item = Model.TypeColumnNames[i];
+
+                    if (item.ShowType == FormControl.Hidden)
                     {
-                        TypeColumnName item = Model.TypeColumnNames[i];
-                        string styles = "style=\'width:560px\'";
-                        if (item.IsColspan3 || item.WebuploadColunm.IsWebUpload)
-                        {
-                            <tr>
-                                <td class="kv-label">@if (item.IsRequired=="1")
-                                {@Html.Raw(@"<span class='font-red'>*</span>")} @Html.Raw(item.Comments) </td>
-                                <td class="kv-content" colspan="3">
-                                    @if (item.WebuploadColunm.IsWebUpload == true)
-                                    {
-                                        <div id="@(item.ColumnName)" style="position:relative"></div>
-                                    }
-                                    else
-                                    {
-                                        @Html.Raw(CreateInput(item, styles))
-                                    }
-                                </td>
-                            </tr>
-                        }
-                        else
+                        @Html.Raw($"<input id=\"{item.ColumnName}\" name=\"{item.ColumnName}\" type =\"hidden\" />")
+                        continue;
+                    }
+
+                    TypeColumnName item2 = null;
+                    if (i + 1 < Model.TypeColumnNames.Count) { item2 = Model.TypeColumnNames[i + 1]; }
+                    string styles = "style=\'width:560px\'";
+                    if (item.IsColspan3 == "1" || (item2 != null && item2.IsColspan3 == "1"))
+                    {
+                        <tr>
+                            <td class="kv-label">
+                                @if (item.IsRequired == "1")
+                                {
+                                    @Html.Raw(@"<span class='font-red'>*</span>")
+                                }
+                                @Html.Raw(item.Comments)
+                            </td>
+                            <td class="kv-content" colspan="3">
+                                @if (item.WebuploadColunm.IsWebUpload == true)
+                                {
+                                    <div id="@(item.ColumnName)" style="position: relative"></div>
+                                }
+                                else
+                                {
+                                    @Html.Raw(CreateInput(item, styles))
+                                }
+                            </td>
+                        </tr>
+                        if (item2 != null && item2.IsColspan3 == "1")
                         {
                             i++;
                             <tr>
-                                <td class="kv-label">@if (item.IsRequired== "1")
-                                {@Html.Raw(@"<span class='font-red'>*</span>")}@Html.Raw(item.Comments)</td>
-                                <td class="kv-content" @(i < Model.TypeColumnNames.Count ? "" : "colspan=\'3\'")>
-                                    @Html.Raw(CreateInput(item, i < Model.TypeColumnNames.Count ? "" : styles))
+                                <td class="kv-label">
+                                    @if (item2.IsRequired == "1")
+                                    {
+                                        @Html.Raw(@"<span class='font-red'>*</span>")
+                                    }
+                                    @Html.Raw(item2.Comments)
                                 </td>
-                                @if (i < Model.TypeColumnNames.Count)
-                                {
-                                    item = Model.TypeColumnNames[i];
-                                    <td class="kv-label">@if (item.IsRequired== "1")
-                                    {@Html.Raw(@"<span class='font-red'>*</span>")}@Html.Raw(item.Comments)</td>
-                                    <td class="kv-content">
-                                        @Html.Raw(CreateInput(item, ""))
-                                    </td>
-                                }
+                                <td class="kv-content" colspan="3">
+                                    @if (item2.WebuploadColunm.IsWebUpload == true)
+                                    {
+                                        <div id="@(item2.ColumnName)" style="position: relative"></div>
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(CreateInput(item2, styles))
+                                    }
+                                </td>
                             </tr>
                         }
                     }
+                    else
+                    {
+                        i++;
+                        bool isOk = i < Model.TypeColumnNames.Count;
+                        <tr>
+                            <td class="kv-label">
+                                @if (item.IsRequired == "1")
+                                {@Html.Raw(@"<span class='font-red'>*</span>")}@Html.Raw(item.Comments)
+                            </td>
+                            <td class="kv-content" @Html.Raw(isOk ? "" : "colspan=\'3\'")>
+                                @Html.Raw(CreateInput(item, isOk ? "" : styles))
+                            </td>
+                            @if (isOk)
+                            {
+                                item = Model.TypeColumnNames[i];
+                                <td class="kv-label">
+                                    @if (item.IsRequired == "1")
+                                    {@Html.Raw(@"<span class='font-red'>*</span>")}@Html.Raw(item.Comments)
+                                </td>
+                                <td class="kv-content">
+                                    @Html.Raw(CreateInput(item, ""))
+                                </td>
+                            }
+                        </tr>
+                    }
+                }
             }
         </table>
     </form>
 </div>
-@Html.Raw("@Html.IncludeScript('~/Areas/Plat/Views/" + Model.TableName + "/CreateOrUpdateModal.js')")
+@Html.Raw("@Html.IncludeScript('/Areas/Plat/Views/" + Model.TableName + "/CreateOrUpdateModal.js')")

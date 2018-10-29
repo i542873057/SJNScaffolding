@@ -88,8 +88,7 @@ namespace SJNScaffolding.WPF
                         IsRequired = columnsList[i].Contains("*") ? "1" : "0",
                         DataLength = 100,
                         IsCombobox = columnsList[i].Contains("@") ? true : false,
-                        IsColspan3 = columnsList[i].Contains("%") ? true : false,
-                        DataOptions = columnsHtmlList[i]
+                        IsColspan3 = columnsList[i].Contains("%") ? "1" : "0"
                     });
                 }
 
