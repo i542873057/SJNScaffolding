@@ -1,8 +1,7 @@
-﻿using System;
+﻿using SJNScaffolding.Models.CollectiveType;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SJNScaffolding.Helper
 {
@@ -31,5 +30,6 @@ namespace SJNScaffolding.Helper
             {"long?","long?" },
             {"other","" }
         };
+
     }
 }

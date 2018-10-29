@@ -136,10 +136,8 @@ namespace SJNScaffolding.Helper
                     ColumnName = r,
                     AttrType = d.ColumnsTypeList[i],
                     Comments = d.ColumnsNameList[i],
-                    IsRequired = i % 2 == 0 ? true : false,
-                    IsVarchar = true,
-                    DataLength = 50 + i,
-                    WebuploadColunm = webuploadColunm
+                    IsRequired = i % 2 == 0 ? "1" : "0",
+                    DataLength = 50 + i
 
                 });
                 i++;

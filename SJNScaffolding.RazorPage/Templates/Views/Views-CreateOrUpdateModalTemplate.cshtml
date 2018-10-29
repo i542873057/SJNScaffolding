@@ -34,7 +34,7 @@ public string CreateInput(TypeColumnName item, string styles)
                         if (item.IsColspan3 || item.WebuploadColunm.IsWebUpload)
                         {
                             <tr>
-                                <td class="kv-label">@if (item.IsRequired)
+                                <td class="kv-label">@if (item.IsRequired=="1")
                                 {@Html.Raw(@"<span class='font-red'>*</span>")} @Html.Raw(item.Comments) </td>
                                 <td class="kv-content" colspan="3">
                                     @if (item.WebuploadColunm.IsWebUpload == true)
@@ -52,7 +52,7 @@ public string CreateInput(TypeColumnName item, string styles)
                         {
                             i++;
                             <tr>
-                                <td class="kv-label">@if (item.IsRequired)
+                                <td class="kv-label">@if (item.IsRequired== "1")
                                 {@Html.Raw(@"<span class='font-red'>*</span>")}@Html.Raw(item.Comments)</td>
                                 <td class="kv-content" @(i < Model.TypeColumnNames.Count ? "" : "colspan=\'3\'")>
                                     @Html.Raw(CreateInput(item, i < Model.TypeColumnNames.Count ? "" : styles))
@@ -60,7 +60,7 @@ public string CreateInput(TypeColumnName item, string styles)
                                 @if (i < Model.TypeColumnNames.Count)
                                 {
                                     item = Model.TypeColumnNames[i];
-                                    <td class="kv-label">@if (item.IsRequired)
+                                    <td class="kv-label">@if (item.IsRequired== "1")
                                     {@Html.Raw(@"<span class='font-red'>*</span>")}@Html.Raw(item.Comments)</td>
                                     <td class="kv-content">
                                         @Html.Raw(CreateInput(item, ""))

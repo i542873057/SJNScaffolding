@@ -30,13 +30,13 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto
 @("     ///" )<summary>
 @Html.Raw("     ///" + item.Comments) 
 @("     ///" )</summary>
-    if(item.IsRequired)
+    if(item.IsRequired=="1")
     {
 @Html.Raw("      [Required(ErrorMessage=\""+item.Comments+"为必填项\")] \r\n")
     }
-    if(item.IsVarchar)
+    if(item.DataLength>0)
     {
-@Html.Raw("      [StringLength(" + item.StringLength+ ",ErrorMessage=\""+item.Comments+"的长度应在"+item.StringLength+"字符以内\")] \r\n")
+@Html.Raw("      [StringLength(" + item.DataLength + ",ErrorMessage=\""+item.Comments+"的长度应在"+item.DataLength+"字符以内\")] \r\n")
     }
 @Html.Raw("     public " + item.AttrType + " " + item.ColumnName + "{get;set;} \r\n")
                 }

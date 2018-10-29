@@ -18,435 +18,616 @@
 
     <script src="http://demo.jeesite.com/js/static/common/jeesite.js?V4.1-10251034"></script>
     <script>
-        var columnList = [
-            {
-                //控件类型
-                "ShowType": "Hidden",
-                "columnName": "Id",
-                //列说明
-                "comments": "主键",
-                "attrType": "Long",
-                "fieldValid": "",
-                //是否是主键
-                "isPk": "1",
-                //字段类型
-                "columnType": "int",
-                "columnSort": 10,
-                //数据长度
-                "dataLength": "30",
-                "isRequired": "1",
-                "isQuery": "1",
-                "isList": "1",
-                "isUpdate": "1",
-                "isEdit": "1",
-                "isInsert": "1",
-                "isColspan3": "1"
+        //var columnList = [
+        //        {
+        //            //控件类型
+        //            "ShowType": "Hidden",
+        //            "ColumnName": "Id",
+        //            //列说明
+        //            "Comments": "主键",
+        //            "AttrType": "Long",
+        //            "FieldValid": "",
+        //            //是否是主键
+        //            "IsPk": "1",
+        //            //字段类型
+        //            "ColumnType": "int",
+        //            "ColumnSort": 10,
+        //            //数据长度
+        //            "DataLength": "30",
+        //            "IsRequired": "1",
+        //            "IsQuery": "1",
+        //            "IsList": "1",
+        //            "IsEdit": "1",
+        //            "IsInsert": "1",
+        //            "IsColspan3": "1"
+        //        }
+        //    ];
+        var config = {
+            attrTypeList: [
+                { "label": "string", "value": "string" }, { "label": "long", "value": "long" },
+                { "label": "long?", "value": "long?" },
+                { "label": "int", "value": "int" }, { "label": "int?", "value": "int?" },
+                { "label": "DateTime", "value": "DateTime" },
+                { "label": "DateTime?", "value": "DateTime?" },
+                { "label": "decimal", "value": "decimal" },
+                { "label": "decimal?", "value": "decimal?" },
+                { "label": "bool", "value": "bool" },
+                { "label": "bool?", "value": "bool?" },
+                { "label": "Guid", "value": "Guid" },
+                { "label": "Guid?", "value": "Guid?" }
+            ],
+            queryTypeList: [
+                { "label": "=", "value": "EQ" }, { "label": "!=", "value": "NE" }, { "label": ">", "value": "GT" },
+                { "label": ">=", "value": "GTE" }, { "label": "<", "value": "LT" },
+                { "label": "<=", "value": "LTE" }, { "label": "Between", "value": "BETWEEN" },
+                { "label": "Like", "value": "LIKE" }
+            ],
+            showTypeList: [
+                { "label": "文本框Textbox", "value": "easyui-textbox" },
+                { "label": "验证框Validatebox", "value": "easyui-validatebox" },
+                { "label": "隐藏文本", "value": "Hidden" },
+                { "label": "密码框Passwordbox", "value": "easyui-Passwordbox" },
+                { "label": "自定义下拉框Combo", "value": "easyui-combo" },
+                { "label": "下拉列表框Combobox", "value": "easyui-combobox" },
+                { "label": "树形下拉框Combotree", "value": "easyui-combotree" },
+                { "label": "数值输入框Numberbox", "value": "easyui-numberbox" },
+                { "label": "日期输入框Datebox", "value": "easyui-datebox" },
+                { "label": "日期时间输入框Datetimebox", "value": "easyui-datetimebox" },
+                { "label": "日历Calendar", "value": "easyui-calendar" },
+                { "label": "开关按钮Switchbutton", "value": "easyui-switchbutton" },
+                { "label": "图片上传", "value": "WebUploaderImg" }, { "label": "文件上传", "value": "WebUploaderFile" }
+            ],
+            fieldValidList: [
+                { "label": "电子邮件", "value": "email" }, { "label": "网址", "value": "url" },
+                { "label": "length[0,50]", "value": "length[0,50]" }
+            ]
+        },
+
+            lang = 'zh_CN',
+            ctx = '/js/a',
+            ctxPath = '/js',
+            ctxAdmin = '/js/a',
+            ctxFront = '/js/f',
+            ctxStatic = '/js/static',
+            Global = {
+                OP_EDIT: 'edit',
+                FALSE: 'false',
+                OP_AUTH: 'auth',
+                OP_ADD: 'add',
+                USERFILES_BASE_URL: '/userfiles/',
+                NO: '0',
+                YES: '1',
+                SHOW: '1',
+                HIDE: '0',
+                TRUE: 'true',
+                STATUS_NORMAL: '0',
+                STATUS_DRAFT: '9',
+                STATUS_AUDIT_BACK: '5',
+                STATUS_DISABLE: '2',
+                STATUS_AUDIT: '4',
+                STATUS_FREEZE: '3',
+                STATUS_DELETE: '1'
             }
-        ],
-            config = {
-                attrTypeList: [
-                    { "label": "string", "value": "string" }, { "label": "long", "value": "long" },
-                    { "label": "long?", "value": "long?" },
-                    { "label": "int", "value": "int" }, { "label": "int?", "value": "int?" },
-                    { "label": "DateTime", "value": "DateTime" },
-                    { "label": "DateTime?", "value": "DateTime?" },
-                    { "label": "decimal", "value": "decimal" },
-                    { "label": "decimal?", "value": "decimal?" },
-                    { "label": "bool", "value": "bool" },
-                    { "label": "bool?", "value": "bool?" }
-                ],
-                queryTypeList: [
-                    { "label": "=", "value": "EQ" }, { "label": "!=", "value": "NE" }, { "label": ">", "value": "GT" },
-                    { "label": ">=", "value": "GTE" }, { "label": "<", "value": "LT" },
-                    { "label": "<=", "value": "LTE" }, { "label": "Between", "value": "BETWEEN" },
-                    { "label": "Like", "value": "LIKE" }
-                ],
-                showTypeList: [
-                    { "label": "文本框Textbox", "value": "Textbox" },
-                    { "label": "验证框Validatebox", "value": "Validatebox" }, { "label": "隐藏文本", "value": "Hidden" },
-                    { "label": "密码框Passwordbox", "value": "Passwordbox" }, { "label": "自定义下拉框Combo", "value": "Combo" },
-                    { "label": "下拉列表框Combobox", "value": "Combobox" },
-                    { "label": "树形下拉框Combotree", "value": "Combotree" },
-                    { "label": "数值输入框Numberbox", "value": "Numberbox" },
-                    { "label": "日期输入框Datebox", "value": "Datebox" },
-                    { "label": "日期时间输入框Datetimebox", "value": "Datetimebox" },
-                    { "label": "日历Calendar", "value": "Calendar" },
-                    { "label": "开关按钮Switchbutton", "value": "Switchbutton" },
-                    { "label": "图片上传", "value": "WebUploaderImg" }, { "label": "文件上传", "value": "WebUploaderFile" }
-                ],
-                fieldValidList: [
-                    { "label": "电子邮件", "value": "email" }, { "label": "网址", "value": "url" },
-                    { "label": "length[0,50]", "value": "length[0,50]" }
-                ]
-            },
-
-            lang = 'zh_CN', ctx = '/js/a', ctxPath = '/js', ctxAdmin = '/js/a', ctxFront = '/js/f', ctxStatic = '/js/static', Global = { OP_EDIT: 'edit', FALSE: 'false', OP_AUTH: 'auth', OP_ADD: 'add', USERFILES_BASE_URL: '/userfiles/', NO: '0', YES: '1', SHOW: '1', HIDE: '0', TRUE: 'true', STATUS_NORMAL: '0', STATUS_DRAFT: '9', STATUS_AUDIT_BACK: '5', STATUS_DISABLE: '2', STATUS_AUDIT: '4', STATUS_FREEZE: '3', STATUS_DELETE: '1' }
 
 
-        $("#dataGrid").dataGrid({
-            data: columnList,
-            datatype: "local",
-            rowNum: 3000,
-            sortableColumn: false,
-            dataId: "aa",
-            autoGridHeight: function () {
-                return $(window).height();
-            },
-            autoGridWidth: function () {
-                return $(".main-content").width() - 25;
-            },
-            columnModel: [{
-                header: "编码",
-                name: "id",
-                frozen: true,
-                hidden: true,
-                editable: true
-            }, {
-                header: "状态",
-                name: "status",
-                frozen: true,
-                hidden: true,
-                editable: true
-            }, {
-                header: "列名",
-                name: "columnSort",
-                width: 30,
-                frozen: true,
-                align: "center",
-                editable: true,
-                edittype: "text",
-                editoptions: {
-                    maxlength: "8",
-                    "class": "form-control required digits hide columnSort",
-                    dataInit: function (a) {
-                        if ($(a).val() == "") {
-                            $(a).val($(a).closest("table").find("tr").length * 10)
-                        }
-                        $(a).parent().append('<i class="fa fa-arrows" style="color:#aaa;cursor:move"></i>')
-                    }
+        function loadGrid(columnList) {
+
+            $('#dataGrid').jqGrid('GridDestroy');
+            $('#gbox_dataGrid').remove();
+
+            $('#dg #table-Form').append('<table id="dataGrid"></table>');
+
+            $("#dataGrid").dataGrid({
+                data: columnList,
+                datatype: "local",
+                rowNum: 3000,
+                sortableColumn: false,
+                dataId: "aa",
+                autoGridHeight: function () {
+                    return $(window).height();
                 },
-                classes: "columnSort"
-            }, {
-                header: "列名",
-                name: "columnName",
-                width: 110,
-                frozen: true,
-                formatter: function (d, b, c, a) {
-                    if (c.status == Global.STATUS_DELETE) {
-                        return '<span title="已被删除的列，保存后下次将不可见" style="color:red">' + c.columnName + ' <i class="fa icon-question"></i></span>'
+                autoGridWidth: function () {
+                    return $(".main-content").width() - 25;
+                },
+                columnModel: [
+                    {
+                        header: "编码",
+                        name: "id",
+                        frozen: true,
+                        hidden: true,
+                        editable: true
+                    }, {
+                        header: "状态",
+                        name: "status",
+                        frozen: true,
+                        hidden: true,
+                        editable: true
+                    }, {
+                        header: "拖动",
+                        name: "ColumnSort",
+                        width: 40,
+                        frozen: true,
+                        align: "center",
+                        editable: true,
+                        edittype: "text",
+                        editoptions: {
+                            maxlength: "8",
+                            "class": "form-control required digits hide ColumnSort",
+                            dataInit: function (a) {
+                                if ($(a).val() == "") {
+                                    $(a).val($(a).closest("table").find("tr").length * 10)
+                                }
+                                $(a).parent().append('<i class="fa fa-arrows" style="color:#aaa;cursor:move"></i>')
+                            }
+                        },
+                        classes: "ColumnSort"
+                    }, {
+                        header: "列名",
+                        name: "ColumnName",
+                        width: 110,
+                        frozen: true,
+                        formatter: function (d, b, c, a) {
+                            if (c.status == Global.STATUS_DELETE) {
+                                return '<span title="已被删除的列，保存后下次将不可见" style="color:red">' +
+                                    c.ColumnName +
+                                    ' <i class="fa icon-question"></i></span>'
+                            }
+                            return c.ColumnName
+                        }
+                    }, {
+                        header: "列名",
+                        name: "ColumnName",
+                        frozen: true,
+                        hidden: true,
+                        editable: true
+                    }, {
+                        header: "列说明",
+                        name: "Comments",
+                        width: 150,
+                        frozen: true,
+                        editable: true,
+                        edittype: "text",
+                        editoptions: {
+                            maxlength: "100",
+                            "class": "form-control required"
+                        }
+                    }, {
+                        header: "字段类型",
+                        name: "ColumnType",
+                        hidden: true,
+                        editable: true
+                    }, {
+                        header: "字段类型",
+                        name: "ColumnType",
+                        width: 110,
+                        formatter: function (d, b, c, a) {
+                            return c.ColumnType
+                        }
+                    }, {
+                        header: "属性类型",
+                        name: "AttrType",
+                        width: 120,
+                        editable: true,
+                        edittype: "select",
+                        editoptions: {
+                            "class": "form-control required",
+                            "data-msg-required": "请选择属性类型",
+                            items: (config.attrTypeList),
+                            itemLabel: "label",
+                            itemValue: "value",
+                            dataInit: function (a) {
+                                $(a).select2().on("change",
+                                    function () {
+                                        try {
+                                            $(this).valid()
+                                        } catch (b) {
+                                        }
+                                    })
+                            }
+                        }
+                    }, {
+                        header: "长度(无限制请输0)",
+                        name: "DataLength",
+                        width: 150,
+                        frozen: true,
+                        editable: true,
+                        edittype: "text",
+                        editoptions: {
+                            maxlength: "100",
+                            "class": "form-control"
+                        }
+                    }, {
+                        header: "主键",
+                        name: "IsPk",
+                        width: 40,
+                        align: "center",
+                        editable: true,
+                        edittype: "checkbox",
+                        editoptions: {
+                            "class": "form-control",
+                            value: "1",
+                            dataInit: function (a) {
+                                $(a).iCheck().on("change",
+                                    function () {
+                                        try {
+                                            $(this).valid()
+                                        } catch (b) {
+                                        }
+                                    })
+                            }
+                        }
+                    }, {
+                        header: "插入",
+                        name: "IsInsert",
+                        width: 40,
+                        align: "center",
+                        editable: true,
+                        edittype: "checkbox",
+                        editoptions: {
+                            "class": "form-control",
+                            value: "1",
+                            dataInit: function (a) {
+                                $(a).iCheck().on("change",
+                                    function () {
+                                        try {
+                                            $(this).valid()
+                                        } catch (b) {
+                                        }
+                                    })
+                            }
+                        }
+                    }, {
+                        header: "更新",
+                        name: "IsEdit",
+                        width: 40,
+                        align: "center",
+                        editable: true,
+                        edittype: "checkbox",
+                        editoptions: {
+                            "class": "form-control",
+                            value: "1",
+                            dataInit: function (a) {
+                                $(a).iCheck().on("change",
+                                    function () {
+                                        try {
+                                            $(this).valid()
+                                        } catch (b) {
+                                        }
+                                    })
+                            }
+                        }
+                    }, {
+                        header: "列表",
+                        name: "IsList",
+                        width: 40,
+                        align: "center",
+                        editable: true,
+                        edittype: "checkbox",
+                        editoptions: {
+                            "class": "form-control",
+                            value: "1",
+                            dataInit: function (a) {
+                                $(a).iCheck().on("change",
+                                    function () {
+                                        try {
+                                            $(this).valid()
+                                        } catch (b) {
+                                        }
+                                    })
+                            }
+                        }
+                    }, {
+                        header: "查询",
+                        name: "IsQuery",
+                        width: 40,
+                        align: "center",
+                        editable: true,
+                        edittype: "checkbox",
+                        editoptions: {
+                            "class": "form-control",
+                            value: "1",
+                            dataInit: function (a) {
+                                $(a).iCheck().on("change",
+                                    function () {
+                                        try {
+                                            $(this).valid()
+                                        } catch (b) {
+                                        }
+                                    })
+                            }
+                        }
+                    }, {
+                        header: "匹配方式",
+                        name: "queryType",
+                        width: 100,
+                        editable: true,
+                        edittype: "select",
+                        editoptions: {
+                            "class": "form-control required",
+                            "data-msg-required": "请选择匹配方式",
+                            items: (config.queryTypeList),
+                            itemLabel: "label",
+                            itemValue: "value",
+                            dataInit: function (a) {
+                                $(a).select2().on("change",
+                                    function () {
+                                        try {
+                                            $(this).valid()
+                                        } catch (b) {
+                                        }
+                                    })
+                            }
+                        }
+                    }, {
+                        header: "必填",
+                        name: "IsRequired",
+                        width: 40,
+                        align: "center",
+                        editable: true,
+                        edittype: "checkbox",
+                        editoptions: {
+                            "class": "form-control",
+                            value: "1",
+                            dataInit: function (a) {
+                                $(a).iCheck().on("change",
+                                    function () {
+                                        try {
+                                            $(this).valid()
+                                        } catch (b) {
+                                        }
+                                    })
+                            }
+                        }
+                    }, {
+                        header: "是否跨三列",
+                        name: "IsColspan3",
+                        width: 80,
+                        align: "center",
+                        editable: true,
+                        edittype: "checkbox",
+                        editoptions: {
+                            "class": "form-control",
+                            value: "1",
+                            dataInit: function (a) {
+                                $(a).iCheck().on("change",
+                                    function () {
+                                        try {
+                                            $(this).valid()
+                                        } catch (b) {
+                                        }
+                                    })
+                            }
+                        }
+                    }, {
+                        header: "控件类型",
+                        name: "ShowType",
+                        width: 200,
+                        editable: true,
+                        edittype: "select",
+                        editoptions: {
+                            "class": "form-control required",
+                            "data-msg-required": "请选择控件类型",
+                            items: (config.showTypeList),
+                            itemLabel: "label",
+                            itemValue: "value",
+                            dataInit: function (a) {
+                                $(a).select2().on("change",
+                                    function () {
+                                        try {
+                                            $(this).valid()
+                                        } catch (b) {
+                                        }
+                                    })
+                            }
+                        }
+                    }, {
+                        header: "字段验证",
+                        name: "FieldValid",
+                        width: 170,
+                        editable: true,
+                        edittype: "select",
+                        editoptions: {
+                            "class": "form-control",
+                            multiple: true,
+                            items: (config.fieldValidList),
+                            itemLabel: "label",
+                            itemValue: "value",
+                            dataInit: function (a) {
+                                $(a).select2().on("change",
+                                    function () {
+                                        try {
+                                            $(this).valid()
+                                        } catch (b) {
+                                        }
+                                    })
+                            }
+                        }
                     }
-                    return c.columnName
-                }
-            }, {
-                header: "列名",
-                name: "columnName",
-                frozen: true,
-                hidden: true,
-                editable: true
-            }, {
-                header: "列说明",
-                name: "comments",
-                width: 110,
-                frozen: true,
-                editable: true,
-                edittype: "text",
-                editoptions: {
-                    maxlength: "100",
-                    "class": "form-control required"
-                }
-            }, {
-                header: "字段类型",
-                name: "columnType",
-                hidden: true,
-                editable: true
-            }, {
-                header: "字段类型",
-                name: "columnType",
-                width: 110,
-                formatter: function (d, b, c, a) {
-                    return c.columnType
-                }
-            }, {
-                header: "属性类型",
-                name: "attrType",
-                width: 120,
-                editable: true,
-                edittype: "select",
-                editoptions: {
-                    "class": "form-control required",
-                    "data-msg-required": "请选择属性类型",
-                    items: (config.attrTypeList),
-                    itemLabel: "label",
-                    itemValue: "value",
-                    dataInit: function (a) {
-                        $(a).select2().on("change", function () {
-                            try {
-                                $(this).valid()
-                            } catch (b) { }
-                        })
-                    }
-                }
-            }, {
-                header: "主键",
-                name: "isPk",
-                width: 40,
-                align: "center",
-                editable: true,
-                edittype: "checkbox",
-                editoptions: {
-                    "class": "form-control",
-                    value: "1",
-                    dataInit: function (a) {
-                        $(a).iCheck().on("change", function () {
-                            try {
-                                $(this).valid()
-                            } catch (b) { }
-                        })
-                    }
-                }
-            }, {
-                header: "插入",
-                name: "isInsert",
-                width: 40,
-                align: "center",
-                editable: true,
-                edittype: "checkbox",
-                editoptions: {
-                    "class": "form-control",
-                    value: "1",
-                    dataInit: function (a) {
-                        $(a).iCheck().on("change", function () {
-                            try {
-                                $(this).valid()
-                            } catch (b) { }
-                        })
-                    }
-                }
-            }, {
-                header: "更新",
-                name: "isUpdate",
-                width: 40,
-                align: "center",
-                editable: true,
-                edittype: "checkbox",
-                editoptions: {
-                    "class": "form-control",
-                    value: "1",
-                    dataInit: function (a) {
-                        $(a).iCheck().on("change", function () {
-                            try {
-                                $(this).valid()
-                            } catch (b) { }
-                        })
-                    }
-                }
-            }, {
-                header: "列表",
-                name: "isList",
-                width: 40,
-                align: "center",
-                editable: true,
-                edittype: "checkbox",
-                editoptions: {
-                    "class": "form-control",
-                    value: "1",
-                    dataInit: function (a) {
-                        $(a).iCheck().on("change", function () {
-                            try {
-                                $(this).valid()
-                            } catch (b) { }
-                        })
-                    }
-                }
-            }, {
-                header: "查询",
-                name: "isQuery",
-                width: 40,
-                align: "center",
-                editable: true,
-                edittype: "checkbox",
-                editoptions: {
-                    "class": "form-control",
-                    value: "1",
-                    dataInit: function (a) {
-                        $(a).iCheck().on("change", function () {
-                            try {
-                                $(this).valid()
-                            } catch (b) { }
-                        })
-                    }
-                }
-            }, {
-                header: "匹配方式",
-                name: "queryType",
-                width: 100,
-                editable: true,
-                edittype: "select",
-                editoptions: {
-                    "class": "form-control required",
-                    "data-msg-required": "请选择匹配方式",
-                    items: (config.queryTypeList),
-                    itemLabel: "label",
-                    itemValue: "value",
-                    dataInit: function (a) {
-                        $(a).select2().on("change", function () {
-                            try {
-                                $(this).valid()
-                            } catch (b) { }
-                        })
-                    }
-                }
-            }, {
-                header: "必填",
-                name: "isRequired",
-                width: 40,
-                align: "center",
-                editable: true,
-                edittype: "checkbox",
-                editoptions: {
-                    "class": "form-control",
-                    value: "1",
-                    dataInit: function (a) {
-                        $(a).iCheck().on("change", function () {
-                            try {
-                                $(this).valid()
-                            } catch (b) { }
-                        })
-                    }
-                }
-            }, {
-                header: "是否跨三列",
-                name: "isColspan3",
-                width: 80,
-                align: "center",
-                editable: true,
-                edittype: "checkbox",
-                editoptions: {
-                    "class": "form-control",
-                    value: "1",
-                    dataInit: function (a) {
-                        $(a).iCheck().on("change", function () {
-                            try {
-                                $(this).valid()
-                            } catch (b) { }
-                        })
-                    }
-                }
-            }, {
-                header: "控件类型",
-                name: "ShowType",
-                width: 160,
-                editable: true,
-                edittype: "select",
-                editoptions: {
-                    "class": "form-control required",
-                    "data-msg-required": "请选择控件类型",
-                    items: (config.showTypeList),
-                    itemLabel: "label",
-                    itemValue: "value",
-                    dataInit: function (a) {
-                        $(a).select2().on("change", function () {
-                            try {
-                                $(this).valid()
-                            } catch (b) { }
-                        })
-                    }
-                }
-            }, {
-                header: "字段验证",
-                name: "fieldValid",
-                width: 170,
-                editable: true,
-                edittype: "select",
-                editoptions: {
-                    "class": "form-control",
-                    multiple: true,
-                    items: (config.fieldValidList),
-                    itemLabel: "label",
-                    itemValue: "value",
-                    dataInit: function (a) {
-                        $(a).select2().on("change", function () {
-                            try {
-                                $(this).valid()
-                            } catch (b) { }
-                        })
-                    }
-                }
-            }],
-            groupHeaders: {
-                twoLevel: [{
-                    startColumnName: "id",
-                    numberOfColumns: 12,
-                    titleText: "字段"
-                }, {
-                    startColumnName: "isList",
-                    numberOfColumns: 3,
-                    titleText: "列表"
-                }, {
-                    startColumnName: "isRequired",
-                    numberOfColumns: 4,
-                    titleText: "表单"
-                }]
-            },
-            editGrid: true,
-            editGridInitRowNum: 0,
-            editGridInitAllRowEdit: true,
-            editGridAddRowBtn: $("#dataGridAdd"),
-            editGridAddRowInitData: {
-                id: "",
-                status: Global.STATUS_NORMAL
-            },
-            editGridInputFormListName: "columnList",
-            editGridInputFormListAttrs: "id,status,columnName,comments,columnType,attrType,isPk,isRequired,isInsert,isUpdate,columnSort,isList,isQuery,queryType,isEdit,ShowType",
-            ajaxSuccess: function (a) {
-                $("#dataGrid_columnSort").attr("colspan", "2").next().hide()
-            }
-        });
-        $("#dataGrid").tableDnD({
-            onDragClass: "dragClass",
-            dragHandle: "columnSort",
-            onDrop: function (a, b) {
-                $(a).find("input.columnSort").each(function (c) {
-                    $(this).val((c + 1) * 10)
-                });
-            }
-        });
-
-
-        layui.form.on('submit(importTable)', function (data) {
-
-            layer.msg(data.filed);
-            return false;
-            $.ajax({
-                url: '/Index?handler=SaveSettings',
-                type: 'post',
-                data: data.field,
-                dataType: 'json',
-                success: function (d) {
-                    if (d.code == 0) {
-                        layer.msg(d.msg);
-                    } else {
-                        layer.msg('error');
-                    }
+                ],
+                groupHeaders: {
+                    twoLevel: [
+                        {
+                            startColumnName: "id",
+                            numberOfColumns: 13,
+                            titleText: "字段"
+                        }, {
+                            startColumnName: "IsList",
+                            numberOfColumns: 3,
+                            titleText: "列表"
+                        }, {
+                            startColumnName: "IsRequired",
+                            numberOfColumns: 4,
+                            titleText: "表单"
+                        }
+                    ]
+                },
+                editGrid: true,
+                editGridInitRowNum: 0,
+                editGridInitAllRowEdit: true,
+                editGridAddRowBtn: $("#dataGridAdd"),
+                editGridAddRowInitData: {
+                    id: "",
+                    status: Global.STATUS_NORMAL
+                },
+                editGridInputFormListName: "columnList",
+                editGridInputFormListAttrs:
+                    "id,status,ColumnName,Comments,ColumnType,AttrType,IsPk,IsRequired,IsInsert,ColumnSort,IsList,IsQuery,queryType,IsEdit,ShowType",
+                ajaxSuccess: function (a) {
+                    $("#dataGrid_columnSort").attr("colspan", "2").next().hide()
                 }
             });
-            return false;
-        });
+
+
+            $("#dataGrid").tableDnD({
+                onDragClass: "dragClass",
+                dragHandle: "ColumnSort",
+                onDrop: function (a, b) {
+                    $(a).find("input.ColumnSort").each(function (c) {
+                        $(this).val((c + 1) * 10);
+                    });
+                }
+            });
+        }
+
+        layui.form.on('submit(importTable)',
+            function (data) {
+
+                $.ajax({
+                    url: '/TableSettings?handler=ImportTable',
+                    type: 'post',
+                    data: data.field,
+                    dataType: 'json',
+                    success: function (d) {
+
+                        if (d.code == 0) {
+                            loadGrid(d.data);
+                        } else {
+                            layer.msg('error');
+                        }
+                    }
+                });
+                return false;
+            });
+
+        layui.form.on('submit(demoData)',
+            function (data) {
+                var demo = $('#tempData').val();
+                $('textarea').text(demo)
+                return false;
+            });
+
+        layui.form.on('submit(formGenerCode)',
+            function (data) {
+                var o = {};
+                $('#table-Form').find('input,select,textarea').each(function () {
+                    var $this = $(this);
+                    var name = $this.attr('name');
+                    var type = $this.attr('type');
+                    if (name == undefined) return;
+
+                    var val = "";
+                    if (type == 'checkbox') {
+                        val = $this.parent().hasClass('checked') == true ? "1" : "0";
+                    } else {
+                        val = $this.val() || "";
+                    }
+
+                    if (o[name] != undefined && !o[name].push) {
+                        o[name] = o[name].push(val);
+
+                    } else {
+                       
+                        if (o[name] == undefined) {
+                            o[name] = [val];
+                        } else {
+                            o[name].push(val);
+                        }
+                    }
+                });
+
+                var jsonArray = [];
+              
+                for (var i = 0; i < o.id.length; i++) {
+                    var newObj = {};
+                    $.each(o,
+                        function (j, v) {
+                            if (j != "__RequestVerificationToken") {
+                                newObj[j]=o[j][i];
+                            }
+                        });
+                    
+                    jsonArray.push(newObj)
+                }
+
+               
+
+                $.ajax({
+                    url: '/TableSettings?handler=FormGenerCode',
+                    type: 'post',
+                    data: {
+                        jsonString: JSON.stringify(jsonArray),
+                        __RequestVerificationToken: o.__RequestVerificationToken[0]
+                    },
+                    dataType: 'json',
+                    success: function (d) {
+                        if (d.code == 0) {
+                            layer.msg(data.msg);
+                        } else {
+                            layer.msg('error');
+                        }
+                    }
+                });
+                return false;
+            });
+
     </script>
 
 }
 <form class="layui-form" action="">
     <div class="layui-form-item layui-form-text">
+        @Html.AntiForgeryToken()
         <div class="layui-input-block">
             <textarea placeholder="请输入内容" name="formTable" class="layui-textarea"></textarea>
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="btn btn-default" lay-submit lay-filter="importTable">导入字段</button>
+            <button class="btn btn-default" lay-submit lay-filter="demoData">示例数据</button>
+            <button class="btn btn-danger" lay-submit lay-filter="importTable">导入字段</button>
             <button class="btn btn-primary" lay-submit lay-filter="formGenerCode">生成代码</button>
         </div>
     </div>
-
 </form>
-<table id="dataGrid"></table>
+<div id="dg">
+    <input type="hidden" name="tempData" id="tempData" value="	Id	BigInt	唯一标识符
+	RegNum	varchar(100)	注册号
+	UncNum	varchar(100)	社会统一信用代码
+	EntName	varchar(100)	企业名称
+	EntRegAddr	varchar(200)	注册地址
+	EntActAddr	varchar(200)	实际经营地址
+	LegalName	varchar(50)	法人姓名
+	RegCap	decimal(10,2)	注册资本，单位万元，保留2位小数
+	EntType	int	企业类型（单选，1-有限责任公司；2-个人独资企业；3-合伙企业；4-全民所有制企业；5-集体所有制企业；6-农民专业合作社；7-其它企业）
+	EntScope	varchar(MAX)	经营范围
+	TelephoneNum	varchar(50)	联系电话
+	BankName	varchar(100)	开户银行
+	BankNum	varchar(100)	银行账户
+	StaffInfo	varchar(MAX)	工作人员信息
+	WebInfo	varchar(MAX)	公司网站信息
+	OperState	varchar(MAX)	企业实际经营状况
+	IllegalMeans	varchar(MAX)	主要违法手段
+	InvestCount	int	投资群体人数
+	IllegalSuckNum	decimal(18,2)	非法吸资金额，单位元，保留2位小数
+	Remark	varchar(MAX)	备注
+	IsDeleted	bit	是否已删除（true,false）
+	DeleterUserId	bigint	删除操作用户Id
+	DeletionTime	datetime	删除时间
+	LastModificationTime	datetime	最后修改时间
+	LastModifierUserId	bigint	最后修改操作用户Id
+	CreationTime	datetime	创建时间
+	CreatorUserId	bigint	创建操作用户Id
+" />
+    <form action="" method="post" class="layui-form" id="table-Form">
+        <table id="dataGrid"></table>
+    </form>
+</div>

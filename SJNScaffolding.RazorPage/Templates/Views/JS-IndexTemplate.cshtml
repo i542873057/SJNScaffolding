@@ -87,7 +87,7 @@ _context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限"
                                         {
                                             foreach (var item in Model.TypeColumnNames)
                                             {
-                                                if (item.IsRequired && item.WebuploadColunm.IsWebUpload)
+                                                if (item.IsRequired=="1" && item.WebuploadColunm.IsWebUpload)
                                                 {
 @Html.Raw(@"                                         formData."+item.ColumnName+"=$(\'#"+item.ColumnName+ "\').GetFilesAddress();\r\n");
 @Html.Raw(@"                                         if(formData." + item.ColumnName + "==\'\'){abp.message.warn(\'"+item.Comments + "为必填项!\');return;}\r\n");

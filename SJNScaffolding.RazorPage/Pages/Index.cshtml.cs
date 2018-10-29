@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace SJNScaffolding.RazorPage.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
         private readonly IProjectBuilder _projectBuilder;
         private readonly AddNewBussinessHelper _addNewBussinessHelper;
@@ -68,13 +68,9 @@ namespace SJNScaffolding.RazorPage.Pages
         }
 
 
-        private IActionResult Json(object o)
-        {
-            return Content(JsonConvert.SerializeObject(o));
-        }
         public async Task<ActionResult> Get()
         {
-            ViewFileModel _viewFileModel = new ViewFileModel()
+            ViewFileModel viewFileModel = new ViewFileModel()
             {
                 TemplateFolderNames = "/Application/Dto/ListDtoTemplate.cshtml",
                 CreateTime = DateTime.Now,
@@ -92,8 +88,8 @@ namespace SJNScaffolding.RazorPage.Pages
             {
                 foreach (var templateName in new[] { "IndexTemplate", "CreateOrUpdateModalTemplate" })
                 {
-                    _viewFileModel.TemplateFolderNames = "/Views/" + itemFolder + "-" + templateName + ".cshtml";
-                    string content = await _templateEngine.Render(_viewFileModel);
+                    viewFileModel.TemplateFolderNames = "/Views/" + itemFolder + "-" + templateName + ".cshtml";
+                    string content = await _templateEngine.Render(viewFileModel);
 
                     string fileName = templateName.Replace("JS", "").Replace("Template", ".").Replace("Views", ".");
 

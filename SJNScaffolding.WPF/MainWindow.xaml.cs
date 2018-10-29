@@ -85,12 +85,10 @@ namespace SJNScaffolding.WPF
                         ColumnName = columnName,
                         AttrType = columnsTypeList[i],
                         Comments = columnsNameList[i],
-                        IsRequired = columnsList[i].Contains("*") ? true : false,
-                        IsVarchar = columnsTypeList[i] == "string",
+                        IsRequired = columnsList[i].Contains("*") ? "1" : "0",
                         DataLength = 100,
                         IsCombobox = columnsList[i].Contains("@") ? true : false,
                         IsColspan3 = columnsList[i].Contains("%") ? true : false,
-                        WebuploadColunm = webuploadColunm,
                         DataOptions = columnsHtmlList[i]
                     });
                 }
