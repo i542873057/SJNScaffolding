@@ -35,8 +35,8 @@ _context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限"
                     toolbar: toolbar,
                     columns: [[
                             @{int i=0;}
-                            @if(Model.TypeColumnNames!=null){
-                                    foreach (var item in Model.TypeColumnNames)
+                            @if(Model.ListColumnNames!=null){
+                                    foreach (var item in Model.ListColumnNames)
                                     {
                                         bool isFormatter = false;
                                         string formatterString="";

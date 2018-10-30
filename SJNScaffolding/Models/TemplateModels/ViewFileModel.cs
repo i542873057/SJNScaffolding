@@ -137,7 +137,7 @@ namespace SJNScaffolding.Models.TemplateModels
             }
         }
 
-        public List<TypeColumnName> IsAddOrEditColumnNames
+        public List<TypeColumnName> AddOrEditColumnNames
         {
             get
             {

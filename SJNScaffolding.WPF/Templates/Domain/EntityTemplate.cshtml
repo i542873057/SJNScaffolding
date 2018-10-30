@@ -24,7 +24,7 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s
 @("     ///" )<summary>
 @("     ///" + item.Comments) 
 @("     ///" )</summary>
-    if(item.IsRequired)
+    if(item.IsRequired=="1")
     {
 @RazorHelper.RawHtml("      [Required(ErrorMessage=\""+item.Comments+"为必填项\")] \r\n")
     }

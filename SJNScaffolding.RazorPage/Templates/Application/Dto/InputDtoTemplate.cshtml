@@ -25,7 +25,7 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto
     {
         @if(Model.TypeColumnNames!=null)
         {
-                foreach (var item in Model.TypeColumnNames)
+                foreach (var item in Model.AddOrEditColumnNames)
                 {
 @("     ///" )<summary>
 @Html.Raw("     ///" + item.Comments) 
