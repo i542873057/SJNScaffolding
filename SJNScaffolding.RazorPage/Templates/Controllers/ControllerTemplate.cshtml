@@ -56,9 +56,8 @@ namespace @(Model.ProjectName).Web.Areas.Plat.Controllers
     #endregion
 
     #region 数据
-    public async Task<@("ActionResult")>
-        GetInfoForEdit(int id)
-        {
+    public async Task<@("ActionResult")>GetInfoForEdit(int id)
+    {
         var output = await _@(Model.TableNameCamel)AppService.GetInfoForEdit(id);
         @if (Model.WebUploadList.Count > 0)
         {
@@ -74,13 +73,13 @@ namespace @(Model.ProjectName).Web.Areas.Plat.Controllers
         {
             @Html.Raw("            return Json(output);\r\n");
         }
-        }
+    }
 
-        public ActionResult GetGridByCondition(@(Model.TableName)SearchDto input)
-        {
+    public ActionResult GetGridByCondition(@(Model.TableName)SearchDto input)
+    {
         var gridData = _@(Model.TableNameCamel)AppService.GetGridByCondition(input);
         return Json(gridData);
-        }
-        #endregion
-        }
-        }
+    }
+    #endregion
+    }
+}
