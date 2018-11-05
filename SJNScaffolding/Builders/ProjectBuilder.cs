@@ -37,8 +37,8 @@ namespace SJNScaffolding.Builders
                 foreach (var buildKv in templates)
                 {
                     if (buildKv.IsExcute == false) continue;
-
-                    if (buildKv.Key == "/Domain/EntityTemplate.cshtml" && isWebUpload == true) continue;
+                    //此模板是ViewModel,只有有上传控件时才生成模板
+                    if (buildKv.Key == "/ViewModel/EntityViewModel.cshtml" && isWebUpload == false) continue;
 
                     var output = buildKv.Output;
 
