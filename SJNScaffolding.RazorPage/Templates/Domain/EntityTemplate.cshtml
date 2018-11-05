@@ -33,7 +33,7 @@ if (item.IsRequired=="1")
 {
 @Html.Raw("     [Required(ErrorMessage=\"" + item.Comments + "为必填项\")]\r\n") 
 }
-if (item.ColumnType.Contains("varchar")&&item.DataLength>0)
+if (item.ColumnType.ToLower().Contains("varchar")&&item.DataLength>0)
 {
 @Html.Raw("     [StringLength(" + item.DataLength + ",ErrorMessage=\"" + item.Comments + "的长度应在" + item.DataLength + "字符以内\")]\r\n")
 }

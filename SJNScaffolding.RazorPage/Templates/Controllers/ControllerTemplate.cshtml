@@ -19,7 +19,7 @@ using System.Web.Mvc;
 using @(Model.ProjectName).Domain.Plat.@(Model.TableName)s;
 using @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto;
 using @(Model.ProjectName).Web.Controllers;
-using HbAssess.Domain.Common.Files;
+using @(Model.ProjectName).Domain.Common.Files;
 namespace @(Model.ProjectName).Web.Areas.Plat.Controllers
 {
     public class @(Model.TableName)Controller : @(Model.ProjectName)ControllerBase
@@ -45,41 +45,42 @@ namespace @(Model.ProjectName).Web.Areas.Plat.Controllers
     #region 视图
     public ActionResult Index()
     {
-        return View();
+    return View();
     }
 
     public ActionResult CreateOrUpdateModal()
     {
-        return View();
+    return View();
     }
 
     #endregion
 
     #region 数据
-    public async Task<@("ActionResult")> GetInfoForEdit(int id)
-    {
-    var output = await _@(Model.TableNameCamel)AppService.GetInfoForEdit(id);
-    @if (Model.WebUploadList.Count > 0)
-    {
-        string webuploadParams = "";
-        foreach (WebUploadColunm r in Model.WebUploadList)
+    public async Task<@("ActionResult")>
+        GetInfoForEdit(int id)
         {
-            webuploadParams += ",_fileAppService.GetFileOutput(output." + r.WebuploadId + ")";
+        var output = await _@(Model.TableNameCamel)AppService.GetInfoForEdit(id);
+        @if (Model.WebUploadList.Count > 0)
+        {
+            string webuploadParams = "";
+            foreach (WebUploadColunm r in Model.WebUploadList)
+            {
+                webuploadParams += ",_fileAppService.GetFileOutput(output." + r.WebuploadId + ")";
+            }
+            @Html.Raw("            var " + Model.TableNameCamel + "ViewModel=new " + Model.TableName + "ViewModel(output" + webuploadParams + ");\r\n");
+            @Html.Raw("            return Json(" + Model.TableNameCamel + "ViewModel" + ");\r\n");
         }
-        @Html.Raw("            var " + Model.TableNameCamel + "ViewModel=new " + Model.TableName + "ViewModel(output" + webuploadParams + ");\r\n");
-        @Html.Raw("            return Json(" + Model.TableNameCamel + "ViewModel" + ");\r\n");
-    }
-    else
-    {
-        @Html.Raw("            return Json(output);\r\n");
-    }
-    }
+        else
+        {
+            @Html.Raw("            return Json(output);\r\n");
+        }
+        }
 
-    public ActionResult GetGridByCondition(@(Model.TableName)SearchDto input)
-    {
+        public ActionResult GetGridByCondition(@(Model.TableName)SearchDto input)
+        {
         var gridData = _@(Model.TableNameCamel)AppService.GetGridByCondition(input);
         return Json(gridData);
-    }
-    #endregion
-    }
-}
+        }
+        #endregion
+        }
+        }

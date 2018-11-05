@@ -5,7 +5,7 @@
 @using SJNScaffolding.Models.CollectiveType
 var gridUI = gridUI || {};
 (function() {
-    var _@(Model.TableNameCamel)Service = abp.services.app.@(Model.TableNameCamel);
+    var @(Model.TableNameCamel)Service = abp.services.app.@(Model.TableNameCamel);
     var gridUrl = '/Plat/@(Model.TableName)/GetGridByCondition';
     var editModalUrl = '/Plat/@(Model.TableName)/CreateOrUpdateModal';
     var dgGrid, dgGridId = "#dgGrid";
@@ -96,7 +96,7 @@ _context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限"
                                         }
 
                                         com.setBusy(pDialog, true);
-                                        _@(Model.TableNameCamel)Service.createOrUpdate(formData, { showMsg: true })
+                                        @(Model.TableNameCamel)Service.createOrUpdate(formData, { showMsg: true })
                                     .done(function() {
                                             com.btnRefresh();
                                             pDialog.dialog('close');
@@ -119,7 +119,7 @@ _context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限"
                         });
                         },
             btnDelete: function() {
-                        com.deleted(_@(Model.TableNameCamel)Service, dgGridId);
+                        com.deleted(@(Model.TableNameCamel)Service, dgGridId);
                         },
             btnAdd: function() {
                         gridUI.editInfo('新增', 'icon-add');

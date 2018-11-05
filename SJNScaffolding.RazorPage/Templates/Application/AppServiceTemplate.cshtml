@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Repositories;
+using Abp.Linq.Extensions;
 using @(Model.ProjectName).Domain.Plat.@(Model.TableName)s.Dto;
 using @(Model.ProjectName).Usual;
 
@@ -27,7 +28,7 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s
     {
         private readonly IRepository<@(Model.TableName+",")@(Model.IdType)>_@(Model.TableNameCamel)Repository;
 
-        public @(Model.TableName)AppService(IRepository<@(Model.TableName+",")long>@(Model.TableNameCamel)Repository) : base(@(Model.TableNameCamel)Repository)
+        public @(Model.TableName)AppService(IRepository<@(Model.TableName+","+Model.IdType)>@(Model.TableNameCamel)Repository) : base(@(Model.TableNameCamel)Repository)
         {
             _@(Model.TableNameCamel)Repository = @(Model.TableNameCamel)Repository;
             @if(Model.HasPermission){
@@ -43,7 +44,7 @@ namespace @(Model.ProjectName).Domain.Plat.@(Model.TableName)s
         {
          @if(Model.SearchColumnNames!=null)
          {
-             string tempRaw="base.CreateFilteredQuery(input)";
+             string tempRaw="return base.CreateFilteredQuery(input)";
              foreach(var item in Model.SearchColumnNames)
              {
                  switch (item.AttrType)

@@ -186,7 +186,7 @@ namespace SJNScaffolding.Models.CollectiveType
                 //解析varchar(50)  得到50
                 if (coluTypelower.Contains("varchar"))
                 {
-                    string len = column.ColumnType.Replace("(", "").Replace(")", "").Replace("varchar", "").Replace("n", "");
+                    string len = coluTypelower.Replace("(", "").Replace(")", "").Replace("varchar", "").Replace("n", "");
 
                     int.TryParse(len, out int result);
 

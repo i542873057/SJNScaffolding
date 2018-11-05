@@ -2,11 +2,11 @@
   "Project": {
     "EmailAddress": "igeekfan@foxmail.com",
     "Author": "IGeekFan",
-    "OutputPath": "E://SS/XwFinanciaWarning",
+    "OutputPath": "D:/svn/TelSCode",
     "Version": "1.1.1",
-    "TableName": "Info",
-    "ProjectName": "XwFinanciaWarning",
-    "IdType": "Long",
+    "TableName": "ProStockIn",
+    "ProjectName": "TelSCode",
+    "IdType": "int",
     "BuildTasks": {
       "ProjectNames": [
         "{{ProjectName}}.Application",

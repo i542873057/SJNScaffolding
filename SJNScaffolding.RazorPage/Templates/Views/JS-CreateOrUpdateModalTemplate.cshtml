@@ -17,7 +17,7 @@ var editUI = {
                 auto: true,
                 uploadType: v.UploadType
             });
-        })
+        });
     },
     setForm: function (id,pDialog,ignore) {
         editUI.initCombobox(pDialog);
@@ -26,7 +26,6 @@ var editUI = {
           editUI.initUpload(pDialog,uploadControl);
         }
         com.setForm(id, function (jsonData) {
-            //com.loadCityPicker($("#Province"), jsonData.Province, jsonData.City, jsonData.Area);
             $.each(uploadControl,function(i,v){
                 webuploader.loadFile({
                     elem: v.WebuploadId,
@@ -34,7 +33,7 @@ var editUI = {
                     uploadType: v.UploadType,
                     isCheck: ignore
                 });
-            })
+            });
         },true,'/Plat/@(Model.TableName)/GetInfoForEdit',pDialog);
     }
 }
