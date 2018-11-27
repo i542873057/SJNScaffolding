@@ -17,11 +17,12 @@
     <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
     @RenderSection("styles", required: false)
 </head>
-<body>
+<body style="background-color: #e6e6e6;">
 
     <ul class="layui-nav">
         <li class="layui-nav-item"><a href="/">首页</a></li>
         <li class="layui-nav-item"><a href="/TableSettings">表结构设置</a></li>
+        <li class="layui-nav-item"><a href="/MenuGenerator">菜单权限生成</a></li>
     </ul>
     <div class="layui-container" style="margin-top: 30px;">
         @RenderBody()

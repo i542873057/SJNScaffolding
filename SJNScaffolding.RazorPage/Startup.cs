@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SJNScaffolding.Builders;
 using SJNScaffolding.Helper;
+using SJNScaffolding.Models.MenuModels;
 using SJNScaffolding.RazorPage.Maps;
 using SJNScaffolding.Utilities;
 
@@ -38,6 +39,7 @@ namespace SJNScaffolding.RazorPage
 
             services.AddOptions();
             services.Configure<Project>(Configuration.GetSection("Project"));
+            services.Configure<MenuRoot>(Configuration.GetSection("MenuRoot"));
 
 
             IFileProvider fileProvider = new PhysicalFileProvider(AppPath.Relative("Templates"));
@@ -58,7 +60,7 @@ namespace SJNScaffolding.RazorPage
             services.AddSingleton<AddNewBussinessHelper>();
             services.AddScoped<IProjectBuilder, ProjectBuilder>();
             services.AddAutoMapper();
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

@@ -1,0 +1,70 @@
+﻿@page "{handler?}"
+@model MenuGeneratorModel
+@{
+    ViewData["Title"] = "菜单权限生成";
+}
+
+@section styles
+    {
+    <style>
+        .layui-card {
+            width: 1390px;
+        }
+
+        .con {
+            width: 1340px;
+            height: 400px;
+        }
+    </style>
+}
+
+@section scripts
+    {
+    <script>
+        function copyText(id) {
+            var text = document.getElementById(id);
+            text.select(); // 选择对象
+            document.execCommand("Copy"); // 执行浏览器复制命令
+            alert("已复制好，可贴粘。");
+        }
+
+        function superGenerate() {
+            $.ajax({
+                url: '/MenuGenerator?handler=AutoComplete',
+                type: 'post',
+                dataType: 'text',
+                data: {
+                    '__RequestVerificationToken': $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                success: function (d) {
+                    layer.msg(d);
+                }
+            });
+        }
+    </script>
+}
+
+@Html.AntiForgeryToken()
+<button class="layui-btn layui-btn-lg layui-btn-radius layui-btn-warning" onclick="superGenerate()">一键超级生成</button>
+<div class="layui-card">
+    <div class="layui-card-header">
+        菜单列表
+        <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" onclick="copyText('menus')">一键复制</button>
+    </div>
+    <div class="layui-card-body">
+        <textarea class="con" id="menus">
+@Html.Raw(Model.menus)
+</textarea>
+    </div>
+</div>
+<div class="layui-card">
+    <div class="layui-card-header">
+        操作权限
+        <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" onclick="copyText('menusPermisson')">一键复制</button>
+    </div>
+    <div class="layui-card-body">
+        <textarea class="con" id="menusPermisson">
+@Html.Raw(Model.menusPermisson)
+</textarea>
+    </div>
+</div>

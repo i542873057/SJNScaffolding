@@ -1,0 +1,57 @@
+﻿/*
+ *所有需要生成的菜单写在这里
+ *----------------------------------------------------
+ *字段名称    | 备注                                 
+ *----------------------------------------------------
+ *MenuArea    | 区域名称
+ *----------------------------------------------------
+ *MenuList    | 菜单列表
+ *----------------------------------------------------
+ *DisplayName | 菜单名称
+ *----------------------------------------------------
+ *EnCode      | 菜单编码
+ *----------------------------------------------------
+ *TypeCode    | 菜单类型：pmenu为父节点，menu为子节点
+ *------------------------------------------
+ *SortCode    | 顺序
+ *----------------------------------------------------
+ *LinkName    | 页面名称
+ *----------------------------------------------------
+ */
+{
+  "MenuRoot": {
+    "MenuArea": "Plat",
+    "BeginId": 10,
+    "MenuList": [
+      {
+        "DisplayName": "测试管理",
+        "EnCode": "TestData",
+        "TypeCode": "pmenu",
+        "SortCode": "1",
+        "Children": [
+          {
+            "DisplayName": "字典1管理",
+            "EnCode": "TestBaseItem",
+            "TypeCode": "menu",
+            "SortCode": "1",
+            "LinkName": "Index"
+          },
+          {
+            "DisplayName": "公告信1息管理",
+            "EnCode": "TestNoticeItem",
+            "TypeCode": "menu",
+            "SortCode": "2",
+            "LinkName": "Index"
+          },
+          {
+            "DisplayName": "公告信2息管理",
+            "EnCode": "Test2NoticeItem",
+            "TypeCode": "menu",
+            "SortCode": "3",
+            "LinkName": "Index"
+          }
+        ]
+      }
+    ]
+  }
+}

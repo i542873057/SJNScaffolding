@@ -23,6 +23,7 @@ namespace SJNScaffolding.RazorPage
                  {
                      config.SetBasePath(Directory.GetCurrentDirectory());
                      config.AddJsonFile("SJNScaffolding.json", optional: true, reloadOnChange: true);
+                     config.AddJsonFile("MenuJson.json", optional: true, reloadOnChange: true);
                  })
                 .UseStartup<Startup>();
     }

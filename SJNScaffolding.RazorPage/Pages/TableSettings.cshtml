@@ -7,8 +7,13 @@
     <link href="~/lib/iCheck/skins/all.css" rel="stylesheet" />
     <link href="~/lib/select2/dist/css/select2.css" rel="stylesheet" />
     <style>
-        .layui-container { width: 100%; }
-        .layui-input-block { margin-left: 0px; }
+        .layui-container {
+            width: 100%;
+        }
+
+        .layui-input-block {
+            margin-left: 0px;
+        }
     </style>
 }
 
@@ -257,9 +262,9 @@
                     //                })
                     //        }
                     //    }
-                    //} , 
-                   {
-                       header: "插入/更新",
+                    //} ,
+                    {
+                        header: "插入/更新",
                         name: "IsEdit",
                         width: 90,
                         align: "center",
@@ -418,7 +423,7 @@
                             itemValue: "value",
                             dataInit: function (a) {
                                 $(a).select2().on("change",
-                                    function() {
+                                    function () {
                                         try {
                                             $(this).valid();
                                         } catch (b) {
@@ -507,7 +512,7 @@
                     var $this = $(this);
                     var name = $this.attr('name');
                     var type = $this.attr('type');
-                    if (name == undefined||name.indexOf('!')==1) return;
+                    if (name == undefined || name.indexOf('!') == 1) return;
 
                     var val = "";
                     if (type == 'checkbox') {
@@ -520,7 +525,7 @@
                         o[name] = o[name].push(val);
 
                     } else {
-                       
+
                         if (o[name] == undefined) {
                             o[name] = [val];
                         } else {
@@ -530,20 +535,20 @@
                 });
 
                 var jsonArray = [];
-              
+
                 for (var i = 0; i < o.id.length; i++) {
                     var newObj = {};
                     $.each(o,
                         function (j, v) {
                             if (j != "__RequestVerificationToken") {
-                                newObj[j]=o[j][i];
+                                newObj[j] = o[j][i];
                             }
                         });
-                    
+
                     jsonArray.push(newObj)
                 }
 
-            var index = layer.load();
+                var index = layer.load();
 
 
                 $.ajax({
