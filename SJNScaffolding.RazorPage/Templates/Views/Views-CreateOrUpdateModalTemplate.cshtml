@@ -4,20 +4,22 @@
 }
 @using SJNScaffolding.Models.CollectiveType
 @model SJNScaffolding.Models.TemplateModels.ViewFileModel
-@Html.Raw("@{Layout=null;}")
+@Html.Raw(@"@{
+    Layout=null;
+}")
 @functions {
-public string CreateInput(TypeColumnName item, string styles)
-{
-    switch (item.ShowType)
+    public string CreateInput(TypeColumnName item, string styles)
     {
-        case FormControl.Combo:
-        case FormControl.Combobox:
-            return string.Format("<input id=\'{0}\' name=\'{0}\' {1} />", item.ColumnName, styles);
+        switch (item.ShowType)
+        {
+            case FormControl.Combo:
+            case FormControl.Combobox:
+                return string.Format("<input id=\'{0}\' name=\'{0}\' {1} />", item.ColumnName, styles);
 
-        default:
-            return string.Format("<input id=\'{0}\' name=\'{0}\' class=\'{1}\' {2} data-options=\'{3}\'/>", item.ColumnName, item.ShowType, styles, item.DataOptions);
+            default:
+                return string.Format("<input id=\'{0}\' name=\'{0}\' class=\'{1}\' {2} data-options=\'{3}\'/>", item.ColumnName, item.ShowType, styles, item.DataOptions);
+        }
     }
-}
 }
 @("@using Abp.Web.Mvc.Extensions")
 <div class="layui-layer-content">
