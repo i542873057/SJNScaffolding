@@ -2,9 +2,9 @@
   "Project": {
     "EmailAddress": "igeekfan@foxmail.com",
     "Author": "IGeekFan",
-    "OutputPath": "D:/svn/TelSCode",
+    "OutputPath": "E:/svn/TelSCode",
     "Version": "1.1.1",
-    "TableName": "ProStockIn",
+    "TableName": "TransferAreaEntry",
     "ProjectName": "TelSCode",
     "IdType": "int",
     "BuildTasks": {

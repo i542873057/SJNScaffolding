@@ -3,37 +3,55 @@
 }
 @model SJNScaffolding.Models.TemplateModels.ViewFileModel
 var editUI = {
-    initCombobox: function (pDialog) {
+    @if(Model.ComboboxList.Any())
+    {
+    @Html.Raw(@"initCombobox: function (pDialog) {
         var comboboxControl = @Html.Raw(Model.ComboboxPart);
         $.each(comboboxControl, function (i, v) {
             pDialog.find('#' + v.ColumnName)[v.ClassName]({
                 url: com.baseUrl + '/baseItem/GetComBoJson?enCode=' + v.ColumnName
             });
         });
-    },
-    initUpload: function (pDialog,uploadControl) {
+    },");
+    }
+    @if(Model.WebUploadList.Any())
+    {
+    @Html.Raw(@"initUpload: function (pDialog,uploadControl) {
         $.each(uploadControl,function(i,v){
             pDialog.find('#'+v.WebuploadId).powerWebUpload({
                 auto: true,
                 uploadType: v.UploadType
             });
         });
-    },
+    },");
+    }
+
     setForm: function (id,pDialog,ignore) {
-        editUI.initCombobox(pDialog);
-        var uploadControl=@Html.Raw(Model.WebUploadPart);
+        @if(Model.ComboboxList.Any())
+        {
+        @Html.Raw(@"editUI.initCombobox(pDialog);");
+        }
+        @if(Model.WebUploadList.Any())
+        {
+        @Html.Raw(@"var uploadControl="+@Html.Raw(Model.WebUploadPart)+@"
         if(ignore!=true){
           editUI.initUpload(pDialog,uploadControl);
+        }");
         }
+
         com.setForm(id, function (jsonData) {
-            $.each(uploadControl,function(i,v){
+        @if(Model.WebUploadList.Any())
+        {
+            @Html.Raw(@"            $.each(uploadControl,function(i,v){
                 webuploader.loadFile({
                     elem: v.WebuploadId,
                     rows: jsonData[v.WebuploadId+'Outputs'],
                     uploadType: v.UploadType,
                     isCheck: ignore
                 });
-            });
+            });");
+        }
+
         },true,'/Plat/@(Model.TableName)/GetInfoForEdit',pDialog);
     }
 }

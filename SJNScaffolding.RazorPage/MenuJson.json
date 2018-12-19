@@ -11,7 +11,7 @@
  *----------------------------------------------------
  *EnCode      | 菜单编码
  *----------------------------------------------------
- *TypeCode    | 菜单类型：pmenu为父节点，menu为子节点
+ *TypeCode    | 菜单类型：PMenu为父节点，Menu为子节点
  *------------------------------------------
  *SortCode    | 顺序
  *----------------------------------------------------
@@ -21,34 +21,45 @@
 {
   "MenuRoot": {
     "MenuArea": "Plat",
-    "BeginId": 10,
+    "BeginId": 34,
     "MenuList": [
       {
-        "DisplayName": "测试管理",
-        "EnCode": "TestData",
-        "TypeCode": "pmenu",
+        "DisplayName": "基础资料管理",
+        "EnCode": "BasicData",
+        "TypeCode": "PMenu",
         "SortCode": "1",
         "Children": [
           {
-            "DisplayName": "字典1管理",
-            "EnCode": "TestBaseItem",
-            "TypeCode": "menu",
-            "SortCode": "1",
-            "LinkName": "Index"
-          },
-          {
-            "DisplayName": "公告信1息管理",
-            "EnCode": "TestNoticeItem",
-            "TypeCode": "menu",
-            "SortCode": "2",
-            "LinkName": "Index"
-          },
-          {
-            "DisplayName": "公告信2息管理",
-            "EnCode": "Test2NoticeItem",
-            "TypeCode": "menu",
+            "DisplayName": "方剂标准代码",
+            "EnCode": "PrescriptionCode",
+            "TypeCode": "Menu",
             "SortCode": "3",
+            "TableName": "PrescriptionCode",
             "LinkName": "Index"
+          },
+          {
+            "DisplayName": "中药标准代码",
+            "EnCode": "ChineseMedicineCode",
+            "TypeCode": "Menu",
+            "SortCode": "3",
+            "TableName": "ChineseMedicineCode",
+            "LinkName": "Index"
+          },
+          {
+            "DisplayName": "中医疾病名称与分类",
+            "EnCode": "TCMNameClassify",
+            "TypeCode": "Menu",
+            "SortCode": "3",
+            "TableName": "TCMNameClassify",
+            "LinkName": "Index?Type=1"
+          },
+          {
+            "DisplayName": "中医证候名称与分类",
+            "EnCode": "TCMNameClassify",
+            "TypeCode": "Menu",
+            "TableName": "TCMNameClassify",
+            "SortCode": "3",
+            "LinkName": "Index?Type=2"
           }
         ]
       }

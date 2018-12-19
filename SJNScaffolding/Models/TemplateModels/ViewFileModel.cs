@@ -72,24 +72,31 @@ namespace SJNScaffolding.Models.TemplateModels
         /// </summary>
         public bool HasPermission { get; } = true;
 
-        public string ComboboxPart
+        public List<dynamic> ComboboxList
         {
             get
             {
-                List<dynamic> comboboxPart = new List<dynamic>();
+                List<dynamic> comboboxlist = new List<dynamic>();
                 TypeColumnNames?.ForEach(r =>
                 {
                     if (r.ShowType == FormControl.Combo || r.ShowType == FormControl.Combobox)
                     {
-                        comboboxPart.Add(new
+                        comboboxlist.Add(new
                         {
                             ClassName = r.ShowType.Replace("easyui-", ""),
                             r.ColumnName
                         });
                     }
                 });
-                var comboxControl = JsonConvert.SerializeObject(comboboxPart);
-                return comboxControl;
+                return comboboxlist;
+            }
+        }
+        public string ComboboxPart
+        {
+            get
+            {
+                var comboboxPart = this.ComboboxList;
+                return JsonConvert.SerializeObject(comboboxPart);
             }
         }
         public string WebUploadPart

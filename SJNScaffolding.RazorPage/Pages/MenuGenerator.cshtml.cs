@@ -17,7 +17,7 @@ namespace SJNScaffolding.RazorPage.Pages
 {
     public class MenuGeneratorModel : BasePageModel
     {
-        public const string conn = "Database='telscode';Data Source='localhost';port=3306;User Id='root';Password='123456';charset='utf8';pooling=true";
+        public const string conn = "Database='CHNMed';Data Source='localhost';port=3306;User Id='root';Password='123456';charset='utf8';pooling=true";
         private readonly MenuRoot _menuRoot;
         public string menus = "";
         public string menusPermisson = "";
@@ -48,17 +48,17 @@ namespace SJNScaffolding.RazorPage.Pages
                 {
                     string linkUrl = "";
                     string enCode = enCodeStr + "." + menuListItem.EnCode;
-                    if (menuListItem.TypeCode == "menu")
+                    if (menuListItem.TypeCode == "Menu")
                     {
-                        linkUrl += "/" + enCodeStr + "/" + menuListItem.EnCode + "/" + menuListItem.LinkName;
-                        opSb.Append($"_context.AbpMenu.Add(new SysMenu {{ ParentId = {addId}, DisplayName = \"列表权限\", EnCode = \"{enCode}.GetGrid\", TypeCode = permission, SortCode = 1 }})").Append("\r\n");
-                        opSb.Append($"_context.AbpMenu.Add(new SysMenu {{ ParentId = {addId}, DisplayName = \"新增权限\", EnCode = \"{enCode}.Add\", TypeCode = permission, SortCode = 2 }})").Append("\r\n");
-                        opSb.Append($"_context.AbpMenu.Add(new SysMenu {{ ParentId = {addId}, DisplayName = \"编辑权限\", EnCode = \"{enCode}.Edit\", TypeCode = permission, SortCode = 3 }})").Append("\r\n");
-                        opSb.Append($"_context.AbpMenu.Add(new SysMenu {{ ParentId = {addId}, DisplayName = \"删除权限\", EnCode = \"{enCode}.Delete\", TypeCode = permission, SortCode = 4 }})").Append("\r\n");
+                        linkUrl += "/" + enCodeStr + "/" + menuListItem.TableName + "/" + menuListItem.LinkName;
+                        opSb.Append($"_context.AbpMenu.Add(new SysMenu {{ ParentId = {addId}, DisplayName = \"列表权限\", EnCode = \"{enCode}.GetGrid\", TypeCode = Permission, SortCode = 1 }});").Append("\r\n");
+                        opSb.Append($"_context.AbpMenu.Add(new SysMenu {{ ParentId = {addId}, DisplayName = \"新增权限\", EnCode = \"{enCode}.Add\", TypeCode = Permission, SortCode = 2 }});").Append("\r\n");
+                        opSb.Append($"_context.AbpMenu.Add(new SysMenu {{ ParentId = {addId}, DisplayName = \"编辑权限\", EnCode = \"{enCode}.Edit\", TypeCode = Permission, SortCode = 3 }});").Append("\r\n");
+                        opSb.Append($"_context.AbpMenu.Add(new SysMenu {{ ParentId = {addId}, DisplayName = \"删除权限\", EnCode = \"{enCode}.Delete\", TypeCode = Permission, SortCode = 4 }});").Append("\r\n");
 
                         enCode += "." + menuListItem.LinkName;
                     }
-                    string t = $"_context.AbpMenu.Add(new SysMenu {{ ParentId = {(parentId == null ? "null" : parentId.ToString())}, DisplayName = \"{menuListItem.DisplayName}\", EnCode = \"{enCode}\", TypeCode ={menuListItem.TypeCode} , SortCode ={menuListItem.SortCode} ,LinkUrl=\"{linkUrl}\"  }})";
+                    string t = $"_context.AbpMenu.Add(new SysMenu {{ ParentId = {(parentId == null ? "null" : parentId.ToString())}, DisplayName = \"{menuListItem.DisplayName}\", EnCode = \"{enCode}\", TypeCode ={menuListItem.TypeCode} , SortCode ={menuListItem.SortCode} ,LinkUrl=\"{linkUrl}\"  }});";
                     sb.Append(t).Append("\r\n");
                     ++addId;
 

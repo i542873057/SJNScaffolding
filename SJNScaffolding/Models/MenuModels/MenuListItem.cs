@@ -5,6 +5,11 @@ namespace SJNScaffolding.Models.MenuModels
     public class MenuListItem
     {
         /// <summary>
+        /// 表名
+        /// </summary>
+        public string TableName { get; set; }
+
+        /// <summary>
         /// 父节点
         /// </summary>
         public int ParentId { get; set; }
