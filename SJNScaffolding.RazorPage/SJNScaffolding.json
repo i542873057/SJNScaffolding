@@ -4,7 +4,7 @@
     "Author": "IGeekFan",
     "OutputPath": "E:/svn/TelSCode",
     "Version": "1.1.1",
-    "TableName": "TransferAreaEntry",
+    "TableName": "CityAllotEntry",
     "ProjectName": "TelSCode",
     "IdType": "int",
     "BuildTasks": {
