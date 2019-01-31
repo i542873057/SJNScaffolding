@@ -2,9 +2,9 @@
   "Project": {
     "EmailAddress": "igeekfan@foxmail.com",
     "Author": "IGeekFan",
-    "OutputPath": "E:/svn/TelSCode",
+    "OutputPath": "E:/svn/T11",
     "Version": "1.1.1",
-    "TableName": "CityAllotEntry",
+    "TableName": "MWorkInfo",
     "ProjectName": "TelSCode",
     "IdType": "int",
     "BuildTasks": {

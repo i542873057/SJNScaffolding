@@ -30,17 +30,12 @@
     @if (Model.SearchColumnNames != null)
     {
         int searchCount = Model.SearchColumnNames.Count;
-        <div data-options="region:'north',border:false" style="height: 50px;">
+        <div data-options="region:'north',border:false" style="height: 54px;">
             <form id="searchForm">
-                <table class="kv-table">
+                <table class="kv-table no-border">
                     @for (int i = 0; i < searchCount; ++i)
                     {
                         <tr>
-                            <th class="kv-label">@Html.Raw(Model.SearchColumnNames[i].Comments)</th>
-                            <td class="kv-content">
-                                <input name="@Model.SearchColumnNames[i].ColumnName" id="@Model.SearchColumnNames[i].ColumnName" class="easyui-textbox" />
-                                @i++;
-                            </td>
                             @if (i < searchCount)
                             {
                                 <th class="kv-label">@Html.Raw(Model.SearchColumnNames[i].Comments)</th>

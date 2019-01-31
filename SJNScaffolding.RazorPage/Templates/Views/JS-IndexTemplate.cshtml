@@ -23,11 +23,17 @@ var gridUI = gridUI || {};
                         ];
                     toolbar = com.authorizeButton(toolbar);
                    @Html.Raw("/*")
-_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "权限",EnCode = "Plat.@(Model.TableName)", TypeCode = menu, LinkUrl = "/Plat/@(Model.TableName)/Index", SortCode = 1 });
-_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "列表权限",EnCode = "Plat.@(Model.TableName).GetGrid", TypeCode = permission,  SortCode = 1 });
-_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "新增权限",EnCode = "Plat.@(Model.TableName).Add", TypeCode = permission,  SortCode = 2 });
-_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "编辑权限",EnCode = "Plat.@(Model.TableName).Edit", TypeCode = permission,  SortCode = 3 });
-_context.AbpMenu.Add(new SysMenu { ParentId = null, DisplayName = "删除权限",EnCode = "Plat.@(Model.TableName).Delete", TypeCode = permission, SortCode = 4});
+                    new SysMenu
+                    {
+                        DisplayName = "管理", EnCode = "Plat.@(Model.TableName)", LinkUrl = "/Plat/@(Model.TableName)/Index", TypeCode = menu, SortCode = 1 ,
+                        @Html.Raw("Childrens = new List<SysMenu>()")
+                        {
+                        new SysMenu { DisplayName = "列表权限", EnCode = "Plat.@(Model.TableName).GetGrid", TypeCode = permission, SortCode = 1 },
+                        new SysMenu { DisplayName = "新增权限", EnCode = "Plat.@(Model.TableName).Add", TypeCode = permission, SortCode = 2 },
+                        new SysMenu { DisplayName = "编辑权限", EnCode = "Plat.@(Model.TableName).Edit", TypeCode = permission, SortCode = 3 },
+                        new SysMenu { DisplayName = "删除权限", EnCode = "Plat.@(Model.TableName).Delete", TypeCode = permission, SortCode = 4 }
+                        }
+                    }
                  @Html.Raw("*/")
 
                 dgGrid = $(dgGridId).datagrid({
