@@ -69,7 +69,9 @@ namespace SJNScaffolding.Builders
             }
         }
 
-
+        /// <summary>
+        /// 自动包含至项目，这段代码还需要改，未完成TODO
+        /// </summary>
         public void AutoIncludeItems()
         {
 

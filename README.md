@@ -56,3 +56,16 @@ CopyRightTemplate.cshtml模板代码如下
 ![avatar](Img/1.png)
 
 解决了模板生成，我们就很容易的写出自己的代码生成器。
+
+
+### 以上内容为.NET Framework版本的Razor，该项目已升级至.NET Core2.2 版本，旧版本已移除。不过新版本的Razor生成方式和语法都相差不大。
+
+#### 接下来为代码生成器计划:
+    1、中文转英文字段，自动起名字，主要关键字段转换。
+    2、主分表代码生成
+    3、下拉代码自动生成，勾选
+    4、代码生成器部署到某一服务器中，生成后可下载生成后的代码，复制至项目中即可。
+
+
+
+CodeLF帮程序员起变量名的网站:[https://unbug.github.io/codelf/](https://unbug.github.io/codelf/)
