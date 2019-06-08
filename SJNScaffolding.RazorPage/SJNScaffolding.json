@@ -16,7 +16,7 @@
       ],
       "Templates": [
         {
-          "Key": "/Application/IAppServiceTemplate.cshtml",
+          "Key": "/Templates/Application/IAppServiceTemplate.cshtml",
           "Remark": "服务接口",
           "IsExcute": true,
           "Output": {
@@ -25,7 +25,7 @@
           }
         },
         {
-          "Key": "/Application/AppServiceTemplate.cshtml",
+          "Key": "/Templates/Application/AppServiceTemplate.cshtml",
           "Remark": "服务实现类",
           "IsExcute": true,
           "Output": {
@@ -34,7 +34,7 @@
           }
         },
         {
-          "Key": "/Application/Dto/InputDtoTemplate.cshtml",
+          "Key": "/Templates/Application/Dto/InputDtoTemplate.cshtml",
           "Remark": "InputDto",
           "IsExcute": true,
           "Output": {
@@ -43,7 +43,7 @@
           }
         },
         {
-          "Key": "/Application/Dto/ListDtoTemplate.cshtml",
+          "Key": "/Templates/Application/Dto/ListDtoTemplate.cshtml",
           "Remark": "ListDto",
           "IsExcute": true,
           "Output": {
@@ -52,7 +52,7 @@
           }
         },
         {
-          "Key": "/Application/Dto/SearchDtoTemplate.cshtml",
+          "Key": "/Templates/Application/Dto/SearchDtoTemplate.cshtml",
           "Remark": "SearchDto",
           "IsExcute": true,
           "Output": {
@@ -61,7 +61,7 @@
           }
         },
         {
-          "Key": "/Views/JS-IndexTemplate.cshtml",
+          "Key": "/Templates/Views/JS-IndexTemplate.cshtml",
           "Remark": "Index.js",
           "IsExcute": true,
           "Output": {
@@ -70,7 +70,7 @@
           }
         },
         {
-          "Key": "/Views/JS-CreateOrUpdateModalTemplate.cshtml",
+          "Key": "/Templates/Views/JS-CreateOrUpdateModalTemplate.cshtml",
           "Remark": "CreateOrUpdateModal.js",
           "IsExcute": true,
           "Output": {
@@ -79,7 +79,7 @@
           }
         },
         {
-          "Key": "/Views/Views-IndexTemplate.cshtml",
+          "Key": "/Templates/Views/Views-IndexTemplate.cshtml",
           "Remark": "Index.cshtml",
           "IsExcute": true,
           "Output": {
@@ -88,7 +88,7 @@
           }
         },
         {
-          "Key": "/Views/Views-CreateOrUpdateModalTemplate.cshtml",
+          "Key": "/Templates/Views/Views-CreateOrUpdateModalTemplate.cshtml",
           "Remark": "CreateOrUpdateModal.cshtml",
           "IsExcute": true,
           "Output": {
@@ -97,7 +97,7 @@
           }
         },
         {
-          "Key": "/Controllers/ControllerTemplate.cshtml",
+          "Key": "/Templates/Controllers/ControllerTemplate.cshtml",
           "Remark": "Controller",
           "IsExcute": true,
           "Output": {
@@ -106,7 +106,7 @@
           }
         },
         {
-          "Key": "/Domain/EntityTemplate.cshtml",
+          "Key": "/Templates/Domain/EntityTemplate.cshtml",
           "Remark": "Core类",
           "IsExcute": true,
           "Output": {
@@ -115,7 +115,7 @@
           }
         },
         {
-          "Key": "/ViewModel/EntityViewModel.cshtml",
+          "Key": "/Templates/ViewModel/EntityViewModel.cshtml",
           "Remark": "ViewModel",
           "IsExcute": true,
           "Output": {

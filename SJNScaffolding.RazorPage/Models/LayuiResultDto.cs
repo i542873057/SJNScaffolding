@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SJNScaffolding.Db
+namespace SJNScaffolding.RazorPage.Models
 {
 
     public class LayuiResultDto<T>: LayuiResultDto
