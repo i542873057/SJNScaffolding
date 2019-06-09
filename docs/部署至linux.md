@@ -1,3 +1,8 @@
+
+
+自定义的ABP代码生成器，使用.NET Core下的Razor模板引擎，配合RazorPage界面，可自定义cshtml模板，实现代码生成，开源地址： [https://github.com/i542873057/SJNScaffolding](https://github.com/i542873057/SJNScaffolding)
+> 相关技术 .NET Core2.2+Docker+Nginx+Supervisor 
+
 ## 部署至ubuntu下
 
 可参考 [https://www.cnblogs.com/linezero/p/aspnetcoreubuntu.html](https://www.cnblogs.com/linezero/p/aspnetcoreubuntu.html)
@@ -5,7 +10,7 @@
 需要安装 .NET Core 2.2，直接看官网
 
 [https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/sdk-current](https://dotnet.microsoft.com/download/linux-package-manager/ubuntu18-04/sdk-current)
-
+### 发布
 使用VS2017或VS2019,右击SJNScaffolding.RazorPage->发布->配置后，如下图所示，点击保存后，生成发布包。
 
 ![Deploy-Settingsb6cfb.png](https://miao.su/images/2019/06/09/Deploy-Settingsb6cfb.png)
@@ -53,7 +58,7 @@ sudo service nginx restart
 ~~~
  
 ### Supervisor 守护进程
-此时使用ctrl+c会退出项目运行状态，无法关闭shell,可使用**Supervisor**，目的是上的是服务器开机时即启动服务器上的发布的ASP.NET Core Web项目
+此时使用ctrl+c会退出项目运行状态，无法关闭shell,可使用**Supervisor**，目的是上的是服务器开机时即启动服务器上的发布的 ASP .NET Core Web项目
 
 
 [ASP.NET Core Linux下为 dotnet 创建守护进程（必备知识）
@@ -171,7 +176,7 @@ ENTRYPOINT ["dotnet", "SJNScaffolding.RazorPage.dll"]
 
 
 前置条件，在ubuntu上安装好了docker。并且正常运行。
-
+    
 **-d** 代表后台运行，此时将对外显露5000端口运行，5000是运行后，docker对外的端口，80是这个服务对外的端口，其中Dockerfile 存在语句EXPOSE 80
 ~~~
 cd /home/admin/SJNScaffolding # 先cd的项目目录 
