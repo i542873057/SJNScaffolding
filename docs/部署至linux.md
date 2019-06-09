@@ -52,7 +52,7 @@ sudo service nginx restart
 #sudo nginx -s reload　  #也可以使用这条命令重新加载配置项
 ~~~
  
-### Supervisor 守护进
+### Supervisor 守护进程
 此时使用ctrl+c会退出项目运行状态，无法关闭shell,可使用**Supervisor**，目的是上的是服务器开机时即启动服务器上的发布的ASP.NET Core Web项目
 
 
