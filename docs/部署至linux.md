@@ -8,7 +8,7 @@
 
 使用VS2017或VS2019,右击SJNScaffolding.RazorPage->发布->配置后，如下图所示，点击保存后，生成发布包。
 
-![avatar](https://miao.su/images/2019/06/09/Deploy-Settingsb6cfb.md.png)
+![Deploy-Settingsb6cfb.png](https://miao.su/images/2019/06/09/Deploy-Settingsb6cfb.png)
 
 将生成的这个文件夹内容，使用xftp上传至linux的某一文件夹中。
 使用以下命令运行
@@ -18,7 +18,7 @@ dotnet SJNScaffolding.RazorPage.dll #启动web项目，默认应该是http://loc
 ~~~
 参考下图
 
-![](https://miao.su/images/2019/06/09/5NOPVXLDV0IMA_QO7cdd8d.md.png)
+![https://miao.su/images/2019/06/09/5NOPVXLDV0IMA_QO7cdd8d.png](https://miao.su/images/2019/06/09/5NOPVXLDV0IMA_QO7cdd8d.png)
 
 ip:端口是无法访问到的，
 命令行中执行，下面这行命令，是正常的，但只能服务器访问，外网无法访问。
@@ -154,20 +154,20 @@ ENTRYPOINT ["dotnet", "SJNScaffolding.RazorPage.dll"]
 ~~~
 
 把第"2. 发布时，使用此Dockerfile配置“后面的注释展开，上面的全部注释。
-![](https://miao.su/images/2019/06/09/Dockerfileea151.md.png)
+[![Dockerfileea151.png](https://miao.su/images/2019/06/09/Dockerfileea151.png)](https://miao.su/image/ftdf5)
 
 
 右击SJNScaffolding.RazorPage->发布->配置后，如下图所示，点击保存后，生成发布包。
 
-![avatar](https://miao.su/images/2019/06/09/Deploy-Settingsb6cfb.md.png)
+[![Deploy-Settingsb6cfb.png](https://miao.su/images/2019/06/09/Deploy-Settingsb6cfb.png)](https://miao.su/image/ftwvM)
 
 将生成的这个文件夹内容，使用xftp上传至linux的某一文件夹中。
 
-![](https://miao.su/images/2019/06/09/PXKF63RUOC5L99LPWe1367.png)
+[![PXKF63RUOC5L99LPWe1367.png](https://miao.su/images/2019/06/09/PXKF63RUOC5L99LPWe1367.png)](https://miao.su/image/ftxWU)
 
 具体上传步骤就不说了。
 
-![](https://miao.su/images/2019/06/09/MYGE3MZ5BNFJQ6R476cf92.md.png)
+[![MYGE3MZ5BNFJQ6R476cf92.png](https://miao.su/images/2019/06/09/MYGE3MZ5BNFJQ6R476cf92.png)](https://miao.su/image/ftuw8)
 
 
 前置条件，在ubuntu上安装好了docker。并且正常运行。
