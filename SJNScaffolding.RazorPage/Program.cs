@@ -25,6 +25,7 @@ namespace SJNScaffolding.RazorPage
                      config.AddJsonFile("SJNScaffolding.json", optional: true, reloadOnChange: true);
                      config.AddJsonFile("MenuJson.json", optional: true, reloadOnChange: true);
                  })
+                .UseUrls("http://*:5000")
                 .UseStartup<Startup>();
     }
 }
