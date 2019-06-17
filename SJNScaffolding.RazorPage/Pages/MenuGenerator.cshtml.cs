@@ -1,37 +1,37 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using MySql.Data.MySqlClient;
+using SJNScaffolding.Models.MenuModels;
+using SJNScaffolding.RazorPage.Models;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Options;
-using MySql.Data.MySqlClient;
-using SJNScaffolding.Helper;
-using SJNScaffolding.Models.MenuModels;
-using SJNScaffolding.RazorPage.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace SJNScaffolding.RazorPage.Pages
 {
     public class MenuGeneratorModel : BasePageModel
     {
-        public const string conn = "Database='CHNMed';Data Source='localhost';port=3306;User Id='root';Password='123456';charset='utf8';pooling=true";
         private readonly MenuRoot _menuRoot;
-        public string menus = "";
-        public string menusPermisson = "";
-        public MenuGeneratorModel(IOptionsSnapshot<MenuRoot> menuRoot)
+        public string Menus { get; private set; } = "";
+        public string MenusPermisson { get; private set; } = "";
+        private readonly string _conn;
+
+
+        public MenuGeneratorModel(IOptionsSnapshot<MenuRoot> menuRoot, IConfiguration configuration)
         {
             _menuRoot = menuRoot.Value;
+            _conn = configuration.GetConnectionString("Default");
         }
 
         public void OnGet()
         {
             int addId = _menuRoot.BeginId;
             (StringBuilder sb, StringBuilder opSb) = GeneratorMenus(_menuRoot.MenuList, new StringBuilder(), new StringBuilder(), ref addId, _menuRoot.MenuArea, true);
-            menus = sb.ToString();
-            menusPermisson = opSb.ToString();
+            Menus = sb.ToString();
+            MenusPermisson = opSb.ToString();
         }
 
         public (StringBuilder, StringBuilder) GeneratorMenus(List<MenuListItem> menuList, StringBuilder sb, StringBuilder opSb, ref int addId, string enCodeStr = "", bool isFirst = false)
@@ -73,7 +73,7 @@ namespace SJNScaffolding.RazorPage.Pages
             try
             {
                 List<string> curEnCodeList = new List<string>();
-                DataTable dt = MySqlHelper.ExecuteDataset(conn, "select * from sysmenus").Tables[0];
+                DataTable dt = MySqlHelper.ExecuteDataset(_conn, "select * from sysmenus").Tables[0];
                 foreach (DataRow row in dt.Rows)
                 {
                     curEnCodeList.Add(row["EnCode"].ToString());
@@ -110,7 +110,7 @@ namespace SJNScaffolding.RazorPage.Pages
                         if (curEnCodeList.All(u => u != enCodeMenu))
                         {
                             string sql = $"INSERT INTO `sysmenus`(`ParentId`, `DisplayName`, `EnCode`, `LinkUrl`, `Icon`, `SortCode`, `IsActive`, `TypeCode`, `Remark`, `IsDeleted`, `DeleterUserId`, `DeletionTime`, `LastModificationTime`, `LastModifierUserId`, `CreationTime`, `CreatorUserId`) VALUES ({(parentId == null ? "null" : parentId.ToString())}, '{menuListItem.DisplayName}', '{enCodeMenu}', '{linkUrl}', NULL, {menuListItem.SortCode}, 1, '{menuListItem.TypeCode}', NULL, 0, NULL, NULL, NULL, NULL, '{DateTime.Now:yyyy-MM-dd hh:mm:ss}', NULL);select LAST_INSERT_ID();";
-                            DataTable dt = MySqlHelper.ExecuteDataset(conn, sql).Tables[0];
+                            DataTable dt = MySqlHelper.ExecuteDataset(_conn, sql).Tables[0];
                             id = int.Parse(dt.Rows[0][0].ToString());
 
                             if (menuListItem.TypeCode == "menu")//如果是菜单的话就要添加 操作权限 
@@ -121,7 +121,7 @@ namespace SJNScaffolding.RazorPage.Pages
                                 sqlBuilder.Append($"INSERT INTO `sysmenus`(`ParentId`, `DisplayName`, `EnCode`, `LinkUrl`, `Icon`, `SortCode`, `IsActive`, `TypeCode`, `Remark`, `IsDeleted`, `DeleterUserId`, `DeletionTime`, `LastModificationTime`, `LastModifierUserId`, `CreationTime`, `CreatorUserId`) VALUES ({id}, '编辑权限', '{enCode}.Edit', NULL, NULL, 1, 1, 'permission', NULL, 0, NULL, NULL, NULL, NULL, '{DateTime.Now:yyyy-MM-dd hh:mm:ss}', NULL);");
                                 sqlBuilder.Append($"INSERT INTO `sysmenus`(`ParentId`, `DisplayName`, `EnCode`, `LinkUrl`, `Icon`, `SortCode`, `IsActive`, `TypeCode`, `Remark`, `IsDeleted`, `DeleterUserId`, `DeletionTime`, `LastModificationTime`, `LastModifierUserId`, `CreationTime`, `CreatorUserId`) VALUES ({id}, '删除权限', '{enCode}.Delete', NULL, NULL, 1, 1, 'permission', NULL, 0, NULL, NULL, NULL, NULL, '{DateTime.Now:yyyy-MM-dd hh:mm:ss}', NULL);");
 
-                                MySqlHelper.ExecuteNonQuery(conn, sqlBuilder.ToString());
+                                MySqlHelper.ExecuteNonQuery(_conn, sqlBuilder.ToString());
                             }
                             StringBuilder perBuilder = new StringBuilder();
                             perBuilder.Append($"INSERT INTO `abppermissions`(`Name`, `IsGranted`, `CreationTime`, `CreatorUserId`, `UserId`, `RoleId`, `Discriminator`) VALUES ('{enCodeMenu}', 1, '{DateTime.Now:yyyy-MM-dd hh:mm:ss}', NULL, NULL, 1, 'RolePermissionSetting');");
@@ -129,13 +129,13 @@ namespace SJNScaffolding.RazorPage.Pages
                             perBuilder.Append($"INSERT INTO `abppermissions`(`Name`, `IsGranted`, `CreationTime`, `CreatorUserId`, `UserId`, `RoleId`, `Discriminator`) VALUES ('{enCode}.Add', 1, '{DateTime.Now:yyyy-MM-dd hh:mm:ss}', NULL, NULL, 1, 'RolePermissionSetting');");
                             perBuilder.Append($"INSERT INTO `abppermissions`(`Name`, `IsGranted`, `CreationTime`, `CreatorUserId`, `UserId`, `RoleId`, `Discriminator`) VALUES ('{enCode}.Edit', 1, '{DateTime.Now:yyyy-MM-dd hh:mm:ss}', NULL, NULL, 1, 'RolePermissionSetting');");
                             perBuilder.Append($"INSERT INTO `abppermissions`(`Name`, `IsGranted`, `CreationTime`, `CreatorUserId`, `UserId`, `RoleId`, `Discriminator`) VALUES ('{enCode}.Delete', 1, '{DateTime.Now:yyyy-MM-dd hh:mm:ss}', NULL, NULL, 1, 'RolePermissionSetting');");
-                            
-                            MySqlHelper.ExecuteNonQuery(conn, perBuilder.ToString());
+
+                            MySqlHelper.ExecuteNonQuery(_conn, perBuilder.ToString());
                         }
                         else
                         {
                             string sql = $"SELECT Id from sysmenus where encode='{enCodeMenu}';";
-                            DataTable dt = MySqlHelper.ExecuteDataset(conn, sql).Tables[0];
+                            DataTable dt = MySqlHelper.ExecuteDataset(_conn, sql).Tables[0];
                             id = int.Parse(dt.Rows[0][0].ToString());
                         }
 
