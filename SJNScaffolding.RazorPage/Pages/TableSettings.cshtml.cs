@@ -13,6 +13,8 @@ namespace SJNScaffolding.RazorPage.Pages
     {
         private readonly Project _project;
         private readonly IProjectBuilder _projectBuilder;
+
+        public string DownloadPath { get; set; } = "";
         public TableSettingsModel(IOptionsSnapshot<Project> p, IProjectBuilder projectBuilder)
         {
             _project = p.Value;
@@ -33,13 +35,13 @@ namespace SJNScaffolding.RazorPage.Pages
             return Json(new LayuiResultDto<TypeColumnName>(columnNames.Count, columnNames));
         }
 
-        public async Task<IActionResult> OnPostFormGenerCodeAsync(string jsonString)
+        public async Task<IActionResult> OnPostFormGenerCodeAsync(string jsonString, bool download)
         {
             List<TypeColumnName> list = JsonConvert.DeserializeObject<List<TypeColumnName>>(jsonString);
 
-            await _projectBuilder.Build(list);
+            DownloadPath = await _projectBuilder.Build(list, download);
 
-            return Success("生成代码成功!");
+            return Success("生成代码成功!",DownloadPath);
         }
 
     }

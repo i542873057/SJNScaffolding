@@ -156,6 +156,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\code\" />
+    <Folder Include="wwwroot\file\" />
   </ItemGroup>
 
   <ItemGroup>

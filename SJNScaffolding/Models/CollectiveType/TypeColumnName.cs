@@ -133,7 +133,7 @@ namespace SJNScaffolding.Models.CollectiveType
 
         public static List<TypeColumnName> String2TypeColumnNames(String str)
         {
-
+            if (str.IsNullOrEmpty()) { return new List<TypeColumnName>(); }
             string[] rows = str.Trim('\n').Split('\n');
 
             List<string> colunmRows = new List<string>();

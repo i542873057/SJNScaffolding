@@ -16,18 +16,23 @@ namespace SJNScaffolding.Builders
     public class ProjectBuilder : IProjectBuilder
     {
         private readonly Project _project;
+        private readonly ILogger<ProjectBuilder> _logger;
+        private readonly AddNewBussinessHelper _addNewBussinessHelper;
         private readonly ITemplateEngine _templateEngine;
 
         public ProjectBuilder(
-             IOptionsSnapshot<Project> p
-            , ILogger<ProjectBuilder> logger,
-             AddNewBussinessHelper addNewBussinessHelper, ITemplateEngine templateEngine)
+             IOptionsSnapshot<Project> p,
+             ILogger<ProjectBuilder> logger,
+             AddNewBussinessHelper addNewBussinessHelper,
+             ITemplateEngine templateEngine)
         {
             _project = p.Value;
+            _logger = logger;
+            _addNewBussinessHelper = addNewBussinessHelper;
             _templateEngine = templateEngine;
         }
 
-        public async Task Build(List<TypeColumnName> typeColumnNames)
+        public async Task<string> Build(List<TypeColumnName> typeColumnNames, bool download = false)
         {
             try
             {
@@ -39,8 +44,6 @@ namespace SJNScaffolding.Builders
                     if (buildKv.IsExcute == false) continue;
                     //此模板是ViewModel,只有有上传控件时才生成模板
                     if (buildKv.Key == "/ViewModel/EntityViewModel.cshtml" && isWebUpload == false) continue;
-
-                    var output = buildKv.Output;
 
                     var addViewModel = new ViewFileModel()
                     {
@@ -65,8 +68,27 @@ namespace SJNScaffolding.Builders
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                _logger.LogError(e.Message);
                 throw;
             }
+
+            if (download)
+            {
+                string outputUrl = FileHelper.GetCompressDirPath(_project.OutputPath, new List<string>()
+                {
+                    _project.OutputPath
+                });
+
+                string relaName = outputUrl.Substring(outputUrl.LastIndexOf("/", StringComparison.Ordinal) + 1);
+                string path = Directory.GetCurrentDirectory() + "/wwwroot/file/" + relaName;
+                byte[] fileBuffer = FileHelper.File2Bytes(outputUrl);
+                FileHelper.Bytes2File(fileBuffer, path);
+                FileHelper.DeletePath(_project.OutputPath);
+                return "/file/" + relaName;
+            }
+
+            return string.Empty;
+
         }
 
         /// <summary>

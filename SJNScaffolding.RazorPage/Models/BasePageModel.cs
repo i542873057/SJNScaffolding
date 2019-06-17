@@ -8,16 +8,17 @@ using Newtonsoft.Json;
 
 namespace SJNScaffolding.RazorPage.Models
 {
-    public class BasePageModel: PageModel
+    public class BasePageModel : PageModel
     {
         public IActionResult Json(object o)
         {
             return Content(JsonConvert.SerializeObject(o));
         }
 
-        public IActionResult Success(string msg)
+        public IActionResult Success(string msg, object data = null)
         {
-            return Json(new LayuiResultDto(msg));
+            return Json(new LayuiResultDto(msg,data));
         }
+
     }
 }

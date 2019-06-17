@@ -462,7 +462,7 @@
                 editGridInputFormListAttrs:
                     "id,status,ColumnName,Comments,ColumnType,AttrType,IsPk,IsRequired,ColumnSort,IsList,IsQuery,queryType,IsEdit,ShowType",
                 ajaxSuccess: function (a) {
-                    $("#dataGrid_columnSort").attr("colspan", "2").next().hide()
+                    $("#dataGrid_columnSort").attr("colspan", "2").next().hide();
                 }
             });
 
@@ -501,7 +501,7 @@
         layui.form.on('submit(demoData)',
             function (data) {
                 var demo = $('#tempData').val();
-                $('textarea').text(demo)
+                $('textarea').text(demo);
                 return false;
             });
 
@@ -545,7 +545,7 @@
                             }
                         });
 
-                    jsonArray.push(newObj)
+                    jsonArray.push(newObj);
                 }
 
                 var index = layer.load();
@@ -556,12 +556,14 @@
                     type: 'post',
                     data: {
                         jsonString: JSON.stringify(jsonArray),
+                        download: data.field.download == "on" ? true : false,
                         __RequestVerificationToken: o.__RequestVerificationToken[0]
                     },
                     dataType: 'json',
                     success: function (d) {
                         if (d.code == 0) {
                             layer.msg(d.msg);
+                            $('#DownloadPath').val(d.data);
                         } else {
                             layer.msg('error');
                         }
@@ -573,6 +575,15 @@
                 return false;
             });
 
+        layui.form.on('submit(downloadCode)', function () {
+            var downloadPath = $('#DownloadPath').val();
+            if (downloadPath == "") {
+                alert('未生成下载链接');
+            } else {
+                window.open(downloadPath, "target");
+            }
+            return false;
+        });
     </script>
 
 }
@@ -584,10 +595,18 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 150px;">是否生成下载链接</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="download" lay-skin="switch" lay-text="是|否">
+        </div>
+    </div>
+    <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit lay-filter="demoData">示例数据</button>
             <button class="layui-btn layui-btn-danger" lay-submit lay-filter="importTable">导入字段</button>
             <button class="layui-btn layui-btn-primary" lay-submit lay-filter="formGenerCode">生成代码</button>
+            <input type="hidden" id="DownloadPath" />
+            <button class="layui-btn layui-btn-warm" lay-submit lay-filter="downloadCode">下载</button>
         </div>
     </div>
 </form>

@@ -32,8 +32,17 @@ namespace SJNScaffolding.RazorPage.Models
             this.msg = msg;
         }
 
+        public LayuiResultDto(string msg,object data)
+        {
+            code = 0;
+            this.msg = msg;
+            this.data = data;
+        }
+
         public int code { get; set; }
         public string msg { get; set; }
+
+        public object data { get; set; }
     }
 
 }
