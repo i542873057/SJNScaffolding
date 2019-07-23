@@ -11,7 +11,7 @@ ABP代码生成器
 - 3、下拉代码自动生成，勾选
 - 4、代码生成器部署到某一服务器中，生成后可下载生成后的代码，复制至项目中即可。
     - 文档：[docs/部署至linux.md](docs/部署至linux.md)
-    - 项目部署地址 :[http://47.106.80.39](http://47.106.80.39)、[http://www.dotnetcore.xin/](http://www.dotnetcore.xin/)
+    - 项目部署地址 :[http://47.106.80.39:5000/](http://47.106.80.39:5000/)
 
 CodeLF帮程序员起变量名的网站:[https://unbug.github.io/codelf/](https://unbug.github.io/codelf/)
 
